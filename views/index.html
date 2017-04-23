@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title><%= title %></title>
-		<link rel="stylesheet" href="/static/css/reset.css">
+		<link rel="stylesheet" href="/static/css/base.css">
 		<link rel="stylesheet" href="/static/css/index.css">
 	</head>
 	<body>
@@ -23,17 +23,26 @@
 					<li class="index-sidebar-item">
 						<span class="link">技术栈</span>
 					</li>
+					<li class="index-sidebar-item">
+						<span class="link"><a href="/admin"> 后台系统 </a></span>
+					</li>
 				</ul>
 			</div>
 			<div class="index-content">
 				<ul>
 					<% for( var i = 0, len = new_list.length; i < len; i++ ) {%>
-						<li class="blog-item">
-							<a href="/artical/<%= new_list[i].id  %>"> <%= new_list[i].title %> </a>
+						<li class="compo-artical">
+							<h3 class="compo-artical-title">
+								<a href="/artical/<%= new_list[i].id  %>"> <%= new_list[i].title %> </a>
+							</h3>
+							<div class="compo-artical-time">
+								<span>创建时间 : <%= new_list[i].create_time %></span>
+								<span>更新时间 : <%= new_list[i].update_time %></span>
+							</div>
 						</li>
 					<% } %>
 				</ul>
-				<a href="/admin"> 后台系统 </a>
+				
 			</div>
 		</div>
 	</body>

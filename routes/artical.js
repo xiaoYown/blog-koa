@@ -7,7 +7,7 @@ const isLogin = require('../utils/login').isLogin;
 router.get('/:id', function *(){
 		yield this.render('artical', { layout: false });
 	});
-router.post('/:method', isLogin, function *( cxt, next ){
+router.post('/:method', function *( cxt, next ){
 		let body = this.request.body;
 
 		let type = {
@@ -33,6 +33,11 @@ router.post('/:method', isLogin, function *( cxt, next ){
 			type_NO03 = body.type_NO03,
 			content;
 
+		if( !this.session.user_id && this.params.method != 'get' ){
+			return this.body = {
+				message: '无权限访问'
+			}
+		}
 		try {
 			let exists = yield db_operate.query(`SELECT * FROM artical where id = ${id}`)
 		} catch( err ) {

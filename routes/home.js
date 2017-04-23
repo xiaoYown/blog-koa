@@ -4,7 +4,14 @@ const db_operate = require('../mysql').db_operate;
 router.get('/', function *( next ) {
 		let new_list = [];
 		try{
-			let new_list = yield db_operate.query(`SELECT title,id FROM artical`);
+			let new_list = yield db_operate.query(
+				`SELECT 
+				title,
+				id,
+				DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
+				DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
+				FROM artical limit 10`
+			);
 			yield this.render('index', {
 				layout: false, 
 				title: '首页', 

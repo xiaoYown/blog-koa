@@ -28,7 +28,8 @@
   .admin-login-item input {
     vertical-align: middle;
     height: 26px;
-    width: 240px; }
+    width: 240px;
+    padding: 0 6px; }
   .admin-login-item button {
     position: absolute;
     top: 0;
