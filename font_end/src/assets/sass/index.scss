@@ -1,0 +1,42 @@
+.index-sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+}
+.admin-introduction{
+    height: 100px;
+}
+.index-sidebar-list{
+    text-align: center;
+    line-height: 40px;
+}
+.index-sidebar-item{
+    position: relative;
+    cursor: pointer;
+    transition: color .3s;
+    &:hover{
+        color: #fff;
+    }
+    &:after{
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        background-color: #24292e;
+        transition: all .5s;
+    }
+    &:hover:after{
+        width: 100%;
+    }
+    & .link{
+        position: relative;
+        z-index: 1;
+    }
+}
+.index-content{
+    padding-left: 200px;
+}
