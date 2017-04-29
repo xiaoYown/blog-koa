@@ -1,65 +1,81 @@
 .admin-sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 200px;
-    line-height: 30px;
-    text-align: center;
-    border-right: 1px solid #999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 200px;
+	line-height: 30px;
+	text-align: center;
+	padding-top: 100px;
+	border-right: 1px solid #999;
+	background-color: #24292e;
+	li{
+		line-height: 40px;
+		transition: all .3s;
+		&:hover{
+			cursor: pointer;
+			background-color: #666;
+		} 
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+			color: #fff;
+		} 
+	}
 }
 
 .admin-section{
-    padding-left: 200px;
+	padding-left: 200px;
 }
 .admin-section-item{
-    display: none;
-    padding-left: 30px;
+	display: none;
+	padding-left: 30px;
 }
 /* 视口区域 */
 li[view-port="/edit"]{
-    padding-top: 20px;
+	padding-top: 20px;
 }
 
 /* 编辑区域 */
 .edit-section{
-    min-height: 800px;
+	min-height: 800px;
 }
 .edit-footer{
 
 }
 .blog-section{
-    padding: 30px;
-    min-height: 600px;
+	padding: 30px;
+	min-height: 600px;
 }
 /* 文章列表展示 */
 .artical-list-wrap{
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-    border-spacing: 0;
-    border-right: 1px solid #ccc;
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	border-spacing: 0;
+	border-right: 1px solid #ccc;
 }
 thead{
-    color: #fff;
-    background-color: #56aaff;
+	color: #fff;
+	background-color: #56aaff;
 }
 tbody{
-    color: #666;
+	color: #666;
 }
 thead th{
-    border-top: 1px solid #ccc;
+	border-top: 1px solid #ccc;
 }
 tr:nth-child(even){
-    background-color: #eee;
+	background-color: #eee;
 }
 th, td{
-    padding: 6px 8px;
-    border-left: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+	padding: 6px 8px;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 }
 span[blog-put],
 span[blog-del]{
-    margin-right: 6px;
-    cursor: pointer;
+	margin-right: 6px;
+	cursor: pointer;
 }

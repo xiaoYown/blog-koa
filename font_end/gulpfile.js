@@ -23,8 +23,7 @@ var path = {
 	js:   	'./src/assets/js',
 	sass: 	'./src/assets/sass',
 	css: 	'./src/assets/css',
-	images: './src/assets/images',
-	dist: 	'./dist'
+	images: './src/assets/images'
 };
 var dist = {
 	static: '../static',
@@ -81,9 +80,10 @@ gulp.task('connect', function () {
  });
 
 gulp.task('default', function(){
-	gulp.watch([path.jade + '/*.jade'], ['jade']);
-	gulp.watch([path.js + '/base/*.js'], ['base']);
-	gulp.watch([path.sass   + '/*.scss'], ['sass']);
+	gulp.watch([path.jade + '/*.jade'],   ['jade']);
+	gulp.watch([path.js + '/base/*.js'],  ['base']);
+	gulp.watch([path.js + '/*.js'], 	  ['js']);
+	gulp.watch([path.sass   + '/mixin/*.scss', path.sass   + '/*.scss'], ['sass']);
 });
 // 热启动
 gulp.task('hot', ['connect','default']);
