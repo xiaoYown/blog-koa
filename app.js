@@ -43,8 +43,8 @@ onerror(app);
 
  render(app, {
 	root: path.join(__dirname, 'views'),
-	layout: 'layout',
-	viewExt: 'html',
+	// layout: 'layout',
+	viewExt: 'ejs',
 	cache: false,
 	debug: true
 });
@@ -75,7 +75,7 @@ app.keys = ['some secret hurr'];
 
 const CONFIG = {
 	key: 'koa:sess', /** (string) cookie key (default is koa:sess) */
-	maxAge: 1000000,//86400000, /** (number) maxAge in ms (default is 1 days) */
+	maxAge: 86400000,//86400000, /** (number) maxAge in ms (default is 1 days) */
 	overwrite: true, /** (boolean) can overwrite or not (default true) */
 	httpOnly: true, /** (boolean) httpOnly or not (default true) */
 	signed: true, /** (boolean) signed or not (default true) */

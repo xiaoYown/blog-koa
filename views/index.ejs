@@ -1,0 +1,45 @@
+<% include header %>
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+	<div>
+		<div class="index-sidebar">
+			<div class="admin-introduction"></div>
+			<ul class="index-sidebar-list">
+				<li class="index-sidebar-item">
+					<span class="link">首页</span>
+				</li>
+				<li class="index-sidebar-item">
+					<span class="link">博客</span>
+				</li>
+				<li class="index-sidebar-item">
+					<span class="link">随记</span>
+				</li>
+				<li class="index-sidebar-item">
+					<span class="link">技术栈</span>
+				</li>
+				<li class="index-sidebar-item">
+					<span class="link"><a href="/admin"> 后台系统 </a></span>
+				</li>
+			</ul>
+		</div>
+		<div class="index-content">
+			<ul class="index-content-main">
+				<% for( var i = 0, len = new_list.length; i < len; i++ ) {%>
+					<li class="compo-artical">
+						<h3 class="compo-artical-title">
+							<a href="/artical/<%= new_list[i].id  %>"> <%= new_list[i].title %> </a>
+						</h3>
+						<div class="compo-artical-time">
+							<span>创建时间 : <%= new_list[i].create_time %></span>
+							<span>更新时间 : <%= new_list[i].update_time %></span>
+						</div>
+					</li>
+				<% } %>
+			</ul>
+			
+		</div>
+	</div>
+</body>
+<% include footer %>

@@ -30,7 +30,6 @@
 }
 .admin-section-item{
 	display: none;
-	padding-left: 30px;
 }
 /* 视口区域 */
 li[view-port="/edit"]{
@@ -42,15 +41,17 @@ li[view-port="/edit"]{
 	min-height: 800px;
 }
 .edit-footer{
-
 }
 .blog-section{
 	padding: 30px;
 	min-height: 600px;
 }
+.blog-footer{
+	padding: 30px;
+}
 /* 文章列表展示 */
 .artical-list-wrap{
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
 	text-align: center;
 	border-spacing: 0;
@@ -58,7 +59,7 @@ li[view-port="/edit"]{
 }
 thead{
 	color: #fff;
-	background-color: #56aaff;
+	background-color: #24292e;
 }
 tbody{
 	color: #666;

@@ -4,14 +4,31 @@
 		<meta charset="utf-8">
 		<title>artical</title>
 		<link rel="stylesheet" href="/static/css/base.css">
-		<link rel="stylesheet" href="/static/css/admin.css">
+		<link rel="stylesheet" href="/static/css/artical.css">
 		<link rel="stylesheet" href="/static/css/editormd.css">
 		<link rel="stylesheet" href="/static/css/codemirror.css">
 	</head>
 	<body>
-		<div class="admin-content">
-			<div id="show"></div>
+		<div class="artical-wrap">
+			<div class="artical-header">
+				<h3 class="artical-title">
+					<%= info.title %>
+				</h3>
+				<p class="artical-tips">
+					<a href="/">首页</a> ----- 
+					<span><%= info.type_name_NO01 %></span> &gt;
+					<span><%= info.type_name_NO02 %></span> &gt;
+					<span><%= info.type_name_NO03 %></span>
+				</p>
+				<ul class="artical-time">
+					<li>创建时间: <%= info.create_time %></li>
+					<li>最近修改: <%= info.update_time %></li>
+				</ul>
+			</div>
+			<div class="artical-section">
+				<div id="show"></div>
 
+			</div>
 		</div>
 	</body>
 </html>

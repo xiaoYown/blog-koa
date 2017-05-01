@@ -1,0 +1,25 @@
+.artical-wrap{
+	max-width: 1080px;
+	padding: 20px;
+	margin: 0 auto;
+}
+.artical-header{
+	padding-left: 20px;
+	.artical-title{
+		line-height: 50px;
+		font-size: 26px;
+	}
+	.artical-tips{
+		color: #bbb;
+	}
+	.artical-time{
+		text-align: right;
+		li{
+			display: inline-block;
+			vertical-align: top;
+			padding-left: 10px;
+		}
+	}
+}
+.artical-section{
+}

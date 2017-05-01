@@ -5,7 +5,17 @@ const db_operate = require('../mysql').db_operate;
 const isLogin = require('../utils/login').isLogin;
 
 router.get('/:id', function *(){
-		yield this.render('artical', { layout: false });
+		let info = yield db_operate.query(
+			`SELECT 
+			title,
+			type_name_NO01,
+			type_name_NO02, 
+			type_name_NO03, 
+			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
+			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
+			FROM artical WHERE id = "${this.params.id}" LIMIT 1`
+		);
+		yield this.render('artical', { layout: false, info: info[0] });
 	});
 router.post('/:method', function *( cxt, next ){
 		let body = this.request.body;
