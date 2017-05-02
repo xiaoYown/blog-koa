@@ -20,7 +20,7 @@
         font   = [0, 0, 0];
     var changing = 0;
     var _time = 4000;
-    var direct_b = 1,
+    var direct_b = -1,
         direct_f = 1;
     var timer = null;
 
@@ -42,7 +42,10 @@
         border[changing] += direct_b;
         font[changing] += direct_f;
 
-        wrap.style.borderColor = 'rgb(' + border[0] + ',' + border[1] + ',' + border[2] + ')';
+        wrap.style.borderColor = 'rgb(' + border[0] + ',' + border[1] + ',' + border[2] + ') ' +
+                                 'rgb(' + border[0] + ',' + border[1] + ',' + border[2] + ') ' +
+                                 'rgb(' + border[2] + ',' + border[1] + ',' + border[0] + ') ' +
+                                 'rgb(' + border[2] + ',' + border[1] + ',' + border[0] + ')';
         cue.style.color = 'rgb(' + font[0] + ',' + font[1] + ',' + font[2] + ')';
     }, 100);
 </script>
