@@ -1,44 +1,48 @@
 <% include header %>
-	<link rel="stylesheet" href="/static/css/index.css">
-</head>
-<body>
-	<div>
-		<div class="index-sidebar">
-			<div class="admin-introduction"></div>
-			<ul class="index-sidebar-list">
-				<li class="index-sidebar-item">
-					<span class="link">首页</span>
-				</li>
-				<li class="index-sidebar-item">
-					<span class="link">博客</span>
-				</li>
-				<li class="index-sidebar-item">
-					<span class="link">随记</span>
-				</li>
-				<li class="index-sidebar-item">
-					<span class="link">技术栈</span>
-				</li>
-				<li class="index-sidebar-item">
-					<span class="link"><a href="/admin"> 后台系统 </a></span>
-				</li>
-			</ul>
-		</div>
-		<div class="index-content">
-			<ul class="index-content-main">
-				<% for( var i = 0, len = new_list.length; i < len; i++ ) {%>
-					<li class="compo-artical">
-						<h3 class="compo-artical-title">
-							<a href="/artical/<%= new_list[i].id  %>"> <%= new_list[i].title %> </a>
-						</h3>
-						<div class="compo-artical-time">
-							<span>创建时间 : <%= new_list[i].create_time %></span>
-							<span>更新时间 : <%= new_list[i].update_time %></span>
-						</div>
-					</li>
-				<% } %>
-			</ul>
-			
-		</div>
-	</div>
-</body>
-<% include footer %>
+        <link rel="stylesheet" href="/static/css/index.css">
+    </head>
+    <body>
+        <div class="index-wrap">
+            <div class="index-content">
+                <h1>xiaoYown</h1>
+                <p>
+                    <a href="/home" target="_blank">Blog</a>
+                </p>
+                <p>
+                    <a href="https://github.com/xiaoYown" target="_blank">Github</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    var border = [204, 204, 204],
+        font   = [0, 0, 0];
+    var changing = 0;
+    var _time = 4000;
+    var direct_b = 1,
+        direct_f = 1;
+    var timer = null;
+
+    var wrap = document.querySelector('.index-content'),
+        cue = document.querySelector('h1');
+
+    timer = setInterval(function(){
+        _time -= 100;
+        if( _time <= 0 ){
+            _time = 4000;
+            changing = Math.floor(Math.random()*3);
+            direct_b = -direct_b;
+            direct_f = -direct_f;
+        }
+
+        direct_b = border[changing] >= 255 ? -1 : border[changing] <= 0 ? 1 : direct_b;
+        direct_f = font[changing]   >= 255 ? -1 : font[changing]   <= 0 ? 1 : direct_f;
+
+        border[changing] += direct_b;
+        font[changing] += direct_f;
+
+        wrap.style.borderColor = 'rgb(' + border[0] + ',' + border[1] + ',' + border[2] + ')';
+        cue.style.color = 'rgb(' + font[0] + ',' + font[1] + ',' + font[2] + ')';
+    }, 100);
+</script>

@@ -12,7 +12,7 @@ router.get('/', function *( next ) {
 				DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
 				FROM artical limit 10`
 			);
-			yield this.render('index', {
+			yield this.render('home', {
 				layout: false, 
 				title: '首页', 
 				new_list
