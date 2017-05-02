@@ -13,10 +13,11 @@ router.get('/', function *( next ) {
 				FROM artical limit 10`
 			);
 			yield this.render('index', {
-				// layout: true, 
+				layout: false, 
 				title: '首页', 
 				new_list
 			});
+			yield console.log(new_list)
 		} catch(err){
 
 		}
