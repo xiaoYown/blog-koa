@@ -1,4 +1,4 @@
-.index-sidebar {
+.home-sidebar {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -8,20 +8,20 @@
 .admin-introduction {
   height: 100px; }
 
-.index-sidebar-list {
+.home-sidebar-list {
   text-align: center;
   line-height: 40px; }
 
-.index-sidebar-item {
+.home-sidebar-item {
   position: relative;
   cursor: pointer;
   -webkit-transition: color .3s;
   -o-transition: color .3s;
   -moz-transition: color .3s;
   transition: color .3s; }
-  .index-sidebar-item:hover {
+  .home-sidebar-item:hover {
     color: #fff; }
-  .index-sidebar-item:after {
+  .home-sidebar-item:after {
     content: "";
     position: absolute;
     right: 0;
@@ -33,13 +33,13 @@
     -o-transition: all .5s;
     -moz-transition: all .5s;
     transition: all .5s; }
-  .index-sidebar-item:hover:after {
+  .home-sidebar-item:hover:after {
     width: 100%; }
-  .index-sidebar-item .link {
+  .home-sidebar-item .link {
     position: relative;
     z-index: 1; }
 
-.index-content {
+.home-content {
   padding: 100px 0 0 220px; }
-  .index-content .index-content-main {
+  .home-content .home-content-main {
     margin: 0 auto; }

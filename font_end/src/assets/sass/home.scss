@@ -1,4 +1,4 @@
-.index-sidebar{
+.home-sidebar{
     position: fixed;
     top: 0;
     bottom: 0;
@@ -8,11 +8,11 @@
 .admin-introduction{
     height: 100px;
 }
-.index-sidebar-list{
+.home-sidebar-list{
     text-align: center;
     line-height: 40px;
 }
-.index-sidebar-item{
+.home-sidebar-item{
     position: relative;
     cursor: pointer;
     transition: color .3s;
@@ -37,9 +37,9 @@
         z-index: 1;
     }
 }
-.index-content{
+.home-content{
     padding: 100px 0 0 220px;
-    .index-content-main{
+    .home-content-main{
         margin: 0 auto;
     }
 }
