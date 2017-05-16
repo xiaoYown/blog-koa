@@ -30,7 +30,8 @@
   padding-left: 200px; }
 
 .admin-section-item {
-  display: none; }
+  margin: 0 auto;
+  max-width: 1200px; }
 
 /* 视口区域 */
 li[view-port="/edit"] {
