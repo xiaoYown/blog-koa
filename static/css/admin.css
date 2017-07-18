@@ -78,3 +78,25 @@ span[blog-put],
 span[blog-del] {
   margin-right: 6px;
   cursor: pointer; }
+
+.admin__add-title {
+  width: 90%;
+  padding: 30px 0;
+  margin: 0 auto; }
+  .admin__add-title input {
+    border-bottom: 1px solid #444;
+    font-size: 20px;
+    padding: 4px 6px; }
+.admin__add-select {
+  padding: 4px 6px; }
+  .admin__add-select:hover {
+    font-weight: 700; }
+  .admin__add-select:focus {
+    border: 1px solid #56aaff; }
+  .admin__add-select option {
+    height: 26px;
+    line-height: 26px; }
+    .admin__add-select option[selected] {
+      font-weight: bold; }
+  .admin__add-select option:nth-child(even) {
+    background-color: #f5f5f5; }

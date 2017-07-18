@@ -1,0 +1,71 @@
+// editor 
+// var editor = null;
+/**
+ * md String content
+ */
+// editor 控制
+var editor = {
+    el: null,
+    md: '',
+    add: function(options){
+        /**
+         * el element editor元素
+         */
+        var wrap = document.createElement('div');
+        wrap.setAttribute('id', 'md-wrap');
+        document.getElementById(options.el).appendChild(wrap);
+        this.el = editormd("md-wrap", {
+            width   : "90%",
+            height  : 800,
+            markdown: this.md,
+            syncScrolling : "single",
+            path    : "../static/js/editor/"
+        });
+    },
+    rem: function(){
+        this.md = '';
+        this.el.editor.remove();
+    },
+    getMarkdown: function(){
+        return this.el.getMarkdown();
+    }
+};
+editor.add({
+    el: 'md-add'
+})
+// add
+function add(){
+    var type = document.getElementById('type').value,
+        type_sub = document.getElementById('type_sub').value,
+        title = document.getElementById('add-title').value;
+
+    if( !type || !type_sub || !title) {
+        console.log('请将信息输入完整');
+        return
+    }
+    var data = {
+        type: type,
+        type_sub: type_sub,
+        title: title,
+        content:   editor.getMarkdown(),
+    };
+
+    $.ajax({
+        url: '/artical/add',
+        type: 'POST',
+        dataType: 'JSON',
+        data: data,
+        success: function(res){
+            if( res.code == '000000' ){
+                console.log(res);
+                editor.rem();
+                window.location.href = '#/blog';
+            }
+        },
+        error: function(status){
+            console.log(status)
+        }
+    });
+}
+
+document.getElementById('post').addEventListener('click', add)

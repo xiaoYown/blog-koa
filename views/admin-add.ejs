@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+	<head>
+		<meta charset="utf-8">
+		<title><%= title %></title>
+		<link rel="stylesheet" href="/static/css/base.css">
+		<link rel="stylesheet" href="/static/css/admin.css">
+		<link rel="stylesheet" href="/static/css/editormd.css">
+		<link rel="stylesheet" href="/static/css/codemirror.css">
+	</head>
+	<body>
+		<!-- 侧边栏 -->
+		<% include admin-sidebar %>
+		<!-- 视口 -->
+		<div class="admin-section">
+			<!-- 博客 -->
+			<div class="admin__add">
+				<h3 class="admin__add-title">
+					<input type="text" id="add-title">
+					<select class="admin__add-select" name="文章类型" id="type">
+						<option value="blog">博客</option>
+						<option value="journal">日志</option>
+					</select>
+					<select class="admin__add-select" name="文章子类型" id="type_sub">
+						<option value="font_end">前端</option>
+						<option value="back_end">后端</option>
+					</select>
+				</h3>
+				<div id="md-add"></div>
+				<button id="post">提交</button>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/editor/editormd.js"></script>
+<!--<script src="/static/js/editor/codemirror.js"></script>-->
+<!--<script src="/static/js/editor/modes.min.js"></script>-->
+<!--<script src="/static/js/editor/addons.min.js"></script>-->
+<script src="/static/js/editor/marked.min.js"></script>
+<script src="/static/js/editor/prettify.min.js"></script>
+
+<script src="/static/js/editor/underscore.min.js"></script>
+<script src="/static/js/editor/raphael.min.js"></script>
+<script src="/static/js/editor/sequence-diagram.min.js"></script>
+<script src="/static/js/editor/flowchart.min.js"></script>
+<script src="/static/js/editor/jquery.flowchart.min.js"></script>
+<script src="/static/js/admin-add.js"></script>

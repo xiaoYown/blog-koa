@@ -36,11 +36,10 @@ router.post('/:method', function *( cxt, next ){
 			}
 		};
 		let new_time = new Date().valueOf();
-		let id = `${body.type_NO01}-${body.type_NO02}-${body.type_NO03}-${new_time}`,
+		let id = `${body.type}-${body.type_sub}-${new_time}`,
 			create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-			type_NO01 = body.type_NO01,
-			type_NO02 = body.type_NO02,
-			type_NO03 = body.type_NO03,
+			type_NO01 = body.type,
+			type_NO02 = body.type_sub,
 			content;
 
 		if( !this.session.user_id && this.params.method != 'get' ){
@@ -68,12 +67,8 @@ router.post('/:method', function *( cxt, next ){
 						return "\\" + str
 					});
 					yield db_operate.query(`insert into artical (
-							type_NO01,
-							type_NO02,
-							type_NO03,
-							type_name_NO01,
-							type_name_NO02,
-							type_name_NO03,
+							type,
+							type_sub,
 							create_time,
 							update_time,
 							id,
@@ -82,12 +77,8 @@ router.post('/:method', function *( cxt, next ){
 						) 
 						values 
 						(
-							"${type_NO01}",
-							"${type_NO02}",
-							"${type_NO03}",
-							"${type[type_NO01].name}",
-							"${type[type_NO01].child[type_NO02].name}",
-							"${type[type_NO01].child[type_NO02].child[type_NO03].name}",
+							"${type}",
+							"${type_sub}",
 							"${create_time}",
 							"${create_time}",
 							"${id}",

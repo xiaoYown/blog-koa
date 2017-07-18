@@ -3,7 +3,7 @@ const db_operate = require('../mysql').db_operate;
 
 router.get('/', function *( next ) {
 		let new_list = [];
-		try{
+		try {
 			let new_list = yield db_operate.query(
 				`SELECT 
 				title,
@@ -17,9 +17,11 @@ router.get('/', function *( next ) {
 				title: '首页', 
 				new_list
 			});
-			yield console.log(new_list)
-		} catch(err){
-
+		} catch (err) {
+			yield this.render('404', {
+				layout: false, 
+				title: '404'
+			});
 		}
 	});
 

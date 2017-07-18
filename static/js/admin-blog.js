@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-05-16 23:22:08
+ * Updated: 2017-07-17 10:25:12
 */
  !function(){
     $.ajax({

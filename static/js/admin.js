@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-04-29 22:37:58
+ * Updated: 2017-07-17 10:25:12
 */
 var router = [
     {
@@ -198,43 +198,7 @@ function get(){
         }
     });
 }
-// add
-function add(){
-    var type_NO01 = document.getElementById('type_NO01').value,
-        type_NO02 = document.getElementById('type_NO02').value,
-        type_NO03 = document.getElementById('type_NO03').value,
-        title     = document.getElementById('add-title').value;
 
-    if( !type_NO01 || !type_NO02 || !type_NO03 || !title) {
-        console.log('请将信息输入完整');
-        return
-    }
-    var data = {
-        type_NO01: type_NO01,
-        type_NO02: type_NO02,
-        type_NO03: type_NO03,
-        title: title,
-        content:   editor.getMarkdown(),
-    };
-
-    $.ajax({
-        url: '/artical/add',
-        type: 'POST',
-        dataType: 'JSON',
-        data: data,
-        success: function(res){
-            if( res.code == '000000' ){
-                console.log(res);
-                editor.rem();
-                window.location.href = '#/blog';
-            }
-        },
-        error: function(status){
-            console.log(status)
-        }
-    });
-
-}
 // put
 function put(){
     var data = {
