@@ -1,5 +1,5 @@
 var wrapper = require('co-mysql'),
-	mysql 	= require('mysql'); 
+		mysql 	= require('mysql'); 
 
 var options = {
 	host : 'localhost',

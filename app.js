@@ -9,11 +9,13 @@ const convert 		= require('koa-convert');
 const json 			= require('koa-json');
 const onerror 		= require('koa-onerror');
 const bodyparser 	= require('koa-bodyparser')();
-const logger 		= require('koa-logger');
-const redisStore 	= require('koa-redis');
+// const logger 		= require('koa-logger');
+// const redisStore 	= require('koa-redis');
 const session 		= require('koa-session');
 const open 			= require("open");
 const dateformat 	= require('dateformat');
+//log工具
+const logUtil = require('./utils/log_util');
 
 // const Router = require('koa-router');
 
@@ -38,7 +40,7 @@ app.use(convert(require('koa-static2')("/static", __dirname + '/static')));
 app.use(convert(bodyparser));
 app.use(convert(json()));
 // app.use(convert(logger()));
-app.use(logger());
+// app.use(logger());
 onerror(app);
 
  render(app, {
@@ -47,6 +49,27 @@ onerror(app);
 	viewExt: 'ejs',
 	cache: false,
 	debug: true
+});
+// logger
+app.use(async (ctx, next) => {
+	//响应开始时间
+	const start = new Date();
+	//响应间隔时间
+	var ms;
+	if (/\/static\//.test(ctx.request.url)) {
+        return next()
+    }
+	try {
+		//开始进入到下一个中间件
+		await next();
+		ms = new Date() - start;
+		//记录响应日志
+		logUtil.logResponse(ctx, ms);
+	} catch (error) {
+		ms = new Date() - start;
+		//记录异常日志
+		logUtil.logError(ctx, error, ms);
+	}
 });
 
 // var myRouter = new Router();
