@@ -36,18 +36,16 @@ editor.add({
 // add
 function add(){
     var type = document.getElementById('type').value,
-        type_sub = document.getElementById('type_sub').value,
         title = document.getElementById('add-title').value;
 
-    if( !type || !type_sub || !title) {
+    if( !type || !title) {
         console.log('请将信息输入完整');
         return
     }
     var data = {
         type: type,
-        type_sub: type_sub,
         title: title,
-        content:   editor.getMarkdown(),
+        content: editor.getMarkdown(),
     };
 
     $.ajax({
@@ -59,7 +57,7 @@ function add(){
             if( res.code == '000000' ){
                 console.log(res);
                 editor.rem();
-                window.location.href = '#/blog';
+                window.location.href = '/admin';
             }
         },
         error: function(status){

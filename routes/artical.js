@@ -3,6 +3,7 @@ const dateformat 	= require('dateformat');
 
 const db_operate = require('../mysql').db_operate;
 const isLogin = require('../utils/login').isLogin;
+const uuid = require('uuid/v4');
 
 router.get('/:id', function *(){
 		let info = yield db_operate.query(
@@ -19,40 +20,23 @@ router.get('/:id', function *(){
 	});
 router.post('/:method', function *( cxt, next ){
 		let body = this.request.body;
-
-		let type = {
-			blog: {
-				name: '博客',
-				child: {
-					web_front_end: {
-						name: 'web前端',
-						child: {
-							framework: {
-								name: '框架',
-							}
-						}
-					}
-				}
-			}
-		};
+		let type = body.type
 		let new_time = new Date().valueOf();
-		let id = `${body.type}-${body.type_sub}-${new_time}`,
+		let id = uuid(),
 			create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-			type_NO01 = body.type,
-			type_NO02 = body.type_sub,
 			content;
 
-		if( !this.session.user_id && this.params.method != 'get' ){
+		if (!this.session.user_id) {
 			return this.body = {
 				message: '无权限访问'
 			}
 		}
 		try {
-			let exists = yield db_operate.query(`SELECT * FROM artical where id = ${id}`)
-		} catch( err ) {
-			switch (this.params.method){
+			let exists = yield db_operate.query(`SELECT * FROM articals where id = ${id}`)
+		} catch (err) {
+			switch (this.params.method) {
 				case 'get':
-					let markdown = yield db_operate.query(`select content from artical where id = "${body.id}"`);
+					let markdown = yield db_operate.query(`select content from articals where id = "${body.id}"`);
 					this.body = {
 						code: '000000',
 						success: true,
@@ -66,9 +50,8 @@ router.post('/:method', function *( cxt, next ){
 					content = body.content.replace(/(\`|\'|\")/g, function(str){
 						return "\\" + str
 					});
-					yield db_operate.query(`insert into artical (
+					yield db_operate.query(`insert into articals (
 							type,
-							type_sub,
 							create_time,
 							update_time,
 							id,
@@ -78,7 +61,6 @@ router.post('/:method', function *( cxt, next ){
 						values 
 						(
 							"${type}",
-							"${type_sub}",
 							"${create_time}",
 							"${create_time}",
 							"${id}",
@@ -95,7 +77,7 @@ router.post('/:method', function *( cxt, next ){
 					content = body.content.replace(/(\`|\'|\")/g, function(str){
 						return "\\" + str
 					});
-					yield db_operate.query(`update artical set content = "${content}", update_time = "${create_time}" where id = "${body.id}"`);
+					yield db_operate.query(`update articals set content = "${content}", update_time = "${create_time}" where id = "${body.id}"`);
 					this.body = {
 						code: '000000',
 						success: true,
