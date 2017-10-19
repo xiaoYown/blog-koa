@@ -18,12 +18,12 @@
 				<h3 class="admin__add-title">
 					<input type="text" id="add-title">
 					<select class="admin__add-select" name="文章类型" id="type">
-						<option value="blog">博客</option>
 						<option value="journal">日志</option>
+						<option value="blog">博客</option>
 					</select>
 				</h3>
 				<div id="md-add"></div>
-				<button id="post">提交</button>
+				<button id="<%= method %>">提交</button>
 			</div>
 		</div>
 	</body>
@@ -41,4 +41,5 @@
 <script src="/static/js/editor/sequence-diagram.min.js"></script>
 <script src="/static/js/editor/flowchart.min.js"></script>
 <script src="/static/js/editor/jquery.flowchart.min.js"></script>
-<script src="/static/js/admin-add.js"></script>
+
+<script src="/static/js/admin-<%= method %>.js"></script>

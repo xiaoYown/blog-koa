@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-10-18 17:15:55
+ * Updated: 2017-10-19 10:35:59
 */
 // editor 
 // var editor = null;
@@ -20,11 +20,11 @@ var editor = {
         wrap.setAttribute('id', 'md-wrap');
         document.getElementById(options.el).appendChild(wrap);
         this.el = editormd("md-wrap", {
-            width   : "90%",
-            height  : 800,
+            width: "90%",
+            height: 800,
             markdown: this.md,
             syncScrolling : "single",
-            path    : "../static/js/editor/"
+            path: "/static/js/editor/"
         });
     },
     rem: function(){
@@ -71,4 +71,4 @@ function add(){
     });
 }
 
-document.getElementById('post').addEventListener('click', add)
+document.getElementById('add').addEventListener('click', add)

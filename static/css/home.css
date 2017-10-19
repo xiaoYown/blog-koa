@@ -1,45 +1,11 @@
-.home-sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 200px; }
-
-.admin-introduction {
-  height: 100px; }
-
-.home-sidebar-list {
-  text-align: center;
-  line-height: 40px; }
-
-.home-sidebar-item {
-  position: relative;
-  cursor: pointer;
-  -webkit-transition: color .3s;
-  -o-transition: color .3s;
-  -moz-transition: color .3s;
-  transition: color .3s; }
-  .home-sidebar-item:hover {
-    color: #fff; }
-  .home-sidebar-item:after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    background-color: #24292e;
-    -webkit-transition: all .5s;
-    -o-transition: all .5s;
-    -moz-transition: all .5s;
-    transition: all .5s; }
-  .home-sidebar-item:hover:after {
-    width: 100%; }
-  .home-sidebar-item .link {
-    position: relative;
-    z-index: 1; }
-
-.home-content {
-  padding: 100px 0 0 220px; }
-  .home-content .home-content-main {
-    margin: 0 auto; }
+.home__wrap {
+  width: 800px;
+  margin: 0 auto; }
+  .home__wrap-list_title {
+    font-size: 20px;
+    line-height: 30px;
+    padding: 10px 0; }
+  .home__wrap-list_time {
+    padding-bottom: 6px; }
+    .home__wrap-list_time span {
+      margin-right: 10px; }

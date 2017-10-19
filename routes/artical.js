@@ -9,14 +9,30 @@ router.get('/:id', function *(){
 		let info = yield db_operate.query(
 			`SELECT 
 			title,
-			type_name_NO01,
-			type_name_NO02, 
-			type_name_NO03, 
+			type,
 			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
 			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
-			FROM artical WHERE id = "${this.params.id}" LIMIT 1`
+			FROM articals WHERE id = "${this.params.id}" LIMIT 1`
 		);
 		yield this.render('artical', { layout: false, info: info[0] });
+	})
+	.get('/query/:id', function *(){
+		let info = yield db_operate.query(
+			`SELECT 
+			title,
+			type,
+			content,
+			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
+			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
+			FROM articals WHERE id = "${this.params.id}" LIMIT 1`
+		);
+		return this.body = {
+			code: 0,
+			status: 'success',
+			data: {
+				artical: info[0]
+			}
+		}
 	});
 router.post('/:method', function *( cxt, next ){
 		let body = this.request.body;
@@ -85,7 +101,7 @@ router.post('/:method', function *( cxt, next ){
 					}
 					break;
 				case 'del':
-					yield db_operate.query(`delete from artical where id = "${body.id}"`);
+					yield db_operate.query(`delete from articals where id = "${body.id}"`);
 					this.body = {
 						code: '000000',
 						success: true,

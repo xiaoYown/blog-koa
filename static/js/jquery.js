@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-10-18 17:15:55
+ * Updated: 2017-10-19 10:35:59
 */
 /*!
  * jQuery JavaScript Library v3.1.1

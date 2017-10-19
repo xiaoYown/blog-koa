@@ -10,12 +10,6 @@ function getBlogList() {
                 var list = '',
                     time = '';
                 for( var i = 0, len = artical_list.length; i < len; i++ ){
-                    // time = artical_list[i].create_time.replace(/(T|\.000Z)/g, function(str){
-                    // 	if( str === 'T' )
-                    // 		return '&nbsp;&nbsp;';
-                    // 	else
-                    // 		return '';
-                    // });
                     list += '<tr>' +
                         '<td>' + artical_list[i].title + '</td>' +
                         '<td>' + artical_list[i].type + '</td>' +
@@ -58,50 +52,25 @@ function del(){
         dataType: 'JSON',
         data: data,
         success: function(res){
-            console.log(res)
             var tr = _this.parentNode.parentNode;
             tr.parentNode.removeChild(tr);
-        },
-        error: function(){
-
-        }
-    });
-}
-// get
-function get(){
-    var data = {
-        id: this.getAttribute('blog-put')
-    };
-    state.id = data.id;
-    $.ajax({
-        url: '/artical/get',
-        type: 'POST',
-        dataType: 'JSON',
-        data: data,
-        success: function(res){
-            console.log(res.data.content)
-            if( res.code == '000000' ){
-                editor.md = res.data.content;
-                window.location.href = '#/edit';
-                setTimeout(function(){
-                    document.getElementById('post-add').style.display = 'none';
-                    document.getElementById('post-put').style.display = 'inline-block';
-                }, 10);
-            }
         },
         error: function(status){
             console.log(status)
         }
     });
 }
+// get
+function get(){
+    window.location.href = '/admin/mod/' + this.getAttribute('blog-put')
+}
 
 // put
 function put(){
     var data = {
         id: state.id,
-        content:   editor.getMarkdown(),
+        content: editor.getMarkdown(),
     };
-
     $.ajax({
         url: '/artical/put',
         type: 'POST',
@@ -118,6 +87,4 @@ function put(){
             console.log(status)
         }
     });
-
 }
-document.getElementById('post-put').addEventListener('click', put);

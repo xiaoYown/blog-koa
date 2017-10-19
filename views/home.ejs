@@ -2,5 +2,22 @@
 		<link rel="stylesheet" href="/static/css/home.css">
 	</head>
 	<body>
+		<div class="home__wrap">
+			<ul class="home__wrap-list">
+				<% for (var i = 0, len = articals.length; i < len; i++) { %>
+					<li>
+						<h3 class="home__wrap-list_title">
+							<a href="/artical/<%= articals[i].id %>">
+								<%= articals[i].title %>
+							</a>
+						</h3>
+						<div class="home__wrap-list_time">
+							<span>创建时间: <%= articals[i].create_time %></span>
+							<span>更新时间: <%= articals[i].update_time %></span>
+						</div>
+					</li>	
+				<% } %>
+			</ul>
+		</div>
 	</body>
 <% include footer %>

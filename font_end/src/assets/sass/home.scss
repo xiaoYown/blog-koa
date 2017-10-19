@@ -1,45 +1,17 @@
-.home-sidebar{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 200px;
-}
-.admin-introduction{
-    height: 100px;
-}
-.home-sidebar-list{
-    text-align: center;
-    line-height: 40px;
-}
-.home-sidebar-item{
-    position: relative;
-    cursor: pointer;
-    transition: color .3s;
-    &:hover{
-        color: #fff;
+.home__wrap {
+  width: 800px;
+  margin: 0 auto;
+  &-list {
+    &_title {
+      font-size: 20px;
+      line-height: 30px;
+      padding: 10px 0;
     }
-    &:after{
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 0;
-        background-color: #24292e;
-        transition: all .5s;
+    &_time {
+      padding-bottom: 6px;
+      span {
+        margin-right: 10px;
+      }
     }
-    &:hover:after{
-        width: 100%;
-    }
-    & .link{
-        position: relative;
-        z-index: 1;
-    }
-}
-.home-content{
-    padding: 100px 0 0 220px;
-    .home-content-main{
-        margin: 0 auto;
-    }
+  }
 }

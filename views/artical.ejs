@@ -15,10 +15,7 @@
 					<%= info.title %>
 				</h3>
 				<p class="artical-tips">
-					<a href="/">首页</a> ----- 
-					<span><%= info.type_name_NO01 %></span> &gt;
-					<span><%= info.type_name_NO02 %></span> &gt;
-					<span><%= info.type_name_NO03 %></span>
+					<a href="/">首页</a>
 				</p>
 				<ul class="artical-time">
 					<li>创建时间: <%= info.create_time %></li>
@@ -35,8 +32,6 @@
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/editor/editormd.js"></script>
 <script src="/static/js/editor/codemirror.js"></script>
-<script src="/static/js/editor/modes.min.js"></script>
-<script src="/static/js/editor/addons.min.js"></script>
 <script src="/static/js/editor/marked.min.js"></script>
 <script src="/static/js/editor/prettify.min.js"></script>
 
@@ -71,7 +66,7 @@
 					// taskList        : true,
 					// tex             : true,  // 默认不解析
 					flowChart       : true,  // 默认不解析
-					sequenceDiagram : true  // 默认不解析
+					sequenceDiagram : true   // 默认不解析
 				});
             }
         },
