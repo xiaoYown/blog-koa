@@ -43,14 +43,11 @@ getBlogList()
 // del
 function del(){
     var _this = this;
-    var data = {
-        id: this.getAttribute('blog-del')
-    };
     $.ajax({
-        url: '/artical/del',
+        url: '/admin/del/' + this.getAttribute('blog-del'),
         type: 'POST',
         dataType: 'JSON',
-        data: data,
+        data: {},
         success: function(res){
             var tr = _this.parentNode.parentNode;
             tr.parentNode.removeChild(tr);

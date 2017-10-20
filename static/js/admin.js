@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-10-19 10:35:59
+ * Updated: 2017-10-20 09:51:01
 */
 function getBlogList() {
     $.ajax({
@@ -48,14 +48,11 @@ getBlogList()
 // del
 function del(){
     var _this = this;
-    var data = {
-        id: this.getAttribute('blog-del')
-    };
     $.ajax({
-        url: '/artical/del',
+        url: '/admin/del/' + this.getAttribute('blog-del'),
         type: 'POST',
         dataType: 'JSON',
-        data: data,
+        data: {},
         success: function(res){
             var tr = _this.parentNode.parentNode;
             tr.parentNode.removeChild(tr);

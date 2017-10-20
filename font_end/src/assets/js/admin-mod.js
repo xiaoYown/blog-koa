@@ -32,7 +32,7 @@ var editor = {
 };
 
 $.ajax({
-  url: '/artical/query/' + this.location.href.match(/mod\/([0-9a-zA-Z\-]+)/)[1],
+  url: '/artical/query/' + window.location.href.match(/mod\/([0-9a-zA-Z\-]+)/)[1],
   type: 'GET',
   dataType: 'JSON',
   success: function(res){
@@ -49,9 +49,8 @@ $.ajax({
   }
 })
 // add
-function add(){
+function update(){
 
-  return
   var type = document.getElementById('type').value,
       title = document.getElementById('add-title').value;
 
@@ -66,14 +65,12 @@ function add(){
   };
 
   $.ajax({
-      url: '/artical/add',
+      url: '/admin/mod/' + window.location.href.match(/mod\/([0-9a-zA-Z\-]+)/)[1],
       type: 'POST',
       dataType: 'JSON',
       data: data,
       success: function(res){
           if( res.code == '000000' ){
-              console.log(res);
-              editor.rem();
               window.location.href = '/admin';
           }
       },
@@ -83,4 +80,4 @@ function add(){
   });
 }
 
-document.getElementById('mod').addEventListener('click', add)
+document.getElementById('mod').addEventListener('click', update)

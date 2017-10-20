@@ -49,7 +49,7 @@ function add(){
     };
 
     $.ajax({
-        url: '/artical/add',
+        url: '/admin/add',
         type: 'POST',
         dataType: 'JSON',
         data: data,
