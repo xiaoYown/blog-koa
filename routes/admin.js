@@ -13,13 +13,11 @@ router.get('/', isLogin , function *( next ) {
 	.post('/add', isLogin , function *( next ) {
 		let body = this.request.body;
 		let type = body.type
-		let new_time = new Date().valueOf();
 		let id = uuid(),
-			create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-			content;
-			content = body.content.replace(/(\`|\'|\")/g, function(str){
-				return "\\" + str
-			});
+				create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
+				content  = body.content.replace(/(\`|\'|\")/g, function(str){
+					return "\\" + str
+				});
 		yield db_operate.query(`insert into articals (
 			type,
 			create_time,
@@ -58,14 +56,12 @@ router.get('/', isLogin , function *( next ) {
 	.post('/mod/:id', isLogin , function *( next ) {
 		let body = this.request.body;
 		let type = body.type
-		let new_time = new Date().valueOf();
 		let id = uuid(),
-			create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-			content;
-		content = body.content.replace(/(\`|\'|\")/g, function(str){
-			return "\\" + str
-		});
-		yield db_operate.query(`update articals set content = "${content}", update_time = "${create_time}" where id = "${this.params.id}"`);
+				update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
+				content = body.content.replace(/(\`|\'|\")/g, function(str){
+					return "\\" + str
+				});
+		yield db_operate.query(`update articals set content = "${content}", update_time = "${update_time}" where id = "${this.params.id}"`);
 		this.body = {
 			code: '000000',
 			success: true,
