@@ -9,7 +9,6 @@ router.get('/', function *( next ) {
 	});
 router.post('/', function *( cxt, next ){
 		let body = this.request.body;
-        console.log(body)
 		if( !!body.user_id && body.user_pwd ){
 			try{
 				let exists = yield db_operate.query(`SELECT * FROM admin WHERE user_id="${body.user_id}" LIMIT 1`)

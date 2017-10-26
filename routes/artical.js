@@ -10,8 +10,8 @@ router.get('/:id', function *(){
 			`SELECT 
 			title,
 			type,
-			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
-			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
+			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
+			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
 			FROM articals WHERE id = "${this.params.id}" LIMIT 1`
 		);
 		yield this.render('artical', { layout: false, title: info[0].title, info: info[0] });
@@ -22,8 +22,8 @@ router.get('/:id', function *(){
 			title,
 			type,
 			content,
-			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
-			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
+			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
+			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
 			FROM articals WHERE id = "${this.params.id}" LIMIT 1`
 		);
 		return this.body = {
