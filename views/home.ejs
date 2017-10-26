@@ -3,6 +3,7 @@
 	</head>
 	<body>
 		<div class="home__wrap">
+			<h1 class="home__wrap-title">XXXXXXX</h1>
 			<ul class="home__wrap-list">
 				<% for (var i = 0, len = articals.length; i < len; i++) { %>
 					<li>
@@ -12,9 +13,10 @@
 							</a>
 						</h3>
 						<div class="home__wrap-list_time">
-							<span>创建时间: <%= articals[i].create_time %></span>
-							<span>更新时间: <%= articals[i].update_time %></span>
+							<span>create : <%= articals[i].create_time %></span>
+							<span>update : <%= articals[i].update_time %></span>
 						</div>
+						<p class="home__wrap-list_desc"><%= articals[i].description %></p>
 					</li>	
 				<% } %>
 			</ul>

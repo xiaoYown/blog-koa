@@ -14,7 +14,7 @@ router.get('/:id', function *(){
 			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
 			FROM articals WHERE id = "${this.params.id}" LIMIT 1`
 		);
-		yield this.render('artical', { layout: false, info: info[0] });
+		yield this.render('artical', { layout: false, title: info[0].title, info: info[0] });
 	})
 	.get('/query/:id', function *(){
 		let info = yield db_operate.query(

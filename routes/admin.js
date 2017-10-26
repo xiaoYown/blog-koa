@@ -4,6 +4,12 @@ const isLogin = require('../utils/login').isLogin;
 const uuid = require('uuid/v4');
 const dateformat 	= require('dateformat');
 
+function tranSpace (str) {
+	return str.replace(/(\`|\'|\")/g, function(str){
+		return "\\" + str
+	});
+}
+
 router.get('/', isLogin , function *( next ) {
 		yield this.render('admin', {layout: false, title: '用户管理'});
 	})
@@ -15,15 +21,15 @@ router.get('/', isLogin , function *( next ) {
 		let type = body.type
 		let id = uuid(),
 				create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-				content  = body.content.replace(/(\`|\'|\")/g, function(str){
-					return "\\" + str
-				});
+				description  = tranSpace(body.description),
+				content  = tranSpace(body.content);
 		yield db_operate.query(`insert into articals (
 			type,
 			create_time,
 			update_time,
 			id,
 			title,
+			description,
 			content
 		) 
 		values 
@@ -33,6 +39,7 @@ router.get('/', isLogin , function *( next ) {
 			"${create_time}",
 			"${id}",
 			"${body.title}",
+			"${body.description}",
 			"${content}"
 		)`);
 		this.body = {
@@ -46,6 +53,7 @@ router.get('/', isLogin , function *( next ) {
 			`SELECT 
 			title,
 			type,
+			description,
 			content,
 			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
 			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
@@ -58,10 +66,9 @@ router.get('/', isLogin , function *( next ) {
 		let type = body.type
 		let id = uuid(),
 				update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-				content = body.content.replace(/(\`|\'|\")/g, function(str){
-					return "\\" + str
-				});
-		yield db_operate.query(`update articals set content = "${content}", update_time = "${update_time}" where id = "${this.params.id}"`);
+				description  = tranSpace(body.description),
+				content = tranSpace(body.content);
+		yield db_operate.query(`update articals set content = "${content}", description = "${description}", update_time = "${update_time}" where id = "${this.params.id}"`);
 		this.body = {
 			code: '000000',
 			success: true,

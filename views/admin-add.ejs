@@ -15,15 +15,31 @@
 		<div class="admin-section">
 			<!-- 博客 -->
 			<div class="admin__add">
-				<h3 class="admin__add-title">
-					<input type="text" id="add-title" value="<%= artical.title %>">
-					<select class="admin__add-select" name="文章类型" id="type">
-						<option value="journal" <% if (artical.type === 'journal') { %>selected="selected"<% } %> >日志</option>
-						<option value="blog" <% if (artical.type === 'blog') { %>selected="selected"<% } %> >博客</option>
-					</select>
-				</h3>
+				<div class="admin__add-options">
+					<div class="admin__add-option">
+						<h4 class="admin__add-option_l">文章名称 : </h4>
+						<div class="admin__add-option_r">
+							<input class="admin__add-title" type="text" id="add-title" value="<%= artical.title %>">
+						</div>
+					</div>
+					<div class="admin__add-option">
+						<h4 class="admin__add-option_l">文章类型 : </h4>
+						<div class="admin__add-option_r">
+							<select class="admin__add-select" name="文章类型" id="type">
+								<option value="journal" <% if (artical.type === 'journal') { %>selected="selected"<% } %> >日志</option>
+								<option value="blog" <% if (artical.type === 'blog') { %>selected="selected"<% } %> >博客</option>
+							</select>
+						</div>
+					</div>
+					<div class="admin__add-option">
+						<h4 class="admin__add-option_l">文章描述 : </h4>
+						<div class="admin__add-option_r">
+							<textarea name="description" id="description" cols="80" rows="4"><%= artical.description %></textarea>
+						</div>
+					</div>
+				</div>
 				<div id="md-add"></div>
-				<button id="<%= method %>">提交</button>
+				<button class="admin__btn-bottom" id="<%= method %>">提交</button>
 			</div>
 		</div>
 	</body>

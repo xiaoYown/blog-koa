@@ -36,7 +36,8 @@ editor.add({
 // add
 function add(){
     var type = document.getElementById('type').value,
-        title = document.getElementById('add-title').value;
+        title = document.getElementById('add-title').value,
+        description = document.getElementById('description').value
 
     if( !type || !title) {
         console.log('请将信息输入完整');
@@ -45,6 +46,7 @@ function add(){
     var data = {
         type: type,
         title: title,
+        description: description,
         content: editor.getMarkdown(),
     };
 

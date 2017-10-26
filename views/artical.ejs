@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh_CN">
-	<head>
-		<meta charset="utf-8">
-		<title>artical</title>
-		<link rel="stylesheet" href="/static/css/base.css">
+<% include header %>
 		<link rel="stylesheet" href="/static/css/artical.css">
 		<link rel="stylesheet" href="/static/css/editormd.css">
 		<link rel="stylesheet" href="/static/css/codemirror.css">
@@ -14,9 +9,9 @@
 				<h3 class="artical-title">
 					<%= info.title %>
 				</h3>
-				<p class="artical-tips">
+				<!-- <p class="artical-tips">
 					<a href="/">首页</a>
-				</p>
+				</p> -->
 				<ul class="artical-time">
 					<li>创建时间: <%= info.create_time %></li>
 					<li>最近修改: <%= info.update_time %></li>
@@ -24,8 +19,8 @@
 			</div>
 			<div class="artical-section">
 				<div id="show"></div>
-
 			</div>
+			<div id="ppp"></div>
 		</div>
 	</body>
 </html>
@@ -42,8 +37,8 @@
 <script src="/static/js/editor/jquery.flowchart.min.js"></script>
 
 <script>
-	let data = {
-		id: location.pathname.match(/\/([^\/]+)$/)[1],
+	var data = {
+		id: window.location.pathname.match(/\/([^\/]+)$/)[1]
 	};
 	$.ajax({
         url: '/artical/query/' + data.id,

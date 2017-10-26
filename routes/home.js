@@ -7,6 +7,7 @@ router.get('/', function *( next ) {
 		title,
 		id,
 		type,
+		description,
 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
 		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
 		FROM articals`

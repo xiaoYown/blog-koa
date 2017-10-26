@@ -14,6 +14,15 @@ body {
 	font-family: "microsoft yahei",sans-serif;
 	-webkit-box-orient: vertical;
 	-webkit-box-align: stretch;
+	&::-webkit-scrollbar{
+		width: 8px;
+		height: 8px;
+		background-color: #d8e1f9;
+	}
+	&::-webkit-scrollbar-thumb{
+		border-radius: 8px;
+		background-color: rgba(0,0,0,.6);
+	}
 }
 
 div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,th,td {

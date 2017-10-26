@@ -1,11 +1,25 @@
 .home__wrap {
-  width: 800px;
+  max-width: 800px;
   margin: 0 auto; }
-  .home__wrap-list_title {
-    font-size: 20px;
-    line-height: 30px;
-    padding: 10px 0; }
-  .home__wrap-list_time {
-    padding-bottom: 6px; }
-    .home__wrap-list_time span {
-      margin-right: 10px; }
+  .home__wrap-title {
+    padding: 0 10px;
+    background-color: #0158af;
+    color: #fff;
+    font-size: 40px; }
+  .home__wrap-list {
+    padding: 0 20px; }
+    .home__wrap-list li {
+      padding-bottom: 10px; }
+    .home__wrap-list_title {
+      font-size: 20px;
+      line-height: 30px;
+      padding: 10px 0; }
+    .home__wrap-list_time {
+      padding-bottom: 6px;
+      line-height: 20px; }
+      .home__wrap-list_time span {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px; }
+    .home__wrap-list_desc {
+      color: #d2d2d2; }
