@@ -1,13 +1,33 @@
 .home__wrap {
+  position: relative;
+  min-height: 100vh;
   max-width: 800px;
   margin: 0 auto; }
+  .home__wrap:before, .home__wrap:after {
+    content: "";
+    position: absolute;
+    top: 52px;
+    background-color: #d0e7fd;
+    width: 1px;
+    bottom: 0; }
+  .home__wrap:before {
+    left: 0; }
+  .home__wrap:after {
+    right: 0; }
   .home__wrap-title {
-    padding: 0 10px;
+    position: relative;
+    padding: 0 10px 40px 10;
     background-color: #0158af;
     color: #fff;
-    font-size: 40px; }
+    font-size: 40px;
+    z-index: 2; }
+    .home__wrap-title_tip {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 12px; }
   .home__wrap-list {
-    padding: 0 20px; }
+    padding: 10px 20px; }
     .home__wrap-list li {
       padding-bottom: 10px; }
     .home__wrap-list_title {

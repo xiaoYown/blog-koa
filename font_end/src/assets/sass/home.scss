@@ -1,14 +1,39 @@
 .home__wrap {
+  position: relative;
+  min-height: 100vh;
   max-width: 800px;
   margin: 0 auto;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    top: 52px;
+    background-color: #d0e7fd;
+    width: 1px;
+    bottom: 0;
+  }
+  &:before {
+    left: 0;
+  }
+  &:after {
+    right: 0;
+  }
   &-title {
-    padding: 0 10px;
+    position: relative;
+    padding: 0 10px 40px 10;
     background-color: #0158af;
     color: #fff;
     font-size: 40px;
+    z-index: 2;
+    &_tip {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 12px;
+    }
   }
   &-list {
-    padding: 0 20px;
+    padding: 10px 20px;
     li {
       padding-bottom: 10px;
     }

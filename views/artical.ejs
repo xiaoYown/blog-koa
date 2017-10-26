@@ -4,20 +4,20 @@
 		<link rel="stylesheet" href="/static/css/codemirror.css">
 	</head>
 	<body>
-		<div class="artical-wrap">
-			<div class="artical-header">
-				<h3 class="artical-title">
+		<div class="artical__wrap">
+			<div class="artical__wrap-header">
+				<h3 class="artical__wrap-title">
 					<%= info.title %>
 				</h3>
-				<!-- <p class="artical-tips">
+				<!-- <p class="artical__wrap-tips">
 					<a href="/">首页</a>
 				</p> -->
-				<ul class="artical-time">
-					<li>创建时间: <%= info.create_time %></li>
-					<li>最近修改: <%= info.update_time %></li>
+				<ul class="artical__wrap-time">
+					<li class="artical__wrap-time_c">create: <%= info.create_time %></li>
+					<li class="artical__wrap-time_u">update: <%= info.update_time %></li>
 				</ul>
 			</div>
-			<div class="artical-section">
+			<div class="artical__wrap-section">
 				<div id="show"></div>
 			</div>
 			<div id="ppp"></div>
