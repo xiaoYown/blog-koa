@@ -1,0 +1,21 @@
+@import "./mixin/reset";
+
+.compo-artica {
+	
+}
+.compo-artical-title {
+	line-height: 30px;
+	padding-bottom: 20px;
+	a {
+		font-size: 15px;
+		border-bottom: 1px solid #ccc;
+	}
+}
+.compo-artical-time {
+	width: 400px;
+	span {
+		display: inline-block;
+		width: 100%;
+		padding-bottom: 10px;
+	}
+}

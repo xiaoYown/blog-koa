@@ -1,0 +1,73 @@
+<% include header %>
+		<link rel="stylesheet" href="/static/css/artical.css">
+		<link rel="stylesheet" href="/static/css/editormd.css">
+		<link rel="stylesheet" href="/static/css/codemirror.css">
+	</head>
+	<body>
+		<div class="artical__wrap">
+			<div class="artical__wrap-header">
+				<h3 class="artical__wrap-title">
+					<%= info.title %>
+				</h3>
+				<!-- <p class="artical__wrap-tips">
+					<a href="/">首页</a>
+				</p> -->
+				<ul class="artical__wrap-time">
+					<li class="artical__wrap-time_c"><%= info.create_time %></li>
+					<!--<li class="artical__wrap-time_u">update: <%= info.update_time %></li>-->
+				</ul>
+			</div>
+			<div class="artical__wrap-section">
+				<div id="show"></div>
+			</div>
+			<div id="ppp"></div>
+		</div>
+	</body>
+</html>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/editor/editormd.js"></script>
+<script src="/static/js/editor/codemirror.js"></script>
+<script src="/static/js/editor/marked.min.js"></script>
+<script src="/static/js/editor/prettify.min.js"></script>
+
+<script src="/static/js/editor/underscore.min.js"></script>
+<script src="/static/js/editor/raphael.min.js"></script>
+<script src="/static/js/editor/sequence-diagram.min.js"></script>
+<script src="/static/js/editor/flowchart.min.js"></script>
+<script src="/static/js/editor/jquery.flowchart.min.js"></script>
+
+<script>
+	var data = {
+		id: window.location.pathname.match(/\/([^\/]+)$/)[1]
+	};
+	$.ajax({
+        url: '/artical/query/' + data.id,
+        type: 'GET',
+        dataType: 'JSON',
+        data: data,
+        success: function(res){
+					if( res.code == '000000' ){
+						editormd.markdownToHTML("show", {
+							markdown        :  res.data.artical.content,//+ "\r\n" + $("#append-test").text(),
+							//htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+							htmlDecode      : "style,script,iframe",  // you can filter tags decode
+							//toc             : false,
+							// tocm            : true,    // Using [TOCM]
+							// tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+							//gfm             : false,
+							//tocDropdown     : true,
+							markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+							// emoji           : true,
+							// taskList        : true,
+							// tex             : true,  // 默认不解析
+							flowChart       : true,  // 默认不解析
+							sequenceDiagram : true   // 默认不解析
+						});
+          }
+        },
+        error: function(status){
+            console.log(status)
+        }
+    });
+
+</script>

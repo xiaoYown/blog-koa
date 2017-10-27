@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+	<head>
+		<meta charset="utf-8">
+		<title><%= title %></title>
+		<link rel="stylesheet" href="/static/css/base.css">
+		<link rel="stylesheet" href="/static/css/admin.css">
+		<link rel="stylesheet" href="/static/css/editormd.css">
+		<link rel="stylesheet" href="/static/css/codemirror.css">
+	</head>
+	<body>
+		<!-- 侧边栏 -->
+		<% include admin-sidebar %>
+		<!-- 视口 -->
+		<div class="admin-section">
+			<!-- 博客 -->
+			<div class="admin__add">
+				<div class="admin__add-options">
+					<div class="admin__add-option">
+						<h4 class="admin__add-option_l">文章名称 : </h4>
+						<div class="admin__add-option_r">
+							<input class="admin__add-title" type="text" id="add-title" value="<%= artical.title %>">
+						</div>
+					</div>
+					<div class="admin__add-option">
+						<h4 class="admin__add-option_l">文章类型 : </h4>
+						<div class="admin__add-option_r">
+							<select class="admin__add-select" name="文章类型" id="type">
+								<option value="journal" <% if (artical.type === 'journal') { %>selected="selected"<% } %> >日志</option>
+								<option value="blog" <% if (artical.type === 'blog') { %>selected="selected"<% } %> >博客</option>
+							</select>
+						</div>
+					</div>
+					<div class="admin__add-option">
+						<h4 class="admin__add-option_l">文章描述 : </h4>
+						<div class="admin__add-option_r">
+							<textarea name="description" id="description" cols="80" rows="4"><%= artical.description %></textarea>
+						</div>
+					</div>
+				</div>
+				<div id="md-add"></div>
+				<button class="admin__btn-bottom" id="<%= method %>">提交</button>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/editor/editormd.js"></script>
+<!--<script src="/static/js/editor/codemirror.js"></script>-->
+<!--<script src="/static/js/editor/modes.min.js"></script>-->
+<!--<script src="/static/js/editor/addons.min.js"></script>-->
+<script src="/static/js/editor/marked.min.js"></script>
+<script src="/static/js/editor/prettify.min.js"></script>
+
+<script src="/static/js/editor/underscore.min.js"></script>
+<script src="/static/js/editor/raphael.min.js"></script>
+<script src="/static/js/editor/sequence-diagram.min.js"></script>
+<script src="/static/js/editor/flowchart.min.js"></script>
+<script src="/static/js/editor/jquery.flowchart.min.js"></script>
+
+<script src="/static/js/admin-<%= method %>.js"></script>

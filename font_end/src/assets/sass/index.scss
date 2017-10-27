@@ -1,0 +1,25 @@
+.index-wrap{
+    text-align: center;
+}
+.index-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    padding: 30px 0;
+    margin: -94px 0 0 -160px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+h1{
+    font-size: 28px;
+    font-weight: 700;
+	letter-spacing: 7px;
+    text-transform: uppercase;
+	font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    margin: 16px 0;
+}
+p{
+    letter-spacing: 2px;
+    line-height: 2rem;
+}

@@ -1,0 +1,32 @@
+<% include header %>
+		<link rel="stylesheet" href="/static/css/home.css">
+	</head>
+	<body>
+		<div class="home__wrap">
+			<h1 class="home__wrap-title">
+				xiaoYown
+				<p class="home__wrap-title_tip">
+					简介 : 
+					<br>
+					默默无闻前端小码农
+				</p>
+			</h1>
+			<ul class="home__wrap-list">
+				<% for (var i = 0, len = articals.length; i < len; i++) { %>
+					<li>
+						<h3 class="home__wrap-list_title">
+							<a href="/artical/<%= articals[i].id %>">
+								<%= articals[i].title %>
+							</a>
+						</h3>
+						<div class="home__wrap-list_time">
+							<span>create : <%= articals[i].create_time %></span>
+							<span>update : <%= articals[i].update_time %></span>
+						</div>
+						<p class="home__wrap-list_desc"><%= articals[i].description %></p>
+					</li>	
+				<% } %>
+			</ul>
+		</div>
+	</body>
+<% include footer %>

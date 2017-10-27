@@ -1,0 +1,31 @@
+.artical__wrap {
+  max-width: 1080px;
+  margin: 0 auto; }
+  .artical__wrap-header {
+    padding-left: 20px; }
+  .artical__wrap-title {
+    line-height: 50px;
+    font-size: 26px;
+    padding-top: 20px;
+    margin-bottom: 10px; }
+  .artical__wrap-tips {
+    color: #bbb;
+    margin-bottom: 10px; }
+  .artical__wrap-time {
+    padding-right: 20px;
+    text-align: right;
+    line-height: 22px; }
+    .artical__wrap-time_c {
+      color: #77ade3; }
+    .artical__wrap-time_u {
+      color: #226eba; }
+    .artical__wrap-time li {
+      display: inline-block;
+      vertical-align: top;
+      padding-left: 10px; }
+
+#show {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  min-height: 600px; }
