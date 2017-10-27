@@ -68,7 +68,7 @@ router.get('/', isLogin , function *( next ) {
 				update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
 				description  = tranSpace(body.description),
 				content = tranSpace(body.content);
-		yield db_operate.query(`update articals set content = "${content}", description = "${description}", update_time = "${update_time}" where id = "${this.params.id}"`);
+		yield db_operate.query(`update articals set title = "${body.title}", type = "${body.type}", content = "${content}", description = "${description}", update_time = "${update_time}" where id = "${this.params.id}"`);
 		this.body = {
 			code: '000000',
 			success: true,
