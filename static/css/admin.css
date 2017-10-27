@@ -35,10 +35,6 @@
       height: 100%;
       color: #fff; }
 
-.admin-section-item {
-  margin: 0 auto;
-  max-width: 1200px; }
-
 /* 视口区域 */
 li[view-port="/edit"] {
   padding-top: 20px; }
@@ -53,37 +49,6 @@ li[view-port="/edit"] {
 
 .blog-footer {
   padding: 30px; }
-
-/* 文章列表展示 */
-.artical-list-wrap {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-spacing: 0;
-  border-right: 1px solid #ccc; }
-
-thead {
-  color: #fff;
-  background-color: #24292e; }
-
-tbody {
-  color: #666; }
-
-thead th {
-  border-top: 1px solid #ccc; }
-
-tr:nth-child(even) {
-  background-color: #eee; }
-
-th, td {
-  padding: 6px 8px;
-  border-left: 1px solid #ccc;
-  border-bottom: 1px solid #ccc; }
-
-span[blog-put],
-span[blog-del] {
-  margin-right: 6px;
-  cursor: pointer; }
 
 .admin-section {
   padding: 0 0 80px 200px; }
@@ -106,6 +71,34 @@ span[blog-del] {
           border-radius: 50%; }
   .admin__btn-bottom:hover {
     background-color: #427db8; }
+.admin__home {
+  /* 文章列表展示 */ }
+  .admin__home-list {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    border-spacing: 0;
+    border-right: 1px solid #ccc; }
+  .admin__home thead {
+    color: #fff;
+    background-color: #24292e; }
+  .admin__home tbody {
+    color: #666; }
+  .admin__home thead th {
+    border-top: 1px solid #ccc; }
+  .admin__home tr:nth-child(even) {
+    background-color: #eee; }
+  .admin__home th, .admin__home td {
+    padding: 6px 8px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc; }
+  .admin__home span[blog-put],
+  .admin__home span[blog-del] {
+    margin-right: 6px;
+    cursor: pointer; }
+  .admin__home-item {
+    margin: 0 auto;
+    max-width: 1200px; }
 .admin__add {
   padding-top: 71px; }
   .admin__add-title {

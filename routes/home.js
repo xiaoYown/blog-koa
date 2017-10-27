@@ -8,8 +8,8 @@ router.get('/', function *( next ) {
 		id,
 		type,
 		description,
-		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
-		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
+		DATE_FORMAT(create_time,'%Y.%m.%d %H:%i') AS create_time, 
+		DATE_FORMAT(update_time,'%Y.%m.%d %H:%i') AS update_time
 		FROM articals`
 	);
 	yield this.render('home', {

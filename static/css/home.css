@@ -36,7 +36,8 @@
       padding: 10px 0; }
     .home__wrap-list_time {
       padding-bottom: 6px;
-      line-height: 20px; }
+      font-size: 10px;
+      line-height: 18px; }
       .home__wrap-list_time span {
         display: inline-block;
         vertical-align: top;

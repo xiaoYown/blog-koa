@@ -1,41 +1,40 @@
 <% include header %>
-		<link rel="stylesheet" href="/static/css/admin.css">
-	</head>
-	<body>
-		<div class="admin-content">
-			<!-- 侧边栏 -->
-			<% include admin-side %>
-			<!-- 视口 -->
-			<ul class="admin-section">
-				<h3 class="admin--title">Artical List</h3>
-				<!-- 博客 -->
-				<li class="admin-section-item" view-port="/blog">
-					<div class="blog-header">
-					</div>
+    <link rel="stylesheet" href="/static/css/admin.css">
+  </head>
+  <body>
+    <div class="admin-section">
+      <!-- 侧边栏 -->
+      <% include admin-side %>
+      <!-- 视口 -->
+      <ul class="admin__home">
+        <h3 class="admin--title">Artical List</h3>
+        <!-- 博客 -->
+        <li class="admin__home-item" view-port="/blog">
+          <div class="blog-header">
+          </div>
 
-					<div class="blog-section">
-						<!-- <ul id="blog-list"></ul> -->
-						<table class="artical-list-wrap">
-							<thead>
-								<tr>
-									<th>名称</th>
-									<th>分类</th>
-									<th>创建时间</th>
-									<th>更新时间</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody id="blog-list"></tbody>
-						</table>
-					</div>
-					<div class="blog-footer">
-						<a class="admin__btn-bottom" href="/admin/add">新增</a>
-					</div>
-				</li>
-			</ul>
+          <div class="blog-section">
+            <table class="admin__home-list">
+              <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>分类</th>
+                  <th>创建时间</th>
+                  <th>更新时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="blog-list"></tbody>
+            </table>
+          </div>
+          <div class="blog-footer">
+            <a class="admin__btn-bottom" href="/admin/add">新增</a>
+          </div>
+        </li>
+      </ul>
 
-		</div>
-	</body>
+    </div>
+  </body>
 </html>
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/admin.js"></script>

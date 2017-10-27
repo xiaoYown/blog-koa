@@ -1,40 +1,33 @@
 .artical__wrap{
-	max-width: 1080px;
-	// padding: 20px;
-	margin: 0 auto;
-	&-header{
-		padding-left: 20px;
-	}
-	&-title{
-		line-height: 50px;
-		font-size: 26px;
-		padding-top: 20px;
-		margin-bottom: 10px;
-	}
-	&-tips{
-		color: #bbb;
-		margin-bottom: 10px;
-	}
-	&-time{
-		padding-right: 20px;
-		text-align: right;
-		line-height: 22px;
-		&_c {
-			color: #77ade3;
-		}
-		&_u {
-			color: #226eba;
-		}
-		li{
-			display: inline-block;
-			vertical-align: top;
-			padding-left: 10px;
-		}
-	}
-	&-section{
-	}
+  max-width: 800px;
+  // padding: 20px;
+  margin: 0 auto 60px auto;
+  color: #fff;
+  &-header{
+    padding-left: 20px;
+    background-color: #0158af;
+  }
+  &-title{
+    line-height: 50px;
+    font-size: 26px;
+    padding-top: 20px;
+  }
+  &-tips{
+    color: #bbb;
+    margin-bottom: 10px;
+  }
+  &-time{
+    padding: 0 20px 6px 0;
+    text-align: right;
+    line-height: 22px;
+    li{
+      display: inline-block;
+      vertical-align: top;
+      padding-left: 10px;
+    }
+  }
 }
 #show {
-	box-sizing: border-box;
-	min-height: 600px;
+  box-sizing: border-box;
+  min-height: 600px;
 }
