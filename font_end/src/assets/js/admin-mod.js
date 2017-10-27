@@ -31,23 +31,27 @@ var editor = {
   }
 };
 
-$.ajax({
-  url: '/artical/query/' + window.location.href.match(/mod\/([0-9a-zA-Z\-]+)/)[1],
-  type: 'GET',
-  dataType: 'JSON',
-  success: function(res){
-      if( res.code === 0 ){
-          console.log(res);
-          editor.md = res.data.artical.content
-          editor.add({
-            el: 'md-add'
-          })
-      }
-  },
-  error: function(status){
-      console.log(status)
-  }
+editor.md = content
+editor.add({
+    el: 'md-add'
 })
+// $.ajax({
+//   url: '/artical/query/' + window.location.href.match(/mod\/([0-9a-zA-Z\-]+)/)[1],
+//   type: 'GET',
+//   dataType: 'JSON',
+//   success: function(res){
+//       if( res.code === 0 ){
+//           console.log(res);
+//           editor.md = res.data.artical.content
+//           editor.add({
+//             el: 'md-add'
+//           })
+//       }
+//   },
+//   error: function(status){
+//       console.log(status)
+//   }
+// })
 // add
 function update(){
 

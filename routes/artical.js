@@ -10,6 +10,7 @@ router.get('/:id', function *(){
 			`SELECT 
 			title,
 			type,
+			content,
 			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
 			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
 			FROM articals WHERE id = "${this.params.id}" LIMIT 1`

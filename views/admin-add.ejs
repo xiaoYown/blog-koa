@@ -39,6 +39,7 @@
 					</div>
 				</div>
 				<div id="md-add"></div>
+				<div style="display: none" id="content"><%= artical.content %></div>
 				<button class="admin__btn-bottom" id="<%= method %>">提交</button>
 			</div>
 		</div>
@@ -57,5 +58,9 @@
 <script src="/static/js/editor/sequence-diagram.min.js"></script>
 <script src="/static/js/editor/flowchart.min.js"></script>
 <script src="/static/js/editor/jquery.flowchart.min.js"></script>
-
+<script>
+	var el = document.getElementById('content')
+	var content = el.innerHTML
+	el.parentNode.removeChild(el)
+</script>
 <script src="/static/js/admin-<%= method %>.js"></script>
