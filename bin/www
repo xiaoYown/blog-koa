@@ -7,9 +7,9 @@ var logConfig = require('../config/log_config');
 var confirmPath = function(pathStr) {
 
   if(!fs.existsSync(pathStr)){
-      fs.mkdirSync(pathStr);
-      console.log('createPath: ' + pathStr);
-    }
+    fs.mkdirSync(pathStr);
+    console.log('createPath: ' + pathStr);
+  }
 }
 
 /**

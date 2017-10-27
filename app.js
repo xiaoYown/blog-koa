@@ -12,8 +12,9 @@ const bodyparser 	= require('koa-bodyparser')();
 // const logger 		= require('koa-logger');
 // const redisStore 	= require('koa-redis');
 const session 		= require('koa-session');
-const open 			= require("open");
-const dateformat 	= require('dateformat');
+// const open 			= require("open");
+// const dateformat 	= require('dateformat');
+const staticCache   = require('koa-static-cache'); 
 //log工具
 const logUtil = require('./utils/log_util');
 
@@ -36,14 +37,20 @@ var options = {
 var pool = mysql.createPool(options),
 	db_operate = wrapper(pool);
 
-app.use(convert(require('koa-static2')("/static", __dirname + '/static')));
+// app.use(convert(require('koa-static2')("/static", __dirname + '/static')));
+app.use(staticCache({
+	buffer: false,
+	gzip: true,
+	prefix: '/static',
+	dir: path.join(__dirname, '/static')
+}));
 app.use(convert(bodyparser));
 app.use(convert(json()));
 // app.use(convert(logger()));
 // app.use(logger());
 onerror(app);
 
- render(app, {
+render(app, {
 	root: path.join(__dirname, 'views'),
 	// layout: 'layout',
 	viewExt: 'ejs',
@@ -57,8 +64,8 @@ app.use(async (ctx, next) => {
 	//响应间隔时间
 	var ms;
 	if (/\/static\//.test(ctx.request.url)) {
-        return next()
-    }
+		return next()
+	}
 	try {
 		//开始进入到下一个中间件
 		await next();
@@ -71,6 +78,7 @@ app.use(async (ctx, next) => {
 		logUtil.logError(ctx, error, ms);
 	}
 });
+
 
 // var myRouter = new Router();
 /**
