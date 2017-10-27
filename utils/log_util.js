@@ -134,11 +134,12 @@ function formatCol (err, status, message, method, url, time) {
             break;
     }
     _status = start + status + end;
-    let _url = sil_op + url + sil_ed,
-        _time = sil_op + time + sil_ed,
-        _message = '\u001b[33m' + message + '\u001b[39m';
+    let _message = '\u001b[33m' + message + '\u001b[39m';
+        // _url = sil_op + url + sil_ed,
+        // _time = sil_op + time + sil_ed,
+        
 
-    console.log(`${sil_op} --> ${sil_ed} ${_method} ${_url} ${_status} ${_message} ${_time}`)
+    console.log(`${sil_op} --> ${sil_ed} ${_method} ${url} ${_status} ${_message} ${time}`)
 }
 
 module.exports = logUtil;
