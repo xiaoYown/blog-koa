@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="zh_CN">
-	<head>
-		<meta charset="utf-8">
-		<title><%= title %></title>
-		<link rel="stylesheet" href="/static/css/base.css">
+<% include header %>
 		<link rel="stylesheet" href="/static/css/admin.css">
 		<link rel="stylesheet" href="/static/css/editormd.css">
 		<link rel="stylesheet" href="/static/css/codemirror.css">
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_298842_24vw8ohp6ekx1or.css">
 	</head>
 	<body>
 		<!-- 侧边栏 -->
@@ -29,6 +25,15 @@
 								<option value="journal" <% if (artical.type === 'journal') { %>selected="selected"<% } %> >日志</option>
 								<option value="blog" <% if (artical.type === 'blog') { %>selected="selected"<% } %> >博客</option>
 							</select>
+						</div>
+					</div>
+					<div class="admin__add-option">
+						<h4 class="admin__add-option_l">文章标签 : </h4>
+						<div class="admin__add-option_r">
+							<ul class="admin__add-tips" id="tips-wrap">
+								<span class="iconfont icon-add" id="tips-add"></span>
+								<input type="text" class="admin__add-tips_fill" id="tips-fill">
+							</ul>
 						</div>
 					</div>
 					<div class="admin__add-option">
@@ -62,5 +67,7 @@
 	var el = document.getElementById('content')
 	var content = el.innerHTML
 	el.parentNode.removeChild(el)
-</script>
+	
+	var tipsDefault = '<%= artical.tips %>'
+	</script>
 <script src="/static/js/admin-<%= method %>.js"></script>

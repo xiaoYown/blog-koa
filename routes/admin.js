@@ -14,7 +14,7 @@ router.get('/', isLogin , function *( next ) {
 		yield this.render('admin', {layout: false, title: '用户管理'});
 	})
 	.get('/add', isLogin , function *( next ) {
-		yield this.render('admin-add', {layout: false, title: '添加文章', method: 'add', artical: {}});
+		yield this.render('admin-edit', {layout: false, title: '添加文章', method: 'add', artical: {}});
 	})
 	.post('/add', isLogin , function *( next ) {
 		let body = this.request.body;
@@ -29,6 +29,7 @@ router.get('/', isLogin , function *( next ) {
 			update_time,
 			id,
 			title,
+			tips,
 			description,
 			content
 		) 
@@ -39,6 +40,7 @@ router.get('/', isLogin , function *( next ) {
 			"${create_time}",
 			"${id}",
 			"${body.title}",
+			"${body.tips}",
 			"${body.description}",
 			"${content}"
 		)`);
@@ -52,6 +54,7 @@ router.get('/', isLogin , function *( next ) {
 		let artical = yield db_operate.query(
 			`SELECT 
 			title,
+			tips,
 			type,
 			description,
 			content,
@@ -59,7 +62,8 @@ router.get('/', isLogin , function *( next ) {
 			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
 			FROM articals WHERE id = "${this.params.id}" LIMIT 1`
 		);
-		yield this.render('admin-add', {layout: false, title: '修改文章', method: 'mod', artical: artical[0]});
+		console.log(artical[0])
+		yield this.render('admin-edit', {layout: false, title: '修改文章', method: 'mod', artical: artical[0]});
 	})
 	.post('/mod/:id', isLogin , function *( next ) {
 		let body = this.request.body;
@@ -68,7 +72,7 @@ router.get('/', isLogin , function *( next ) {
 				update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
 				description  = tranSpace(body.description),
 				content = tranSpace(body.content);
-		yield db_operate.query(`update articals set title = "${body.title}", type = "${body.type}", content = "${content}", description = "${description}", update_time = "${update_time}" where id = "${this.params.id}"`);
+		yield db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${this.params.id}"`);
 		this.body = {
 			code: '000000',
 			success: true,

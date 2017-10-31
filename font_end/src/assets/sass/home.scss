@@ -1,3 +1,8 @@
+@keyframes spread-icon {
+  from  { opacity: 0;}
+  50%   { opacity: 1;}
+  to    { opacity: 0;}
+}
 .home__wrap {
   position: relative;
   min-height: 100vh;
@@ -30,6 +35,102 @@
       right: 10px;
       bottom: 10px;
       font-size: 12px;
+    }
+  }
+  @media screen and (min-width: 800px) {
+    &-spread {
+      position: fixed;
+      top: 50%;
+      left: -80px;
+      height: 180px;
+      width: 100px;
+      padding: 10px 0;
+      margin-top: -100px;
+      background: #0158af;
+      transition: all .4s;
+      &_btn {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 20px;
+        line-height: 200px;
+        cursor: pointer;
+        transition: all .4s;
+        &:hover {
+          background-color: #014a93;
+        }
+        .iconfont {
+          color: #fff;
+          font-size: 20px;
+          animation: spread-icon linear 1.6s infinite;
+        }
+        .icon-options {
+          display: none;
+        }
+        .icon-arrow-double-l {
+          display: none;
+        }
+      }
+      &.spreading {
+        right: auto;
+        left: 0;
+        .icon-arrow-double {
+          &-r {
+            display: none;
+          }
+          &-l {
+            display: inline-block;
+          }
+        }
+      }
+      &_item {
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+        transition: all .4s;
+        &:hover {
+          background-color: #014a93;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 799px) {
+    &-spread {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      padding-top: 10px;
+      &.spreading &_list {
+        opacity: 1;
+        bottom: 100%;
+        visibility: visible;
+      }
+      &_list {
+        position: absolute;
+        bottom: 80%;
+        right: 0;
+        width: 60px;
+        background-color: #0158af;
+        border-radius: 3px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .4s;
+      }
+      &_item {
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+        transition: all .4s;
+        &:hover {
+          background-color: #014a93;
+        }
+      }
+      .icon-arrow-double {
+        &-l, &-r {
+          display: none;
+        }
+      }
     }
   }
   &-list {

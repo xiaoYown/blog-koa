@@ -1,6 +1,30 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-10-27 17:58:28
+ * Updated: 2017-10-31 16:10:14
 */
-var Xyselect=function(e){this.el=e.el};Xyselect.prototype=function(e){return{}}("undefined"!=typeof window&&window),"function"==typeof define&&define.amd&&define("Xyselect",[],function(){return Xyselect}),window.Xyselect=Xyselect;
+/**
+ * options Object
+ * el: select wrap
+ *
+ */
+var Xyselect = function(options){
+	this.el = options.el;
+
+}
+
+Xyselect.prototype = (function( global ){
+
+	return {
+
+	}
+
+})( typeof window !== "undefined" ? window : this );
+
+if ( typeof define === "function" && define.amd ) {
+	define( "Xyselect", [], function() {
+		return Xyselect;
+	} );
+}
+
+window.Xyselect = Xyselect;
