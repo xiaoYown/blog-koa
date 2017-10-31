@@ -17,7 +17,7 @@ var editor = {
       path: "/static/js/editor/"
     });
   },
-  rem: function(){
+  rem: function () {
     this.md = '';
     this.el.editor.remove();
   },
@@ -70,7 +70,6 @@ function add(){
 
 document.getElementById('add').addEventListener('click', add)
 
-
 // 标签
 function Tips (param) {
   this.el = document.getElementById(param.id)
@@ -99,7 +98,7 @@ Tips.prototype = {
     // 关闭输入事件
     this.fillEl.addEventListener('blur', this.close)
   },
-  initMethods () {
+  initMethods: function () {
     function bind (fn, ctx) {
       return function (a) {
         var l = arguments.length
@@ -110,7 +109,7 @@ Tips.prototype = {
             : fn.call(ctx)
       }
     }
-    for (let key in this) {
+    for (var key in this) {
       if (typeof this[key] === 'function') {
         this[key] = bind(this[key], this)
       }
