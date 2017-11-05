@@ -1,4 +1,3 @@
 node_modules/
 *.scssc
 logs/
-static/vendor/
