@@ -62,7 +62,6 @@ router.get('/', isLogin , function *( next ) {
 			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
 			FROM articals WHERE id = "${this.params.id}" LIMIT 1`
 		);
-		console.log(artical[0])
 		yield this.render('admin-edit', {layout: false, title: '修改文章', method: 'mod', artical: artical[0]});
 	})
 	.post('/mod/:id', isLogin , function *( next ) {

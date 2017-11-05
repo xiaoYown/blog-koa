@@ -8,18 +8,25 @@
     </head>
     <body onresize="document.activeElement.scrollIntoView(true);">
         <div class="lady__wrap" id="wrap">
-        <audio src="/static/audio/memories.m4a" autoplay></audio>
+        <audio id="audio" src="http://dl.stream.qqmusic.qq.com/C400000kTjXy3qevM2.m4a?fromtag=38&vkey=40BBDF136C8763A67C4D0C3B41CA0BFA23FE308D2754429FDDA6FAB20719EF9C606E44FF31C8E3ACD169182DB64A4E83581E24B2D7E4DC37&guid=303544008"></audio>
             <div class="lady__wrap-bg"></div>
             <div class="lady__wrap-bg_filter"></div>
         </div>
         <div class="lady__wrap-form">
             <div class="lady__wrap-form_bg"></div>
-            <input id="wechat" type="" name="" value="">
+            <input id="wechat" type="text">
+            <div class="btn" id="send">发送</div>
         </div>
     </body>
 </html>
-
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="/static/js/jquery.js"></script>
 <script>
+    document.getElementById('audio').play()
+    document.addEventListener("WeixinJSBridgeReady", function () { 
+        document.getElementById('audio').play()
+    }, false);
+
     var wechat = document.getElementById('wechat')
 
     function Say (params) {
@@ -27,7 +34,7 @@
         this.sentences = params.sentences
     }
     Say.prototype = {
-        addTime: 250,
+        addTime: 180,
         loaded: 0,
         sentenceEls: [],
         init: function () {
@@ -58,7 +65,10 @@
                 setTimeout(this.loadWord.bind(this), this.addTime)
             } else {
                 this.loaded += 1
-                this.load()
+                var _this = this
+                setTimeout(function () {
+                    _this.load()
+                }, 1000)
             }
         }
 
@@ -68,16 +78,35 @@
         sentences: [
             '你好',
             '第一眼见到你',
-            '惊为天人',
-            '但小生自幼不善言辞, 略微羞涩',
+            '惊为天人...(此处省略一万字)',
+            '但自幼不善言辞, 略微羞涩',
             '不知如何搭讪',
             '冥思苦想, 茅塞顿开',
             '如果你没有男票, 可否赠与认识的机会',
-            '可以的话请在下方输入你的微信号',
-            '3Q'
+            '可以的话请在下方输入你的微信号'
         ]
     })
+    setTimeout(function () {
+        say.init()
+    }, 4600)
 
-    say.init()
 
+    function sendWechat () {
+        var data = {
+            wechat: document.getElementById('wechat').value
+        }
+        $.ajax({
+            url: '/lady-wechat',
+            type: 'POST',
+            dataType: 'JSON',
+            data: data,
+            success: function(res){
+                alert('good good study, day day up !')
+            },
+            error: function(status){
+                alert('err')
+            }
+        })
+    }
+    document.getElementById('send').addEventListener('click', sendWechat)
 </script>

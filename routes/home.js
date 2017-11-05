@@ -41,11 +41,36 @@ router.get('/', function *( next ){
 		articals
 	});
 })
+.get('/lady-entry', function *( next ) {
+	yield this.render('lady-entry', {
+		layout: false,
+		title: 'lady'
+	});
+})
 .get('/lady', function *( next ) {
+	yield db_operate.query('CREATE TABLE IF NOT EXISTS my_lady (id VARCHAR(255), wechat VARCHAR(255))')
+	
 	yield this.render('lady', {
 		layout: false,
 		title: 'lady'
 	});
+})
+.post('/lady-wechat', function *() {
+	let body = this.request.body
+	let wechat = yield db_operate.query('SELECT * FROM my_lady')
+
+	if (wechat.length === 0) {
+		console.log(body)
+		yield db_operate.query(`insert into my_lady (id, wechat) values ("lady", "${body.wechat}")`)
+		this.body = {
+			message: 'none'
+		}
+	} else {
+		yield db_operate.query(`update my_lady set wechat="${body.wechat}" where id="lady"`)
+		this.body = {
+			message: 'had'
+		}
+	}
 })
 
 module.exports = router;

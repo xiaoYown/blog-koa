@@ -67,10 +67,29 @@ body {
             background-color: rgba(0,0,0,.35);
         }
         input {
-            background-color: #ccc;
+            display: inline-block;
+            vertical-align: top;
+            width: 73%;
+            padding: 0 6px 0 6px;
             height: 30px;
-            width: 80%;
-            margin: 10px;
+            margin: 10px 6px 10px 10px;
+            background-color: #ccc;
+        }
+        .btn {
+            display: inline-block;
+            vertical-align: top;
+            width: 15%;
+            height: 28px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            color: #666;
+            text-align: center;
+            line-height: 28px;
+            &:active {
+                background-color: #ccc;
+                color: #fff;
+            }
         }
     }
 }

@@ -92,7 +92,7 @@ app.use(async (ctx, next) => {
  * 插入列(之后): alter table table_name add  column col_name varchar(30) after __col__name
  * 删除列: alter table table_name drop column col_name
  * 
- * 插入行: inert into table_name (col1_name,col2_name) values (col1_val, col2_val)
+ * 插入行: insert into table_name (col1_name,col2_name) values (col1_val, col2_val)
  * 修改:   update table_name set _key_=_value_ where __key__=__value__ (limit 1) 
  * 删除:   delete from table_name where id = _id
  */
