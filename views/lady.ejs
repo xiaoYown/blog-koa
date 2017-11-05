@@ -1,0 +1,83 @@
+<html lang="zh_CN">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title><%= title %></title>
+		<link rel="stylesheet" href="/static/vendor/css/base.css">
+		<link rel="stylesheet" href="/static/vendor/css/lady.css">
+    </head>
+    <body onresize="document.activeElement.scrollIntoView(true);">
+        <div class="lady__wrap" id="wrap">
+        <audio src="/static/audio/memories.m4a" autoplay></audio>
+            <div class="lady__wrap-bg"></div>
+            <div class="lady__wrap-bg_filter"></div>
+        </div>
+        <div class="lady__wrap-form">
+            <div class="lady__wrap-form_bg"></div>
+            <input id="wechat" type="" name="" value="">
+        </div>
+    </body>
+</html>
+
+<script>
+    var wechat = document.getElementById('wechat')
+
+    function Say (params) {
+        this.wrap = params.wrap
+        this.sentences = params.sentences
+    }
+    Say.prototype = {
+        addTime: 250,
+        loaded: 0,
+        sentenceEls: [],
+        init: function () {
+            this.load()
+        },
+        load: function () {
+            if (this.loaded < this.sentences.length) {
+                var sentence = null,
+                    ct = null
+                sentence = document.createElement('div')
+                sentence.className = 'lady__wrap-chatting'
+                ct = document.createElement('p')
+                ct.className = 'lady__wrap-ct'
+                sentence.appendChild(ct)
+
+                this.wrap.appendChild(sentence)
+                this.wrap.scrollTop = 1000
+
+                this.sentenceEls.push(ct)
+                this.loadWord()
+
+            }
+        },
+        loadWord: function () {
+            var loadLen = this.sentenceEls[this.loaded].textContent.length
+            if (loadLen < this.sentences[this.loaded].length) {
+                this.sentenceEls[this.loaded].textContent += this.sentences[this.loaded][loadLen]
+                setTimeout(this.loadWord.bind(this), this.addTime)
+            } else {
+                this.loaded += 1
+                this.load()
+            }
+        }
+
+    }
+    var say = new Say({
+        wrap: document.getElementById('wrap'),
+        sentences: [
+            '你好',
+            '第一眼见到你',
+            '惊为天人',
+            '但小生自幼不善言辞, 略微羞涩',
+            '不知如何搭讪',
+            '冥思苦想, 茅塞顿开',
+            '如果你没有男票, 可否赠与认识的机会',
+            '可以的话请在下方输入你的微信号',
+            '3Q'
+        ]
+    })
+
+    say.init()
+
+</script>

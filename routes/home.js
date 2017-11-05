@@ -41,5 +41,11 @@ router.get('/', function *( next ){
 		articals
 	});
 })
+.get('/lady', function *( next ) {
+	yield this.render('lady', {
+		layout: false,
+		title: 'lady'
+	});
+})
 
 module.exports = router;

@@ -1,0 +1,76 @@
+html, body {
+    // background-color: #eee;
+}
+body {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.lady__wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 51px;
+    left: 0;
+    padding-bottom: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    &-bg {
+        z-index: -2;
+        background-color: #000;
+        // filter: blur(90px);
+        &, &_filter {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        &_filter {
+            z-index: -1;
+            filter: blur(90px);
+            background-size: cover;
+            background-image: url(/static/images/lady-bg.png);
+        }
+    }
+    &-chatting {
+        padding-top: 16px;
+        overflow: hidden;
+    }
+    &-ct {
+        float: right;
+        padding: 4px 6px;
+        // border: 1px solid #cdcdcd;
+        margin-right: 10px;
+        border-radius: 2px;
+        color: #fff;
+        font-size: 14px;
+
+    }
+    &-form {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-top: 1px solid #cdcdcd;
+        height: 50px;
+        &_bg {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            filter: blur(90px);
+            background-color: rgba(0,0,0,.35);
+        }
+        input {
+            background-color: #ccc;
+            height: 30px;
+            width: 80%;
+            margin: 10px;
+        }
+    }
+}
