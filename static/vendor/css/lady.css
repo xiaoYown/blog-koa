@@ -1,0 +1,65 @@
+body {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.lady__wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 51px;
+  left: 0;
+  padding-bottom: 50px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch; }
+  .lady__wrap-bg {
+    z-index: -2;
+    background-color: #000; }
+    .lady__wrap-bg, .lady__wrap-bg_filter {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0; }
+    .lady__wrap-bg_filter {
+      z-index: -1;
+      -webkit-filter: blur(90px);
+              filter: blur(90px);
+      -o-background-size: cover;
+         background-size: cover;
+      background-image: url(/static/images/lady-bg.png); }
+  .lady__wrap-chatting {
+    padding-top: 16px;
+    overflow: hidden; }
+  .lady__wrap-ct {
+    float: right;
+    padding: 4px 6px;
+    margin-right: 10px;
+    -webkit-border-radius: 2px;
+            border-radius: 2px;
+    color: #fff;
+    font-size: 14px; }
+  .lady__wrap-form {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #cdcdcd;
+    height: 50px; }
+    .lady__wrap-form_bg {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      -webkit-filter: blur(90px);
+              filter: blur(90px);
+      background-color: rgba(0, 0, 0, 0.35); }
+    .lady__wrap-form input {
+      background-color: #ccc;
+      height: 30px;
+      width: 80%;
+      margin: 10px; }
