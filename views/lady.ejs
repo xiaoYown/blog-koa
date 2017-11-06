@@ -23,7 +23,7 @@
         <div id="loading" class="lady__wrap-loading loading">
             <div class="iconfont icon-loading"></div>
         </div>
-        <audio id="audio" src="http://dl.stream.qqmusic.qq.com/C400000kTjXy3qevM2.m4a?fromtag=38&vkey=40BBDF136C8763A67C4D0C3B41CA0BFA23FE308D2754429FDDA6FAB20719EF9C606E44FF31C8E3ACD169182DB64A4E83581E24B2D7E4DC37&guid=303544008"></audio>
+        <<audio id="audio" src="http://m128.xiami.net/802/57802/469888/1770534730_2715254_l.mp3?auth_key=1510628400-0-0-dbec9890ceca16aaf29c955252dd547a"></audio>
     </body>
 </html>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -108,13 +108,13 @@
     })
 
     function actionInit () {
+        document.getElementById('audio').play()
         setTimeout(function () {
             $('#loading').addClass('before-leave')
             setTimeout(function () {
                 $('#loading').removeClass('loading')
             }, 2000)
         }, 2600)
-        document.getElementById('audio').play()
         setTimeout(function () {
             say.init()
         }, 5400)
