@@ -5,6 +5,49 @@ body {
   bottom: 0;
   left: 0; }
 
+@-webkit-keyframes loading {
+  from {
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    opacity: 1;
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@-moz-keyframes loading {
+  from {
+    opacity: 1;
+    -moz-transform: rotate(0deg);
+         transform: rotate(0deg); }
+  to {
+    opacity: 1;
+    -moz-transform: rotate(360deg);
+         transform: rotate(360deg); } }
+
+@-o-keyframes loading {
+  from {
+    opacity: 1;
+    -o-transform: rotate(0deg);
+       transform: rotate(0deg); }
+  to {
+    opacity: 1;
+    -o-transform: rotate(360deg);
+       transform: rotate(360deg); } }
+
+@keyframes loading {
+  from {
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+       -moz-transform: rotate(0deg);
+         -o-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    opacity: 1;
+    -webkit-transform: rotate(360deg);
+       -moz-transform: rotate(360deg);
+         -o-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 .lady__wrap {
   position: absolute;
   top: 0;
@@ -16,11 +59,44 @@ body {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch; }
+  .lady__wrap-loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-transition: opacity 2s;
+    -o-transition: opacity 2s;
+    -moz-transition: opacity 2s;
+    transition: opacity 2s; }
+    .lady__wrap-loading.loading {
+      display: block; }
+    .lady__wrap-loading.before-leave {
+      opacity: 0; }
+    .lady__wrap-loading .iconfont {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 0;
+      width: 50px;
+      height: 50px;
+      margin-top: -25px;
+      margin-left: -25px;
+      color: #fff;
+      font-size: 30px;
+      text-align: center;
+      line-height: 50px;
+      -webkit-animation: loading 1.6s infinite;
+         -moz-animation: loading 1.6s infinite;
+           -o-animation: loading 1.6s infinite;
+              animation: loading 1.6s infinite; }
   .lady__wrap-bg {
     z-index: -2;
     background-color: #000; }
     .lady__wrap-bg, .lady__wrap-bg_filter {
-      position: absolute;
+      position: fixed;
       top: 0;
       right: 0;
       bottom: 0;
