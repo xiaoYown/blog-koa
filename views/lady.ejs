@@ -23,9 +23,6 @@
 <script src="/static/js/jquery.js"></script>
 <script>
     document.getElementById('audio').play()
-    document.addEventListener("WeixinJSBridgeReady", function () { 
-        document.getElementById('audio').play()
-    }, false);
 
     var wechat = document.getElementById('wechat')
 
@@ -73,23 +70,6 @@
         }
 
     }
-    var say = new Say({
-        wrap: document.getElementById('wrap'),
-        sentences: [
-            '你好',
-            '第一眼见到你',
-            '惊为天人...(此处省略一万字)',
-            '但自幼不善言辞, 略微羞涩',
-            '不知如何搭讪',
-            '冥思苦想, 茅塞顿开',
-            '如果你没有男票, 可否赠与认识的机会',
-            '可以的话请在下方输入你的微信号'
-        ]
-    })
-    setTimeout(function () {
-        say.init()
-    }, 4600)
-
 
     function sendWechat () {
         var data = {
@@ -108,5 +88,26 @@
             }
         })
     }
+
+    document.addEventListener("WeixinJSBridgeReady", function () { 
+        document.getElementById('audio').play()
+        var say = new Say({
+            wrap: document.getElementById('wrap'),
+            sentences: [
+                '你好',
+                '第一眼见到你',
+                '惊为天人...(此处省略一万字)',
+                '但自幼不善言辞, 略微羞涩',
+                '不知如何搭讪',
+                '冥思苦想, 茅塞顿开',
+                '如果你没有男票, 可否赠与认识的机会',
+                '可以的话请在下方输入你的微信号'
+            ]
+        })
+        setTimeout(function () {
+            say.init()
+        }, 4600)
+    }, false);
+    
     document.getElementById('send').addEventListener('click', sendWechat)
 </script>
