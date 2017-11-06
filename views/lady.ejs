@@ -108,14 +108,16 @@
     })
 
     function actionInit () {
-        $('#loading').addClass('before-leave')
         setTimeout(function () {
-            $('#loading').removeClass('loading')
-        }, 2000)
+            $('#loading').addClass('before-leave')
+            setTimeout(function () {
+                $('#loading').removeClass('loading')
+            }, 2000)
+        }, 2600)
         document.getElementById('audio').play()
         setTimeout(function () {
             say.init()
-        }, 4600)
+        }, 5400)
     }
     document.addEventListener("WeixinJSBridgeReady", function () {
         actionInit()
