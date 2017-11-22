@@ -17,6 +17,7 @@ const session 		= require('koa-session');
 const staticCache   = require('koa-static-cache'); 
 //log工具
 const logUtil = require('./utils/log_util');
+var favicon = require('koa-favicon');
 
 // const Router = require('koa-router');
 
@@ -37,6 +38,7 @@ var options = {
 var pool = mysql.createPool(options),
 	db_operate = wrapper(pool);
 
+app.use(favicon(path.join(__dirname, './favicon.ico')));
 // app.use(convert(require('koa-static2')("/static", __dirname + '/static')));
 app.use(staticCache({
 	buffer: false,
