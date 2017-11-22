@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-10-31 18:51:19
+ * Updated: 2017-11-22 11:08:47
 */
 // editor 
 // var editor = null;
@@ -42,7 +42,7 @@ editor.add({
 })
 
 // add
-function update(){
+function update () {
 
   var type = document.getElementById('type').value,
     title = document.getElementById('add-title').value,
@@ -55,7 +55,7 @@ function update(){
     return
   }
   for (var i = 0, len = tipsEls.length; i < len; i++) {
-  tips += tipsEls[i].getAttribute('data-tip') + (i < len -1 ? '--' : '')
+    tips += tipsEls[i].getAttribute('data-tip') + (i < len -1 ? '--' : '')
   }
   var data = {
     type: type,
@@ -111,7 +111,7 @@ function Tips (param) {
     // 关闭输入事件
     this.fillEl.addEventListener('blur', this.close)
   },
-  initMethods () {
+  initMethods: function () {
     function bind (fn, ctx) {
     return function (a) {
       var l = arguments.length
@@ -122,10 +122,10 @@ function Tips (param) {
         : fn.call(ctx)
     }
     }
-    for (let key in this) {
-    if (typeof this[key] === 'function') {
-      this[key] = bind(this[key], this)
-    }
+    for (var key in this) {
+      if (typeof this[key] === 'function') {
+        this[key] = bind(this[key], this)
+      }
     }
   },
   close: function () {
@@ -167,9 +167,9 @@ function Tips (param) {
   del: function (_tips) {
     var lis = this.el.querySelectorAll('[data-tip]')
     for (var i = 0, len = lis.length; i < len; i++) {
-    if (_tips.indexOf(lis[i].getAttribute('data-tip')) > -1) {
-      this.el.removeChild(lis[i])
-    }
+      if (_tips.indexOf(lis[i].getAttribute('data-tip')) > -1) {
+        this.el.removeChild(lis[i])
+      }
     }
   },
   destroy: function () {
@@ -178,15 +178,15 @@ function Tips (param) {
     this.el = null
     this.addEl = null
   }
-  }
+}
   
-  var tips = new Tips ({
+var tips = new Tips ({
   str: tipsDefault,
   id: 'tips-wrap'
-  })
-  
-  tips.init()
-  
-  function delTip (tip) {
+})
+
+tips.init()
+
+function delTip (tip) {
   tips.del([tip])
-  }
+}

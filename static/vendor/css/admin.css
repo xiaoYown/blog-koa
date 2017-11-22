@@ -79,23 +79,30 @@ li[view-port="/edit"] {
     text-align: center;
     border-spacing: 0;
     border-right: 1px solid #ccc; }
+    .admin__home-list .artical-top td {
+      color: #fff;
+      background-color: #0158af; }
   .admin__home thead {
     color: #fff;
     background-color: #24292e; }
   .admin__home tbody {
-    color: #666; }
+    color: #666;
+    font-size: 12px; }
+    .admin__home tbody tr:nth-child(odd) {
+      background-color: #eee; }
   .admin__home thead th {
     border-top: 1px solid #ccc; }
-  .admin__home tr:nth-child(even) {
-    background-color: #eee; }
   .admin__home th, .admin__home td {
     padding: 6px 8px;
     border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc; }
   .admin__home span[blog-put],
+  .admin__home span[blog-top],
   .admin__home span[blog-del] {
     margin-right: 6px;
     cursor: pointer; }
+  .admin__home .cancel-top {
+    color: #333; }
   .admin__home-item {
     margin: 0 auto;
     max-width: 1200px; }

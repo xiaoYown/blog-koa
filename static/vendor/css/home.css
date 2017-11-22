@@ -154,6 +154,9 @@
       font-size: 20px;
       line-height: 30px;
       padding: 10px 0; }
+      .home__wrap-list_title .icon-label {
+        color: #0158af;
+        font-size: 20px; }
     .home__wrap-list_time {
       padding-bottom: 6px;
       font-size: 10px;

@@ -1,29 +1,31 @@
 const router = require('koa-router')();
 const db_operate = require('../mysql').db_operate;
 
+// 只做 table list 类型列表进行获取
 router.get('/articals', function *(){
-		try{
+		try {
 			let artical_list = yield db_operate.query(
 					`SELECT 
 					title,
 					id,
 					type,
+					top,
 					DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
 					DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
-					FROM articals`
+					FROM articals order by top desc`
 				);
 			this.body = {
 				code: '000000',
 				success: true,
 				message: '查询成功',
-				data: artical_list,
+				data: artical_list
 			}
-		} catch(err) {
+		} catch (err) {
 			this.body = {
 				code: '000000',
 				success: true,
 				message: '无此类文章',
-				data: [],
+				data: []
 			}
 		}
 	});

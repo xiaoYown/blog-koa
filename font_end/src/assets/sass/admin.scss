@@ -88,6 +88,12 @@ li[view-port="/edit"]{
       text-align: center;
       border-spacing: 0;
       border-right: 1px solid #ccc;
+      .artical-top {
+        td {
+          color: #fff;
+          background-color: #0158af;
+        }
+      }
     }
     thead{
       color: #fff;
@@ -95,12 +101,13 @@ li[view-port="/edit"]{
     }
     tbody{
       color: #666;
+      font-size: 12px;
+      tr:nth-child(odd){
+        background-color: #eee;
+      }
     }
     thead th{
       border-top: 1px solid #ccc;
-    }
-    tr:nth-child(even){
-      background-color: #eee;
     }
     th, td{
       padding: 6px 8px;
@@ -108,9 +115,13 @@ li[view-port="/edit"]{
       border-bottom: 1px solid #ccc;
     }
     span[blog-put],
+    span[blog-top],
     span[blog-del]{
       margin-right: 6px;
       cursor: pointer;
+    }
+    .cancel-top {
+      color: #333;
     }
     &-item{
       margin: 0 auto;

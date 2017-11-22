@@ -97,47 +97,6 @@ input::-moz-placeholder {
 input:-moz-placeholder {
   color: #999; }
 
-.bk {
-  display: block; }
-
-.clear, .clearfix {
-  *zoom: 1; }
-
-.clear:after, .clearfix {
-  content: '';
-  display: block;
-  clear: both;
-  height: 0;
-  visibility: hidden; }
-
-.ovh {
-  overflow: hidden; }
-
-.tal {
-  text-align: left; }
-
-.tac {
-  text-align: center; }
-
-.tar {
-  text-align: right; }
-
-.show {
-  display: block; }
-
-.hide {
-  display: none; }
-
-.fr {
-  float: right; }
-
-.fl {
-  float: left; }
-
-.inline {
-  display: inline-block;
-  vertical-align: top; }
-
 .compo-artical-title {
   line-height: 30px;
   padding-bottom: 20px; }

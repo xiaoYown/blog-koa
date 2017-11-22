@@ -1,1 +1,87 @@
-function getBlogList(){$.ajax({url:"/list/articals",type:"GET",dataType:"JSON",data:{},success:function(t){if("000000"==t.code){for(var e=t.data,o="",n=0,l=e.length;n<l;n++)o+="<tr><td>"+e[n].title+"</td><td>"+e[n].type+"</td><td>"+e[n].create_time+"</td><td>"+e[n].update_time+'</td><td><span blog-put="'+e[n].id+'">编辑</span><span blog-del='+e[n].id+" >删除</span></td></tr>";document.getElementById("blog-list").innerHTML=o;for(var d=document.querySelectorAll("[blog-del]"),a=document.querySelectorAll("[blog-put]"),n=0,l=d.length;n<l;n++)d[n].onclick=del;for(var n=0,l=a.length;n<l;n++)a[n].onclick=get}},error:function(t){console.log(t)}})}function del(){var t=this;$.ajax({url:"/admin/del/"+this.getAttribute("blog-del"),type:"POST",dataType:"JSON",data:{},success:function(e){var o=t.parentNode.parentNode;o.parentNode.removeChild(o)},error:function(t){console.log(t)}})}function get(){window.location.href="/admin/mod/"+this.getAttribute("blog-put")}function put(){var t={id:state.id,content:editor.getMarkdown()};$.ajax({url:"/artical/put",type:"POST",dataType:"JSON",data:t,success:function(t){"000000"==t.code&&(console.log(t),editor.rem(),window.location.href="#/blog")},error:function(t){console.log(t)}})}getBlogList();
+/*
+ * Version: 1.0.0
+ * Author: xioYown 
+ * Updated: 2017-11-22 11:08:47
+*/
+function getBlogList() {
+    $.ajax({
+        url: '/list/articals',
+        type: 'GET',
+        dataType: 'JSON',
+        data: {},
+        success: function (res) {
+            if( res.code == '000000' ){
+                var artical_list = res.data;
+                var list = '',
+                    time = '';
+                for( var i = 0, len = artical_list.length; i < len; i++ ){
+                    list += '<tr ' + (artical_list[i].top ? 'class="artical-top"' : '') + '>' +
+                        '<td>' + artical_list[i].title + '</td>' +
+                        '<td>' + artical_list[i].type + '</td>' +
+                        '<td>' + artical_list[i].create_time + '</td>' +
+                        '<td>' + artical_list[i].update_time + '</td>' +
+                        '<td><span blog-put="' + artical_list[i].id + '">编辑</span>' +
+                        '<span blog-del=' + artical_list[i].id + ' >删除</span>' +
+                        ('<span blog-top=' + artical_list[i].id + ' >' + (artical_list[i].top ? '取消置顶' : '置顶') + '</span></td>') +
+                        '</tr>';
+                }
+                document.getElementById('blog-list').innerHTML = list;
+
+                var dels = document.querySelectorAll('[blog-del]'),
+                    puts = document.querySelectorAll('[blog-put]'),
+                    tops = document.querySelectorAll('[blog-top]');
+
+                for( var i = 0, len = dels.length; i < len; i++ ){
+                    // 删除
+                    dels[i].onclick = del;
+                    // 编辑
+                    puts[i].onclick = get;
+                    // 置顶
+                    tops[i].onclick = toTop;
+                }
+            }
+        },
+        error: function(status){
+            console.log(status)
+        }
+    });
+}
+getBlogList()
+/* 操作 */
+// del
+function del () {
+    var _this = this;
+    $.ajax({
+        url: '/admin/del/' + this.getAttribute('blog-del'),
+        type: 'POST',
+        dataType: 'JSON',
+        data: {},
+        success: function(res){
+            var tr = _this.parentNode.parentNode;
+            tr.parentNode.removeChild(tr);
+        },
+        error: function(status){
+            console.log(status)
+        }
+    });
+}
+// 编辑
+function get () {
+    window.location.href = '/admin/mod/' + this.getAttribute('blog-put')
+}
+// 置顶
+function toTop () {
+    let id = this.textContent === '置顶' ? this.getAttribute('blog-top') : 'cancel-top'
+    $.ajax({
+        url: '/admin/top/' + id,
+        type: 'POST',
+        dataType: 'JSON',
+        data: {},
+        success: function(res){
+            window.location.reload()
+        },
+        error: function(status){
+            console.log(status)
+        }
+    });
+}

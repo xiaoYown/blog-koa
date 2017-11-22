@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS articals (
 	description VARCHAR(200),
 	tips VARCHAR(200),
 	title VARCHAR(30),
-	content TEXT(65535)
+	content TEXT(65535),
+	top INT(1)
 )

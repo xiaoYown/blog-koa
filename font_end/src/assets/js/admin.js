@@ -4,32 +4,35 @@ function getBlogList() {
         type: 'GET',
         dataType: 'JSON',
         data: {},
-        success: function(res){
+        success: function (res) {
             if( res.code == '000000' ){
                 var artical_list = res.data;
                 var list = '',
                     time = '';
                 for( var i = 0, len = artical_list.length; i < len; i++ ){
-                    list += '<tr>' +
+                    list += '<tr ' + (artical_list[i].top ? 'class="artical-top"' : '') + '>' +
                         '<td>' + artical_list[i].title + '</td>' +
                         '<td>' + artical_list[i].type + '</td>' +
                         '<td>' + artical_list[i].create_time + '</td>' +
                         '<td>' + artical_list[i].update_time + '</td>' +
-                        '<td><span blog-put="' + artical_list[i].id + '">编辑</span><span blog-del=' + artical_list[i].id + ' >删除</span></td>' +
+                        '<td><span blog-put="' + artical_list[i].id + '">编辑</span>' +
+                        '<span blog-del=' + artical_list[i].id + ' >删除</span>' +
+                        ('<span blog-top=' + artical_list[i].id + ' >' + (artical_list[i].top ? '取消置顶' : '置顶') + '</span></td>') +
                         '</tr>';
                 }
                 document.getElementById('blog-list').innerHTML = list;
 
                 var dels = document.querySelectorAll('[blog-del]'),
-                    puts = document.querySelectorAll('[blog-put]');
+                    puts = document.querySelectorAll('[blog-put]'),
+                    tops = document.querySelectorAll('[blog-top]');
 
-                // 删除
                 for( var i = 0, len = dels.length; i < len; i++ ){
+                    // 删除
                     dels[i].onclick = del;
-                }
-                // 编辑
-                for( var i = 0, len = puts.length; i < len; i++ ){
+                    // 编辑
                     puts[i].onclick = get;
+                    // 置顶
+                    tops[i].onclick = toTop;
                 }
             }
         },
@@ -41,7 +44,7 @@ function getBlogList() {
 getBlogList()
 /* 操作 */
 // del
-function del(){
+function del () {
     var _this = this;
     $.ajax({
         url: '/admin/del/' + this.getAttribute('blog-del'),
@@ -57,28 +60,20 @@ function del(){
         }
     });
 }
-// get
-function get(){
+// 编辑
+function get () {
     window.location.href = '/admin/mod/' + this.getAttribute('blog-put')
 }
-
-// put
-function put(){
-    var data = {
-        id: state.id,
-        content: editor.getMarkdown(),
-    };
+// 置顶
+function toTop () {
+    let id = this.textContent === '置顶' ? this.getAttribute('blog-top') : 'cancel-top'
     $.ajax({
-        url: '/artical/put',
+        url: '/admin/top/' + id,
         type: 'POST',
         dataType: 'JSON',
-        data: data,
+        data: {},
         success: function(res){
-            if( res.code == '000000' ){
-                console.log(res);
-                editor.rem();
-                window.location.href = '#/blog';
-            }
+            window.location.reload()
         },
         error: function(status){
             console.log(status)

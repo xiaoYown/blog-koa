@@ -67,8 +67,7 @@ router.get('/', isLogin , function *( next ) {
 	.post('/mod/:id', isLogin , function *( next ) {
 		let body = this.request.body;
 		let type = body.type
-		let id = uuid(),
-				update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
+		let update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
 				description  = tranSpace(body.description),
 				content = tranSpace(body.content);
 		yield db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${this.params.id}"`);
@@ -84,6 +83,15 @@ router.get('/', isLogin , function *( next ) {
 			code: '000000',
 			success: true,
 			message: '删除成功'
+		}
+	})
+	.post('/top/:id', isLogin , function *( next ) {
+		yield db_operate.query(`update articals set top=0 where top=1`);
+		yield db_operate.query(`update articals set top=1 where id="${this.params.id}"`);
+		this.body = {
+			code: '000000',
+			success: true,
+			message: '修改成功'
 		}
 	})
 	.get('/blog', isLogin , function *( next ) {

@@ -34,5 +34,25 @@ router.get('/:id', function *(){
 				artical: info[0]
 			}
 		}
+	})
+	.get('/list_blog', function *( next ) {
+		let articals = yield db_operate.query(
+			`SELECT 
+			title,
+			id,
+			type,
+			top,
+			description,
+			DATE_FORMAT(create_time,'%Y.%m.%d %H:%i') AS create_time, 
+			DATE_FORMAT(update_time,'%Y.%m.%d %H:%i') AS update_time
+			FROM articals WHERE type = "blog"`
+		);
+		return this.body = {
+			code: 0,
+			status: 'success',
+			data: {
+				articals: articals
+			}
+		}
 	});
 module.exports = router;
