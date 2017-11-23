@@ -10,13 +10,13 @@ function tranSpace (str) {
 	});
 }
 
-router.get('/', isLogin , function *( next ) {
+router.get('/', isLogin , function *(next) {
 		yield this.render('admin', {layout: false, title: '用户管理'});
 	})
-	.get('/add', isLogin , function *( next ) {
+	.get('/add', isLogin , function *(next) {
 		yield this.render('admin-edit', {layout: false, title: '添加文章', method: 'add', artical: {}});
 	})
-	.post('/add', isLogin , function *( next ) {
+	.post('/add', isLogin , function *(next) {
 		let body = this.request.body;
 		let type = body.type
 		let id = uuid(),
@@ -50,7 +50,7 @@ router.get('/', isLogin , function *( next ) {
 			message: '请求成功'
 		}
 	})
-	.get('/mod/:id', isLogin , function *( next ) {
+	.get('/mod/:id', isLogin , function *(next) {
 		let artical = yield db_operate.query(
 			`SELECT 
 			title,
@@ -64,7 +64,7 @@ router.get('/', isLogin , function *( next ) {
 		);
 		yield this.render('admin-edit', {layout: false, title: '修改文章', method: 'mod', artical: artical[0]});
 	})
-	.post('/mod/:id', isLogin , function *( next ) {
+	.post('/mod/:id', isLogin , function *(next) {
 		let body = this.request.body;
 		let type = body.type
 		let update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
@@ -77,7 +77,7 @@ router.get('/', isLogin , function *( next ) {
 			message: '修改成功'
 		}
 	})
-	.post('/del/:id', isLogin , function *( next ) {
+	.post('/del/:id', isLogin , function *(next) {
 		yield db_operate.query(`delete from articals where id = "${this.params.id}"`);
 		this.body = {
 			code: '000000',
@@ -85,7 +85,7 @@ router.get('/', isLogin , function *( next ) {
 			message: '删除成功'
 		}
 	})
-	.post('/top/:id', isLogin , function *( next ) {
+	.post('/top/:id', isLogin , function *(next) {
 		yield db_operate.query(`update articals set top=0 where top=1`);
 		yield db_operate.query(`update articals set top=1 where id="${this.params.id}"`);
 		this.body = {
@@ -94,7 +94,7 @@ router.get('/', isLogin , function *( next ) {
 			message: '修改成功'
 		}
 	})
-	.get('/blog', isLogin , function *( next ) {
+	.get('/blog', isLogin , function *(next) {
 		yield this.render('admin-blog', {layout: false, title: '用户管理-blog'});
 	});
 
