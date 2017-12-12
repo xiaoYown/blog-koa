@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-11-22 11:08:47
+ * Updated: 2017-12-12 18:02:41
 */
 // editor 
 // var editor = null;
@@ -35,11 +35,23 @@ var editor = {
     return this.el.getMarkdown();
   }
 };
-
-editor.md = content
-editor.add({
-  el: 'md-add'
+$.ajax({
+  url: '/artical/query/' + window.location.pathname.match(/mod\/([\w\-]+)/)[1],
+  method: 'GET',
+  success: function (res) {
+    editor.md = res.data.artical.content
+    editor.add({
+      el: 'md-add'
+    })
+  },
+  error: function (err) {
+    console.log(err)
+  }
 })
+// editor.md = content
+// editor.add({
+//   el: 'md-add'
+// })
 
 // add
 function update () {

@@ -18,6 +18,21 @@ const staticCache   = require('koa-static-cache');
 //log工具
 const logUtil = require('./utils/log_util');
 var favicon = require('koa-favicon');
+var cors = require('koa2-cors');
+
+// app.use(cors({
+//   origin: function (ctx) {
+//     if (/admin/.test(ctx.url)) {
+//       return false;
+//     }
+//     return '/';
+//   },
+//   exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+//   maxAge: 5,
+//   credentials: true,
+//   allowMethods: ['GET', 'POST', 'DELETE'],
+//   allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+// }));
 
 // const Router = require('koa-router');
 

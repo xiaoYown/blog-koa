@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2017-11-22 11:08:47
+ * Updated: 2017-12-12 18:02:41
 */
 // editor 控制
 var editor = {
@@ -65,6 +65,8 @@ function add(){
       if( res.code == '000000' ){
         editor.rem();
         window.location.href = '/admin';
+      } else {
+        alert(res.message)
       }
     },
     error: function(status){

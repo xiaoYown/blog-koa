@@ -28,6 +28,7 @@
 		"koa-session": "^5.0.0",
 		"koa-static-cache": "^5.1.1",
 		"koa-static2": "^0.1.8",
+		"koa2-cors": "^2.0.5",
 		"loader": "^2.1.1",
 		"log4js": "^1.1.1",
 		"mysql": "^2.13.0",

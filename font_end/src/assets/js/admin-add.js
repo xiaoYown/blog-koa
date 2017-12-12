@@ -60,6 +60,8 @@ function add(){
       if( res.code == '000000' ){
         editor.rem();
         window.location.href = '/admin';
+      } else {
+        alert(res.message)
       }
     },
     error: function(status){

@@ -3,6 +3,9 @@ const db_operate = require('../mysql').db_operate;
 const isLogin = require('../utils/login').isLogin;
 const uuid = require('uuid/v4');
 const dateformat 	= require('dateformat');
+const path = require('path');
+const utils = require('../utils/utils');
+const config = require('../config/config');
 
 function tranSpace (str) {
 	return str.replace(/(\`|\'|\")/g, function(str){
@@ -21,34 +24,55 @@ router.get('/', isLogin , function *(next) {
 		let type = body.type
 		let id = uuid(),
 				create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-				description  = tranSpace(body.description),
-				content  = tranSpace(body.content);
-		yield db_operate.query(`insert into articals (
-			type,
-			create_time,
-			update_time,
-			id,
-			title,
-			tips,
-			description,
-			content
-		) 
-		values 
-		(
-			"${type}",
-			"${create_time}",
-			"${create_time}",
-			"${id}",
-			"${body.title}",
-			"${body.tips}",
-			"${body.description}",
-			"${content}"
-		)`);
-		this.body = {
-			code: '000000',
-			success: true,
-			message: '请求成功'
+				description = tranSpace(body.description),
+				content = tranSpace(body.content);
+		let artical = yield db_operate.query(`select * from articals where title="${body.title}" limit 1`)
+		let filePath = config.pathMd + body.title + '.md';
+		let isExists = yield utils.fileExists(filePath);
+
+		// 新增时文件如果存在则直接删除
+		if (isExists) {
+			utils.fileRem(filePath);
 		}
+
+		if (artical.length > 0) {
+			this.body = {
+				code: '000001',
+				success: false,
+				message: '该文章已存在'
+			}
+		} else {
+			// md 存储文章内容
+			utils.fileWrite(filePath, body.content);
+			// database 存储文章信息
+			yield db_operate.query(`insert into articals (
+				type,
+				create_time,
+				update_time,
+				id,
+				title,
+				tips,
+				description,
+				content
+			) 
+			values 
+			(
+				"${type}",
+				"${create_time}",
+				"${create_time}",
+				"${id}",
+				"${body.title}",
+				"${body.tips}",
+				"${body.description}",
+				"${content}"
+			)`);
+			this.body = {
+				code: '000000',
+				success: true,
+				message: '请求成功'
+			}
+		}
+		
 	})
 	.get('/mod/:id', isLogin , function *(next) {
 		let artical = yield db_operate.query(
@@ -70,6 +94,11 @@ router.get('/', isLogin , function *(next) {
 		let update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
 				description  = tranSpace(body.description),
 				content = tranSpace(body.content);
+
+		let filePath = config.pathMd + body.title + '.md';
+
+		utils.fileWrite(filePath, body.content);
+		
 		yield db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${this.params.id}"`);
 		this.body = {
 			code: '000000',
@@ -78,6 +107,16 @@ router.get('/', isLogin , function *(next) {
 		}
 	})
 	.post('/del/:id', isLogin , function *(next) {
+		var articals = yield db_operate.query(`select * from articals where id = "${this.params.id}" limit 1`);
+		
+		if (articals.length > 0) {
+			let filePath = config.pathMd + articals[0].title + '.md';
+			let isExists = yield utils.fileExists(filePath);
+			if (isExists) {
+				utils.fileRem(filePath);
+			}
+		}
+
 		yield db_operate.query(`delete from articals where id = "${this.params.id}"`);
 		this.body = {
 			code: '000000',
