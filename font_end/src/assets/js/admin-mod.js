@@ -30,6 +30,7 @@ var editor = {
     return this.el.getMarkdown();
   }
 };
+
 $.ajax({
   url: '/artical/query/' + window.location.pathname.match(/mod\/([\w\-]+)/)[1],
   method: 'GET',
