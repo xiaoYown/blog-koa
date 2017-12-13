@@ -17,6 +17,7 @@ const session 		= require('koa-session');
 const staticCache   = require('koa-static-cache'); 
 //log工具
 const logUtil = require('./utils/log_util');
+const config = require('./config/config');
 var favicon = require('koa-favicon');
 var cors = require('koa2-cors');
 
@@ -39,19 +40,19 @@ var cors = require('koa2-cors');
 // const router = Router();
 const router = require('./routes');
 
-var wrapper = require('co-mysql'),
-	mysql 	= require('mysql'); 
+// var wrapper = require('co-mysql'),
+// 	mysql 	= require('mysql'); 
 
-var options = {
-	host : 'localhost',
-	port : 3306 ,
-	database : 'blog_test',
-	user: 'root',
-	password : '511687372'
-};
+// var options = {
+// 	host : 'localhost',
+// 	port : 3306 ,
+// 	database : 'blog_test',
+// 	user: 'root',
+// 	password : '511687372'
+// };
 
-var pool = mysql.createPool(options),
-	db_operate = wrapper(pool);
+// var pool = mysql.createPool(options),
+// 	db_operate = wrapper(pool);
 
 app.use(favicon(path.join(__dirname, './favicon.ico')));
 // app.use(convert(require('koa-static2')("/static", __dirname + '/static')));
@@ -162,7 +163,7 @@ app.on('error', function(err, ctx){
 	// console.error('server error', err, ctx);
 });
 
-app.listen(3002);
+app.listen(config.port);
 
 // open("http://localhost:3002")
 
