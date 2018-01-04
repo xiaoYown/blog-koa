@@ -1,0 +1,61 @@
+<% include header %>
+		<link rel="stylesheet" href="/static/vendor/css/blog.css">
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_298842_24vw8ohp6ekx1or.css">
+	</head>
+	<body>
+		<div class="blog__wrap .com__cmp-wrap">
+			<% include title %>
+			<% include aside %>
+			<div class="blog__wrap-main">
+				<ul class="blog__wrap-list">
+					<% for (var i = 0, len = articals.length; i < len; i++) { %>
+						<li>
+							<h3 class="blog__wrap-list_title">
+								<% if (articals[i].top) { %>
+									<span class="iconfont icon-label"></span>
+								<% } %>
+								<a href="/artical/<%= articals[i].id %>">
+									<%= articals[i].title %>
+								</a>
+							</h3>
+							<div class="blog__wrap-list_time">
+								<span>创建 : <%= articals[i].create_time %></span>
+								<span>更新 : <%= articals[i].update_time %></span>
+							</div>
+							<p class="blog__wrap-list_desc"><%= articals[i].description %></p>
+						</li>	
+					<% } %>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+	var isSpread = window.screen.availWidth < 1000
+
+	var box = document.getElementById('spread-box')
+	var btn = document.getElementById('spread-btn')
+
+	function spreading (event) {
+		if (!!event) {
+			event.stopPropagation()
+		}
+		if (!isSpread) {
+			box.setAttribute('class', box.className + ' spreading')
+		} else {
+			box.setAttribute('class', box.className.replace(/\sspreading/, ''))
+		}
+		isSpread = !isSpread
+	}
+	function close () {
+		if (isSpread) {
+			box.setAttribute('class', box.className.replace(/\sspreading/, ''))
+			isSpread = !isSpread
+		}
+	}
+	btn.addEventListener('click', spreading)
+	window.addEventListener('click', close)
+
+	spreading()
+</script>
