@@ -6,7 +6,7 @@
 		<div class="blog__wrap .com__cmp-wrap">
 			<% include title %>
 			<% include aside %>
-			<div class="blog__wrap-main">
+			<div class="blog__wrap-main com__cmp-ct">
 				<ul class="blog__wrap-list">
 					<% for (var i = 0, len = articals.length; i < len; i++) { %>
 						<li>
@@ -14,7 +14,7 @@
 								<% if (articals[i].top) { %>
 									<span class="iconfont icon-label"></span>
 								<% } %>
-								<a href="/artical/<%= articals[i].id %>">
+								<a href="<%= articals[i].key_time.replace(/-/g, '/') + '/' + articals[i].title %>">
 									<%= articals[i].title %>
 								</a>
 							</h3>

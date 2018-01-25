@@ -1,5 +1,7 @@
 const router = require('koa-router')();
 const db_operate = require('../mysql').db_operate;
+const config = require('../config/config');
+const utils = require('../utils/utils');
 
 router.get('/', function *( next ){
   let articals = yield db_operate.query(
@@ -8,6 +10,7 @@ router.get('/', function *( next ){
 		id,
 		type,
 		top,
+		key_time,
 		description,
 		DATE_FORMAT(create_time,'%Y.%m.%d %H:%i') AS create_time, 
 		DATE_FORMAT(update_time,'%Y.%m.%d %H:%i') AS update_time
@@ -59,6 +62,27 @@ router.get('/', function *( next ){
 		title: '琐事', 
 		articals
 	});
+})
+.get('/image', function *(){
+	yield this.render('image', {
+		layout: false,
+	});
+})
+.get('/:year/:month/:date/:title', function *() {
+	let time = key_time = this.params.year + '-' + this.params.month + '-' + this.params.date
+	let info = yield db_operate.query(
+		`SELECT
+		id,
+		title,
+		type,
+		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
+		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
+		FROM articals WHERE key_time='${key_time}' AND title='${this.params.title}' LIMIT 1`
+	);
+	var content = yield utils.fileRead(config.pathMd + info[0].title + '.md');
+	info[0].content = content;
+	console.log(content)
+	yield this.render('artical', { layout: false, title: info[0].title, info: info[0] });
 })
 
 module.exports = router;

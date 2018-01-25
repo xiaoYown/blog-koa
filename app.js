@@ -39,6 +39,7 @@ var cors = require('koa2-cors');
 
 // const router = Router();
 const router = require('./routes');
+const imageRouter = require('./routes/image');
 
 // var wrapper = require('co-mysql'),
 // 	mysql 	= require('mysql'); 
@@ -94,6 +95,16 @@ app.use(async (ctx, next) => {
 		ms = new Date() - start;
 		//记录异常日志
 		logUtil.logError(ctx, error, ms);
+	}
+});
+
+// logger
+app.use(async (ctx, next) => {
+	if (!/\/image/.test(ctx.request.url)) {
+		console.log(ctx.request.url)
+		imageRouter(ctx.request.url, ctx)
+	} else {
+		return next()
 	}
 });
 

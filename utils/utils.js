@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+/* 判断文件是否存在 */
 exports.fileExists = function (filePath) {
   return new Promise(function (resolve, reject) {
     fs.exists(filePath, function (exists) {
@@ -7,7 +7,7 @@ exports.fileExists = function (filePath) {
     })
   })
 }
-
+/* 读文件 */
 exports.fileRead = function (fileName) {
   return new Promise(function (resolve, reject) {
     fs.readFile(fileName, function(err, data) {
@@ -19,7 +19,7 @@ exports.fileRead = function (fileName) {
     })
   })
 }
-
+/* 写文件 */
 exports.fileWrite = function (fileName, ct, encode = 'utf-8') {
   return new Promise(function (resolve, reject) {
     fs.writeFile(fileName, ct, encode, function(err, data) {
@@ -31,7 +31,7 @@ exports.fileWrite = function (fileName, ct, encode = 'utf-8') {
     })
   })
 }
-
+/* 修改文件 */
 exports.filePut = function (fileName, ct) {
   return new Promise(function (resolve, reject) {
     fs.write(fileName, ct, function(err, data) {
@@ -43,11 +43,23 @@ exports.filePut = function (fileName, ct) {
     })
   })
 }
-
+/* 删除文件 */
 exports.fileRem = function (fileName, ct) {
   return new Promise(function (resolve, reject) {
     fs.unlink(fileName, function (err) {
       if (err) console.log(err);
+    })
+  })
+}
+/* 读取目录 */
+exports.dirRead = function (folderPath) {
+  return new Promise(function (resolve, reject) {
+    fs.readdir(folderPath, function (err, files) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(files);
+      }
     })
   })
 }

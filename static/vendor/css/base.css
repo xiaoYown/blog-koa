@@ -143,17 +143,21 @@ input:-moz-placeholder {
     line-height: 40px; }
     .com__cmp-aside_list li:hover {
       background-color: #f6f6f6; }
+.com__cmp-ct {
+  padding-left: 260px; }
 @media screen and (max-width: 1060px) {
   .com__cmp-wrap {
     padding-left: 0; }
   .com__cmp-title {
-    padding-left: 50px; }
+    padding-left: 10px; }
   .com__cmp-aside {
     -webkit-transform: translateX(-100%);
        -moz-transform: translateX(-100%);
         -ms-transform: translateX(-100%);
          -o-transform: translateX(-100%);
-            transform: translateX(-100%); } }
+            transform: translateX(-100%); }
+  .com__cmp-ct {
+    padding-left: 0; } }
 
 .compo-artical-title {
   line-height: 30px;
