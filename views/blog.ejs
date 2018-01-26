@@ -14,7 +14,7 @@
 								<% if (articals[i].top) { %>
 									<span class="iconfont icon-label"></span>
 								<% } %>
-								<a href="<%= articals[i].key_time.replace(/-/g, '/') + '/' + articals[i].title %>">
+								<a href="<%= '/artical/' + articals[i].key_time.replace(/-/g, '/') + '/' + articals[i].title %>">
 									<%= articals[i].title %>
 								</a>
 							</h3>

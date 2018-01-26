@@ -1,0 +1,56 @@
+.image__wrap {
+  padding: 60px 20px 20px 20px; }
+  .image__wrap-folders {
+    position: relative; }
+  .image__wrap-tools {
+    text-align: right; }
+  .image__wrap-tool {
+    padding: 2px 6px;
+    border: 1px solid #000;
+    -webkit-border-radius: 3px;
+            border-radius: 3px;
+    margin-left: 6px;
+    cursor: pointer; }
+    .image__wrap-tool:hover {
+      background-color: #000;
+      color: #fff; }
+  .image__wrap-del {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    border: 1px solid #000;
+    line-height: 20px; }
+    .editting .image__wrap-del {
+      display: block; }
+    .image__wrap-del input[type="checkbox"] {
+      display: none; }
+      .image__wrap-del input[type="checkbox"]:checked + .icon-sure {
+        display: block; }
+    .image__wrap-del .icon-sure {
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      display: none;
+      font-size: 10px; }
+  .image__wrap-file {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 100px; }
+    .image__wrap-file .icon-folder,
+    .image__wrap-file .icon-add {
+      font-size: 30px;
+      cursor: pointer; }
+  .image__wrap-f-title {
+    position: absolute;
+    right: 0;
+    bottom: 6px;
+    left: 0;
+    line-height: 20px; }

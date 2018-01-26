@@ -98,17 +98,6 @@ app.use(async (ctx, next) => {
 	}
 });
 
-// logger
-app.use(async (ctx, next) => {
-	if (!/\/image/.test(ctx.request.url)) {
-		console.log(ctx.request.url)
-		imageRouter(ctx.request.url, ctx)
-	} else {
-		return next()
-	}
-});
-
-
 // var myRouter = new Router();
 /**
  * 创建数据库: create database dbname

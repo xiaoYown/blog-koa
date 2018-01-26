@@ -33,7 +33,8 @@ h1, h2, h3, h4, h5, h6 {
 input, textarea, select, button {
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none; }
+  appearance: none;
+  background-color: #fff; }
 
 section {
   -moz-user-select: none;

@@ -6,9 +6,35 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="baidu-site-verification" content="ChQ2o4EBnT"/>
 		<title>图片管理</title>
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_298842_e1jaeqslks5uerk9.css">
 		<link rel="stylesheet" href="/static/vendor/css/base.css">
+		<link rel="stylesheet" href="/static/vendor/css/image.css">
   </head>
   <body>
-    创建目录
+		<section class="image__wrap">
+			<ul id="edit-area" class="image__wrap-folders">
+				<li class="image__wrap-tools">
+					<button id="del" class="image__wrap-tool">删除</button>
+					<button id="edit" class="image__wrap-tool">编辑</button>
+				</li>
+				<% for (var i = 0, len = folders.length; i < len; i++) { %>
+					<li class="image__wrap-file">
+						<label class="image__wrap-del">
+							<input type="checkbox" data-index="<%= i %>"></input>
+							<i class="iconfont icon-sure"></i>
+						</label>
+						<% if (folders[i].type === 'folder') { %>
+							<i class="iconfont icon-folder" onclick="linkFolder(<%= i %>)"></i>
+							<span class="image__wrap-f-title"><%= folders[i].name %></span>
+						<% } %>
+					</li>
+					<% } %>
+					<li class="image__wrap-file">
+							<i id="add-folder" class="iconfont icon-add"></i>
+					</li>
+			</ul>
+		</section>
   </body>
 </html>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/vendor/js/image.js"></script>
