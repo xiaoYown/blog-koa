@@ -5,12 +5,6 @@ const imageConfig = require('../config/image_config');
 function setAddFolder (tree, dir, name) {
   if (dir.length > 0) {
     setAddFolder(tree.folders[dir[0]], dir.slice(1), name);
-    // for (let i = 0, len = tree.folders.length; i < len; i++) {
-    //   if (tree.folders[i].name === tree.folders[dir[0]].name) {
-    //     setAddFolder(tree.folders[i], dir.slice(1), name);
-    //     break;
-    //   }
-    // }
   } else {
     tree.folders.push({
       "type": "folder",

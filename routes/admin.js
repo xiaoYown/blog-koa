@@ -13,128 +13,144 @@ function tranSpace (str) {
 	});
 }
 
-router.get('/', isLogin , function *(next) {
-		yield this.render('admin', {layout: false, title: '用户管理'});
-	})
-	.get('/add', isLogin , function *(next) {
-		yield this.render('admin-edit', {layout: false, title: '添加文章', method: 'add', artical: {}});
-	})
-	.post('/add', isLogin , function *(next) {
-		let body = this.request.body;
-		let type = body.type
-		let id = uuid(),
-				create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-				description = tranSpace(body.description),
-				content = tranSpace(body.content);
-		let artical = yield db_operate.query(`select * from articals where title="${body.title}" limit 1`)
-		let filePath = config.pathMd + body.title + '.md';
-		let isExists = yield utils.fileExists(filePath);
+router.get('/', isLogin, async (ctx, next) => {
+	await ctx.render('admin', {
+		layout: false,
+		title: '用户管理'
+	});
+})
+.get('/add', isLogin, async (ctx, next) => {
+	await ctx.render('admin-edit', {
+		layout: false,
+		title: '添加文章',
+		method: 'add',
+		artical: {}
+	});
+})
+.post('/add', isLogin, async (ctx, next) => {
+	let body = ctx.request.body;
+	let type = body.type
+	let id = uuid(),
+			create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
+			description = tranSpace(body.description),
+			content = tranSpace(body.content);
+	let artical = await db_operate.query(`select * from articals where title="${body.title}" limit 1`)
+	let filePath = config.pathMd + body.title + '.md';
+	let isExists = await utils.fileExists(filePath);
 
-		// 新增时文件如果存在则直接删除
+	// 新增时文件如果存在则直接删除
+	if (isExists) {
+		utils.fileRem(filePath);
+	}
+
+	if (artical.length > 0) {
+		ctx.body = {
+			code: '000001',
+			success: false,
+			message: '该文章已存在'
+		}
+	} else {
+		// md 存储文章内容
+		utils.fileWrite(filePath, body.content);
+		// database 存储文章信息
+		await db_operate.query(`insert into articals (
+			type,
+			create_time,
+			update_time,
+			id,
+			title,
+			tips,
+			description,
+			content
+		) 
+		values 
+		(
+			"${type}",
+			"${create_time}",
+			"${create_time}",
+			"${id}",
+			"${body.title}",
+			"${body.tips}",
+			"${body.description}",
+			"${content}"
+		)`);
+		ctx.body = {
+			code: '000000',
+			success: true,
+			message: '请求成功'
+		}
+	}
+	
+})
+.get('/mod/:id', isLogin, async (ctx, next) => {
+	let artical = await db_operate.query(
+		`SELECT 
+		title,
+		tips,
+		type,
+		description,
+		content,
+		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
+		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
+		FROM articals WHERE id = "${this.params.id}" LIMIT 1`
+	);
+	await ctx.render('admin-edit', {
+		layout: false,
+		title: '修改文章',
+		method: 'mod',
+		artical: artical[0]
+	});
+})
+.post('/mod/:id', isLogin, async (ctx, next) => {
+	let body = ctx.request.body;
+	let type = body.type
+	let update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
+			description  = tranSpace(body.description),
+			content = tranSpace(body.content);
+
+	let filePath = config.pathMd + body.title + '.md';
+
+	utils.fileWrite(filePath, body.content);
+	
+	await db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${this.params.id}"`);
+	ctx.body = {
+		code: '000000',
+		success: true,
+		message: '修改成功'
+	};
+})
+.post('/del/:id', isLogin, async (ctx, next) => {
+	var articals = await db_operate.query(`select * from articals where id = "${this.params.id}" limit 1`);
+	
+	if (articals.length > 0) {
+		let filePath = config.pathMd + articals[0].title + '.md';
+		let isExists = await utils.fileExists(filePath);
 		if (isExists) {
 			utils.fileRem(filePath);
 		}
+	}
 
-		if (artical.length > 0) {
-			this.body = {
-				code: '000001',
-				success: false,
-				message: '该文章已存在'
-			}
-		} else {
-			// md 存储文章内容
-			utils.fileWrite(filePath, body.content);
-			// database 存储文章信息
-			yield db_operate.query(`insert into articals (
-				type,
-				create_time,
-				update_time,
-				id,
-				title,
-				tips,
-				description,
-				content
-			) 
-			values 
-			(
-				"${type}",
-				"${create_time}",
-				"${create_time}",
-				"${id}",
-				"${body.title}",
-				"${body.tips}",
-				"${body.description}",
-				"${content}"
-			)`);
-			this.body = {
-				code: '000000',
-				success: true,
-				message: '请求成功'
-			}
-		}
-		
-	})
-	.get('/mod/:id', isLogin , function *(next) {
-		let artical = yield db_operate.query(
-			`SELECT 
-			title,
-			tips,
-			type,
-			description,
-			content,
-			DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
-			DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
-			FROM articals WHERE id = "${this.params.id}" LIMIT 1`
-		);
-		yield this.render('admin-edit', {layout: false, title: '修改文章', method: 'mod', artical: artical[0]});
-	})
-	.post('/mod/:id', isLogin , function *(next) {
-		let body = this.request.body;
-		let type = body.type
-		let update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-				description  = tranSpace(body.description),
-				content = tranSpace(body.content);
-
-		let filePath = config.pathMd + body.title + '.md';
-
-		utils.fileWrite(filePath, body.content);
-		
-		yield db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${this.params.id}"`);
-		this.body = {
-			code: '000000',
-			success: true,
-			message: '修改成功'
-		}
-	})
-	.post('/del/:id', isLogin , function *(next) {
-		var articals = yield db_operate.query(`select * from articals where id = "${this.params.id}" limit 1`);
-		
-		if (articals.length > 0) {
-			let filePath = config.pathMd + articals[0].title + '.md';
-			let isExists = yield utils.fileExists(filePath);
-			if (isExists) {
-				utils.fileRem(filePath);
-			}
-		}
-
-		yield db_operate.query(`delete from articals where id = "${this.params.id}"`);
-		this.body = {
-			code: '000000',
-			success: true,
-			message: '删除成功'
-		}
-	})
-	.post('/top/:id', isLogin , function *(next) {
-		yield db_operate.query(`update articals set top=0 where top=1`);
-		yield db_operate.query(`update articals set top=1 where id="${this.params.id}"`);
-		this.body = {
-			code: '000000',
-			success: true,
-			message: '修改成功'
-		}
-	})
-	.get('/blog', isLogin , function *(next) {
-		yield this.render('admin-blog', {layout: false, title: '用户管理-blog'});
+	await db_operate.query(`delete from articals where id = "${this.params.id}"`);
+	ctx.body = {
+		code: '000000',
+		success: true,
+		message: '删除成功'
+	}
+})
+.post('/top/:id', isLogin, async (ctx, next) => {
+	await db_operate.query(`update articals set top=0 where top=1`);
+	await db_operate.query(`update articals set top=1 where id="${this.params.id}"`);
+	ctx.body = {
+		code: '000000',
+		success: true,
+		message: '修改成功'
+	}
+})
+.get('/blog', isLogin, async (ctx, next) => {
+	await ctx.render('admin-blog', {
+		layout: false,
+		title: '用户管理-blog'
 	});
+});
 
 module.exports = router;

@@ -8,33 +8,33 @@ const path = require('path');
 const utils = require('../utils/utils');
 const config = require('../config/config');
 
-router.get('/:id', function *() {
-	let info = yield db_operate.query(
+router.get('/:id', async (ctx, next) => {
+	let info = await db_operate.query(
 		`SELECT 
 		title,
 		type,
 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
 		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
-		FROM articals WHERE id = "${this.params.id}" LIMIT 1`
+		FROM articals WHERE id = "${ctx.params.id}" LIMIT 1`
 	);
-	var content = yield utils.fileRead(config.pathMd + info[0].title + '.md');
+	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
 	info[0].content = content;
-	yield this.render('artical', { layout: false, title: info[0].title, info: info[0] });
+	await ctx.render('artical', { layout: false, title: info[0].title, info: info[0] });
 })
-.get('/query/:id', function *() {
-	let info = yield db_operate.query(
+.get('/query/:id', async (ctx, next) => {
+	let info = await db_operate.query(
 		`SELECT 
 		title,
 		type,
 		content,
 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
 		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
-		FROM articals WHERE id = "${this.params.id}" LIMIT 1`
+		FROM articals WHERE id = "${ctx.params.id}" LIMIT 1`
 	);
-	var content = yield utils.fileRead(config.pathMd + info[0].title + '.md');
+	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
 	info[0].content = content;
 
-	return this.body = {
+	return ctx.body = {
 		code: 0,
 		status: 'success',
 		data: {
@@ -42,8 +42,8 @@ router.get('/:id', function *() {
 		}
 	}
 })
-.get('/list_blog', function *(next) {
-	let articals = yield db_operate.query(
+.get('/list_blog', async (ctx, next) => {
+	let articals = await db_operate.query(
 		`SELECT 
 		title,
 		id,
@@ -54,7 +54,7 @@ router.get('/:id', function *() {
 		DATE_FORMAT(update_time,'%Y.%m.%d %H:%i') AS update_time
 		FROM articals WHERE type = "blog"`
 	);
-	return this.body = {
+	return ctx.body = {
 		code: 0,
 		status: 'success',
 		data: {
@@ -62,21 +62,21 @@ router.get('/:id', function *() {
 		}
 	}
 })
-.get('/:year/:month/:date/:title', function *() {
+.get('/:year/:month/:date/:title', async (ctx, next) => {
 	console.log(1)
-	let time = key_time = this.params.year + '-' + this.params.month + '-' + this.params.date
-	let info = yield db_operate.query(
+	let time = key_time = ctx.params.year + '-' + ctx.params.month + '-' + ctx.params.date
+	let info = await db_operate.query(
 		`SELECT
 		id,
 		title,
 		type,
 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
 		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
-		FROM articals WHERE key_time='${key_time}' AND title='${this.params.title}' LIMIT 1`
+		FROM articals WHERE key_time='${key_time}' AND title='${ctx.params.title}' LIMIT 1`
 	);
-	var content = yield utils.fileRead(config.pathMd + info[0].title + '.md');
+	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
 	info[0].content = content;
 	console.log(content)
-	yield this.render('artical', { layout: false, title: info[0].title, info: info[0] });
+	await ctx.render('artical', { layout: false, title: info[0].title, info: info[0] });
 });
 module.exports = router;

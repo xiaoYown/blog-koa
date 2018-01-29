@@ -117,17 +117,15 @@ xTool.uploadImg = function(fileInfo){
       if(xhr.status ==200 || xhr.status == 304)  {  
         var respon = JSON.parse(xhr.responseText);  
         if(respon.success == "success")  {  
-          if( !!fileInfo.success ){
+          if (!!fileInfo.success) {
             fileInfo.success(JSON.parse(xhr.response));
           }
-        }  
-        else if(respon.success == "no_file")  {  
-          if( !!fileInfo.fail ){
+        } else if (respon.success == "no_file"){  
+          if (!!fileInfo.fail) {
             fileInfo.fail(xhr);
           }
-        }  
-        else  {  
-          if( !!fileInfo.fail ){
+        } else {  
+          if (!!fileInfo.fail) {
             fileInfo.fail(xhr);
           }
         }  
@@ -149,7 +147,7 @@ xTool.uploadImg = function(fileInfo){
   
   var files = document.getElementById('files').files;  
   
-  if (!files.length)   {  
+  if (!files.length) {  
     alert('Please select a file!');  
     return;  
   }  
@@ -157,6 +155,11 @@ xTool.uploadImg = function(fileInfo){
   
   var form = new FormData();  
   form.append(fileInfo.apiKey, file);
+  if (fileInfo.params && typeof fileInfo.params === 'object') {
+    for (var key in fileInfo.params) {
+      form.append(key, fileInfo.params[key]);
+    }
+  }
   form.append("acttime", new Date().valueOf()); 
   xhr.open("post", fileInfo.api, true);  
   xhr.send(form);
@@ -167,13 +170,16 @@ function uploadImg () {
     file: document.getElementById('files'),
     progress: document.getElementById('progress'),
     progressNum: document.getElementById('progressNumber'),
-    api: '/image/uploadimg',
+    api: '/image/uploadimg?url=' + location.pathname.replace(/^\/image\/{0,1}/, ''),
     apiKey: 'infile',
-    success: function(res){
+    params: {
+      url: location.pathname.replace(/^\/image\/{0,1}/, '')
+    },
+    success: function (res) {
       console.log(res)
       console.log('success')
     },
-    fail: function(){
+    fail: function () {
       console.log('upload fail')
     }
 

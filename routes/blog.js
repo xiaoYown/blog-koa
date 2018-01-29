@@ -1,14 +1,14 @@
 const router = require('koa-router')();
 const db_operate = require('../mysql').db_operate;
 
-router.get('/', function *( next ){
-  yield this.render('index', {
+router.get('/', async (ctx, next) =>{
+  await ctx.render('index', {
     layout: false,
     title: 'xiaoYown'
   });
 })
-.get('/home', function *( next ) {
-	let articals = yield db_operate.query(
+.get('/home', async (ctx, next) => {
+	let articals = await db_operate.query(
 		`SELECT 
 		title,
 		id,
@@ -19,20 +19,20 @@ router.get('/', function *( next ){
 		DATE_FORMAT(update_time,'%Y.%m.%d %H:%i') AS update_time
 		FROM articals WHERE type = "blog" order by top desc`
 	);
-	yield this.render('home', {
+	await ctx.render('home', {
 		layout: false,
 		title: '首页',
 		articals
 	});
 })
-.get('/react', function *( next ) {
-	yield this.render('react', {
+.get('/react', async (ctx, next) => {
+	await ctx.render('react', {
 		layout: false,
 		title: '首页'
 	});
 })
-.get('/journal', function *( next ) {
-	let articals = yield db_operate.query(
+.get('/journal', async (ctx, next) => {
+	let articals = await db_operate.query(
 		`SELECT 
 		title,
 		id,
@@ -42,7 +42,7 @@ router.get('/', function *( next ){
 		DATE_FORMAT(update_time,'%Y.%m.%d %H:%i') AS update_time
 		FROM articals WHERE type = "journal"`
 	);
-	yield this.render('home', {
+	await ctx.render('home', {
 		layout: false, 
 		title: '琐事', 
 		articals
