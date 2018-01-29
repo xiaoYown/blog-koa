@@ -1,39 +1,60 @@
 <html lang="zh_CN">
-	<head>
-		<meta charset="utf-8">
-		<meta name="keywords" content="xiaoYown web 前端 node">
-		<meta name="description" content="xiaoYown 奋斗在底层的前端小码农">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="baidu-site-verification" content="ChQ2o4EBnT"/>
-		<title>图片管理</title>
-		<link rel="stylesheet" href="//at.alicdn.com/t/font_298842_e1jaeqslks5uerk9.css">
-		<link rel="stylesheet" href="/static/vendor/css/base.css">
-		<link rel="stylesheet" href="/static/vendor/css/image.css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="xiaoYown web 前端 node">
+    <meta name="description" content="xiaoYown 奋斗在底层的前端小码农">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="baidu-site-verification" content="ChQ2o4EBnT"/>
+    <title>图片管理</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_298842_e1jaeqslks5uerk9.css">
+    <link rel="stylesheet" href="/static/vendor/css/base.css">
+    <link rel="stylesheet" href="/static/vendor/css/image.css">
   </head>
   <body>
-		<section class="image__wrap">
-			<ul id="edit-area" class="image__wrap-folders">
-				<li class="image__wrap-tools">
-					<button id="del" class="image__wrap-tool">删除</button>
-					<button id="edit" class="image__wrap-tool">编辑</button>
-				</li>
-				<% for (var i = 0, len = folders.length; i < len; i++) { %>
-					<li class="image__wrap-file">
-						<label class="image__wrap-del">
-							<input type="checkbox" data-index="<%= i %>"></input>
-							<i class="iconfont icon-sure"></i>
-						</label>
-						<% if (folders[i].type === 'folder') { %>
-							<i class="iconfont icon-folder" onclick="linkFolder(<%= i %>)"></i>
-							<span class="image__wrap-f-title"><%= folders[i].name %></span>
-						<% } %>
-					</li>
-					<% } %>
-					<li class="image__wrap-file">
-							<i id="add-folder" class="iconfont icon-add"></i>
-					</li>
-			</ul>
-		</section>
+    <section class="image__wrap">
+      <ul id="edit-area" class="image__wrap-folders">
+        <li class="image__wrap-tools">
+          <button id="del" class="image__wrap-tool">删除</button>
+          <button id="edit" class="image__wrap-tool">编辑</button>
+        </li>
+        <% for (var i = 0, len = folders.length; i < len; i++) { %>
+          <li class="image__wrap-file">
+            <label class="image__wrap-del">
+              <input type="checkbox" data-index="<%= i %>"></input>
+              <i class="iconfont icon-sure"></i>
+            </label>
+            <% if (folders[i].type === 'folder') { %>
+              <i class="iconfont icon-folder" onclick="linkFolder(<%= i %>)"></i>
+              <span class="image__wrap-f-title"><%= folders[i].name %></span>
+            <% } %>
+          </li>
+          <% } %>
+          <li class="image__wrap-file">
+              <i id="add-folder" class="iconfont icon-add"></i>
+          </li>
+      </ul>
+
+      <style type="text/css">
+        #progress{
+          width: 0;
+          height: 20px;
+          background-color: #000;
+          transition: width 0.4s;
+        }
+        #progressNumber{
+          font-size: 30px;
+        }
+      </style>
+      <p id="progress"></p>
+      <p id="progressNumber">0</p>
+
+      <div class="image__wrap-footer">
+        <div class="mage__wrap-upload">
+          <input id="files" type="file" multiple="multiple" accept="image/gif, image/jpeg, image/jpg, image/png"/>
+          <button id="upload">上传</button>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
 <script src="/static/js/jquery.js"></script>

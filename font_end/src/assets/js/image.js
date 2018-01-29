@@ -96,3 +96,88 @@ function editStatus () {
 
 document.getElementById('edit').addEventListener('click', editStatus);
 document.getElementById('del').addEventListener('click', delFolder);
+
+/* 上传图片 */
+var xTool = {};
+
+/**
+ * @param file.file 		-- ele for file input
+ * @param file.progress 	-- ele for progress length show
+ * @param file.progressNum  -- ele for progress number show
+ * @param file.api 			-- file upload url
+ * @param file.apiKey 		-- key word for api key name
+ * @cb    file.success 		-- callback for success
+ * @cb    file.fail 		-- callback for fail
+ */
+xTool.uploadImg = function(fileInfo){
+  var xhr = new XMLHttpRequest();  
+    
+  xhr.onreadystatechange = function(){  
+    if(xhr.readyState == 4)  {  
+      if(xhr.status ==200 || xhr.status == 304)  {  
+        var respon = JSON.parse(xhr.responseText);  
+        if(respon.success == "success")  {  
+          if( !!fileInfo.success ){
+            fileInfo.success(JSON.parse(xhr.response));
+          }
+        }  
+        else if(respon.success == "no_file")  {  
+          if( !!fileInfo.fail ){
+            fileInfo.fail(xhr);
+          }
+        }  
+        else  {  
+          if( !!fileInfo.fail ){
+            fileInfo.fail(xhr);
+          }
+        }  
+      }  
+      else  {  
+        alert("Request was unsuccessful:" + xhr.status);
+      }  
+    }  
+  }
+
+  xhr.upload.onprogress = function (evt) {
+    console.log(fileInfo)
+    if (evt.lengthComputable) {
+      var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+      fileInfo.progress.style.width = percentComplete + '%';
+      fileInfo.progressNum.innerHTML = percentComplete + '%';
+    }
+  };
+  
+  var files = document.getElementById('files').files;  
+  
+  if (!files.length)   {  
+    alert('Please select a file!');  
+    return;  
+  }  
+  var file = files[0];  
+  
+  var form = new FormData();  
+  form.append(fileInfo.apiKey, file);
+  form.append("acttime", new Date().valueOf()); 
+  xhr.open("post", fileInfo.api, true);  
+  xhr.send(form);
+}
+
+function uploadImg () {
+  xTool.uploadImg({
+    file: document.getElementById('files'),
+    progress: document.getElementById('progress'),
+    progressNum: document.getElementById('progressNumber'),
+    api: '/image/uploadimg',
+    apiKey: 'infile',
+    success: function(res){
+      console.log(res)
+      console.log('success')
+    },
+    fail: function(){
+      console.log('upload fail')
+    }
+
+  });
+}
+
+document.getElementById('upload').addEventListener('click', uploadImg);

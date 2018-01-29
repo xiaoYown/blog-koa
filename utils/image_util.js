@@ -22,16 +22,24 @@ function setAddFolder (tree, dir, name) {
 // 获取文件夹树形结构
 exports.getFolderTree = function () {
   return new Promise(function (resolve, reject) {
-    fs.readFile(imageConfig.folders_path, function (err, data) {
+    fs.stat(imageConfig.folders_root, function (err) {
       if (err) {
-        const folderTree = {
-          name: 'root',
-          folders: []
-        };
-        resolve(folderTree);
-        fs.writeFileSync(imageConfig.folders_path, JSON.stringify(folderTree), 'utf-8')
+        fs.mkdir(imageConfig.folders_root, function () {
+            const folderTree = {
+              name: 'root',
+              folders: []
+            };
+            resolve(folderTree);
+            fs.writeFileSync(imageConfig.folders_path, JSON.stringify(folderTree), 'utf-8')
+        })
       } else {
-        resolve(JSON.parse(data.toString()));
+        fs.readFile(imageConfig.folders_path, function (err, data) {
+          if (err) {
+            console.log(err)
+          } else {
+            resolve(JSON.parse(data.toString()));
+          }
+        })
       }
     })
   })

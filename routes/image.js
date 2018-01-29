@@ -1,5 +1,7 @@
 const router = require('koa-router')();
 const image_util = require('../utils/image_util');
+const formParse = require('co-busbody');
+const path = require('path');
 
 router.get('/', function *(){
   let folderTree = yield image_util.getFolderTree();
@@ -55,6 +57,28 @@ router.get('/', function *(){
     status: 'success',
     message: '删除成功'
   };
+})
+// 删除文件夹
+.post('/uploadimg', function *() {
+  var parts = formParse(this.request);
+  var part;
+  var fileNames = [];
+  while (part = yield parts) {
+    const filename = part.filename;
+    fileNames.push(filename);
+    const homeDir = path.resolve(__dirname, '..');
+    const nrepath = homeDir + '/static/' + filename;
+    const stream = fs.createWriteStream(newpath);
+    part.pipe(stream);
+  }
+  if (fileNames.length > 0) {
+    console.log('filename', fileNames)
+    const imgUrls = []
+    for (let item of fileNames) {
+      imgUrls.push('/' + item)
+    }
+  }
+  this.body = { code: 0, urls: imgUrls }
 });
 
 module.exports = router;
