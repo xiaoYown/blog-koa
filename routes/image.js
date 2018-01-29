@@ -76,9 +76,19 @@ router.get('/', async (ctx, next) => {
 })
 // 删除文件夹
 .post('/uploadimg', upload.single('infile'), async (ctx, next) => {
+  let file = ctx.req.file;
+  let folderTree = await image_util.getFolderTree();
+  let url = ctx.request.query.url;
+  let dirArray = url === '' ? [] : url.split('_');
+
+  image_util.addImg(folderTree, dirArray, {
+    originalName: file.originalname.substring(0, file.originalname.lastIndexOf('.')),
+    fileName: file.filename
+  });
+
   ctx.body = {  
     success: 'success', // 返回文件名
-    filename: ctx.req.file.filename
+    filename: file.filename
   };
 });
 

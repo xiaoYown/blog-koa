@@ -13,6 +13,18 @@ function setAddFolder (tree, dir, name) {
     })
   }
 }
+// 设置 json 文件目录 新图片属性
+function setAddImg (tree, dir, options) {
+  if (dir.length > 0) {
+    setAddImg(tree.folders[dir[0]], dir.slice(1), options);
+  } else {
+    tree.folders.push({
+      "type": "image",
+      "name": options.originalName,
+      "src": imageConfig.static_host + options.fileName
+    })
+  }
+}
 // 获取文件夹树形结构
 exports.getFolderTree = function () {
   return new Promise(function (resolve, reject) {
@@ -82,4 +94,15 @@ exports.getDirs = function (tree, dir) {
   } else {
     return tree.folders
   }
+}
+
+// 添加文件夹
+exports.addImg = function (tree, dir, name) {
+  setAddImg(tree, dir, name)
+  fs.writeFileSync(imageConfig.folders_path, JSON.stringify(tree), 'utf-8')
+  return new Promise(function (resolve, reject) {
+    fs.readFile(imageConfig.folders_path, function (err, data) {
+      resolve(data)
+    })
+  })
 }

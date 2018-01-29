@@ -26,6 +26,8 @@
             <% if (folders[i].type === 'folder') { %>
               <i class="iconfont icon-folder" onclick="linkFolder(<%= i %>)"></i>
               <span class="image__wrap-f-title"><%= folders[i].name %></span>
+            <% } else { %>
+              <img src="<%= folders[i].src %>" alt="<%= folders[i].name %>">
             <% } %>
           </li>
           <% } %>
