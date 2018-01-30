@@ -29,12 +29,14 @@ router.get('/', isLogin, async (ctx, next) => {
 })
 .post('/add', isLogin, async (ctx, next) => {
 	let body = ctx.request.body;
-	let type = body.type
-	let id = uuid(),
-			create_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-			description = tranSpace(body.description),
-			content = tranSpace(body.content);
-	let artical = await db_operate.query(`select * from articals where title="${body.title}" limit 1`)
+	let type = body.type;
+	let id = uuid();
+	let now_time = new Date();
+	let create_time = dateformat(now_time, 'yyyy-mm-dd\nHH:M:ss');
+	let key_time = dateformat(now_time, 'yyyy-mm-dd');
+	let description = tranSpace(body.description);
+	let content = tranSpace(body.content);
+	let artical = await db_operate.query(`select * from articals where title="${body.title}" limit 1`);
 	let filePath = config.pathMd + body.title + '.md';
 	let isExists = await utils.fileExists(filePath);
 
