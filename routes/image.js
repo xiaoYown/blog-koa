@@ -1,6 +1,7 @@
 const router = require('koa-router')();
 const image_util = require('../utils/image_util');
 const image_config = require('../config/image_config');
+const isLogin = require('../utils/login').isLogin;
 const path = require('path');
 
 const multer = require('koa-multer');
@@ -19,7 +20,7 @@ var upload = multer({
   storage: storage
 });
 
-router.get('/', async (ctx, next) => {
+router.get('/', isLogin, async (ctx, next) => {
   let folderTree = await image_util.getFolderTree();
 
   await ctx.render('image', {
@@ -28,7 +29,7 @@ router.get('/', async (ctx, next) => {
     folders: folderTree.folders
 	})
 })
-.get('/:url', async (ctx, next) => {
+.get('/:url', isLogin, async (ctx, next) => {
   let folderTree = await image_util.getFolderTree();
   let folders = image_util.getDirs(folderTree, ctx.params.url.split('_'));
 	await ctx.render('image', {
@@ -37,7 +38,7 @@ router.get('/', async (ctx, next) => {
 	})
 })
 // 添加文件夹
-.post('/addfolder', async (ctx, next) => {
+.post('/addfolder', isLogin, async (ctx, next) => {
   let body = ctx.request.body;
   let folderTree = await image_util.getFolderTree();
   let dirArray = body.dir === '' ? [] : body.dir.split('_');
@@ -61,7 +62,7 @@ router.get('/', async (ctx, next) => {
   };
 })
 // 删除文件夹
-.post('/delfolder', async (ctx, next) => {
+.post('/delfolder', isLogin, async (ctx, next) => {
   let body = ctx.request.body;
   let folderTree = await image_util.getFolderTree();
   let dirArray = body.dir === '' ? [] : body.dir.split('_');
@@ -75,7 +76,7 @@ router.get('/', async (ctx, next) => {
   };
 })
 // 删除文件夹
-.post('/uploadimg', upload.single('infile'), async (ctx, next) => {
+.post('/uploadimg', isLogin, upload.single('infile'), async (ctx, next) => {
   let file = ctx.req.file;
   let folderTree = await image_util.getFolderTree();
   let url = ctx.request.query.url;

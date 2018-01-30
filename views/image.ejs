@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="zh_CN">
   <head>
     <meta charset="utf-8">
@@ -12,49 +13,56 @@
   </head>
   <body>
     <section class="image__wrap">
-      <ul id="edit-area" class="image__wrap-folders">
-        <li class="image__wrap-tools">
+      <div id="edit-area" class="image__wrap-container">
+        <div class="image__wrap-tools">
           <button id="del" class="image__wrap-tool">删除</button>
           <button id="edit" class="image__wrap-tool">编辑</button>
-        </li>
-        <% for (var i = 0, len = folders.length; i < len; i++) { %>
-          <li class="image__wrap-file">
-            <label class="image__wrap-del">
-              <input type="checkbox" data-index="<%= i %>"></input>
-              <i class="iconfont icon-sure"></i>
-            </label>
+        </div>
+        <ul class="image__wrap-folders">
+          <% for (var i = 0, len = folders.length; i < len; i++) { %>
             <% if (folders[i].type === 'folder') { %>
-              <i class="iconfont icon-folder" onclick="linkFolder(<%= i %>)"></i>
-              <span class="image__wrap-f-title"><%= folders[i].name %></span>
-            <% } else { %>
-              <img src="<%= folders[i].src %>" alt="<%= folders[i].name %>">
+              <li class="image__wrap-file">
+                <label class="image__wrap-del">
+                  <input type="checkbox" data-index="<%= i %>"></input>
+                  <i class="iconfont icon-sure"></i>
+                </label>
+                <i class="iconfont icon-folder" onclick="linkFolder(<%= i %>)"></i>
+                <span class="image__wrap-f-title"><%= folders[i].name %></span>
+              </li>
             <% } %>
-          </li>
           <% } %>
           <li class="image__wrap-file">
-              <i id="add-folder" class="iconfont icon-add"></i>
+            <i id="add-folder" class="iconfont icon-add"></i>
           </li>
-      </ul>
-
-      <style type="text/css">
-        #progress{
-          width: 0;
-          height: 20px;
-          background-color: #000;
-          transition: width 0.4s;
-        }
-        #progressNumber{
-          font-size: 30px;
-        }
-      </style>
-      <p id="progress"></p>
-      <p id="progressNumber">0</p>
-
-      <div class="image__wrap-footer">
-        <div class="mage__wrap-upload">
-          <input id="files" type="file" multiple="multiple" accept="image/gif, image/jpeg, image/jpg, image/png"/>
-          <button id="upload">上传</button>
-        </div>
+        </ul>
+        <ul class="image__wrap-images">
+          <% for (var i = 0, len = folders.length; i < len; i++) { %>
+            <% if (folders[i].type === 'image') { %>
+              <li class="image__wrap-image">
+                <label class="image__wrap-del">
+                  <input type="checkbox" data-index="<%= i %>"></input>
+                  <i class="iconfont icon-sure"></i>
+                </label>
+                <div class="image__wrap-image_item">
+                  <img src="<%= folders[i].src %>" alt="<%= folders[i].name %>">
+                </div>
+                <h4 class="image__wrap-image_name"><%= folders[i].name %></h4>
+                <h4 class="image__wrap-image_src">
+                  <input type="text" value="<%= folders[i].src %>" onfocus="this.select()" readonly>
+                  <i class="iconfont icon-document_fill" src-copy></i>
+                </h4>
+              </li>
+            <% } %>
+          <% } %>
+          <li class="image__wrap-image">
+            <label>
+              <input id="files" type="file" accept="image/gif, image/jpeg, image/jpg, image/png"/>
+              <i class="iconfont icon-add"></i>
+              <p id="progress"></p>
+              <p id="progressNumber">0</p>
+            </label>
+          </li>
+        </ul>
       </div>
     </section>
   </body>

@@ -137,7 +137,6 @@ xTool.uploadImg = function(fileInfo){
   }
 
   xhr.upload.onprogress = function (evt) {
-    console.log(fileInfo)
     if (evt.lengthComputable) {
       var percentComplete = Math.round(evt.loaded * 100 / evt.total);
       fileInfo.progress.style.width = percentComplete + '%';
@@ -151,7 +150,7 @@ xTool.uploadImg = function(fileInfo){
     alert('Please select a file!');  
     return;  
   }  
-  var file = files[0];  
+  var file = files[0];
   
   var form = new FormData();  
   form.append(fileInfo.apiKey, file);
@@ -176,14 +175,24 @@ function uploadImg () {
       url: location.pathname.replace(/^\/image\/{0,1}/, '')
     },
     success: function (res) {
-      console.log(res)
-      console.log('success')
+      location.reload();
     },
     fail: function () {
       console.log('upload fail')
     }
-
   });
 }
 
-document.getElementById('upload').addEventListener('click', uploadImg);
+document.getElementById('files').addEventListener('change', uploadImg);
+
+/* 复制图片链接 */
+function copySrc () {
+  this.previousElementSibling.select();
+  document.execCommand("copy");
+}
+
+var copyEles = document.querySelectorAll('[src-copy]');
+
+for (var i = 0, len = copyEles.length; i < len; i++) {
+  copyEles[i].addEventListener('click', copySrc);
+}

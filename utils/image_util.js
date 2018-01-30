@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const imageConfig = require('../config/image_config');
 
 // 设置 json 文件目录 新文件夹属性
@@ -21,6 +22,7 @@ function setAddImg (tree, dir, options) {
     tree.folders.push({
       "type": "image",
       "name": options.originalName,
+      "filename": options.fileName,
       "src": imageConfig.static_host + options.fileName
     })
   }
@@ -60,13 +62,31 @@ exports.addFolder = function (tree, dir, name) {
     })
   })
 }
+// 删除文件夹时 删除该文件夹内的图片
+function delInnerImage (tree) {
+  let file;
+  for (let i = 0, len = tree.folders.length; i < len; i++) {
+    file = tree.folders[i];
+    if (file.type === 'image') {
+      fs.unlinkSync(path.join(imageConfig.files_path, file.filename));
+    } else if (file.type === 'folder') {
+      delInnerImage(file);
+    }
+  }
+}
 // 删除 json 文件目录 文件夹属性
 function setDelFolder (tree, dir, indexs) {
   if (dir.length > 0) {
     setDelFolder(tree.folders[dir[0]], dir.slice(1), indexs);
   } else {
+    let file;
     for (let i = indexs.length - 1; i >= 0; i--) {
-      tree.folders.splice(indexs[i], 1);
+      file = tree.folders.splice(indexs[i], 1)[0];
+      if (file.type === 'image') {
+        fs.unlinkSync(path.join(imageConfig.files_path, file.filename));
+      } else if (file.type === 'folder') {
+        delInnerImage(file);
+      }
     }
   }
 }
