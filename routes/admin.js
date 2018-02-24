@@ -58,6 +58,7 @@ router.get('/', isLogin, async (ctx, next) => {
 		await db_operate.query(`insert into articals (
 			type,
 			create_time,
+			key_time,
 			update_time,
 			id,
 			title,
@@ -68,6 +69,7 @@ router.get('/', isLogin, async (ctx, next) => {
 		values 
 		(
 			"${type}",
+			"${key_time}",
 			"${create_time}",
 			"${create_time}",
 			"${id}",

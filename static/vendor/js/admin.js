@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2018-01-30 09:52:15
+ * Updated: 2018-02-24 22:57:38
 */
 function getBlogList() {
     $.ajax({

@@ -63,7 +63,6 @@ router.get('/:id', async (ctx, next) => {
 	}
 })
 .get('/:year/:month/:date/:title', async (ctx, next) => {
-	console.log(1)
 	let time = key_time = ctx.params.year + '-' + ctx.params.month + '-' + ctx.params.date
 	let info = await db_operate.query(
 		`SELECT
@@ -76,7 +75,6 @@ router.get('/:id', async (ctx, next) => {
 	);
 	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
 	info[0].content = content;
-	console.log(content)
 	await ctx.render('artical', { layout: false, title: info[0].title, info: info[0] });
 });
 module.exports = router;

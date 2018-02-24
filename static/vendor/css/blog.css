@@ -32,10 +32,10 @@ html {
 .blog__wrap {
   position: relative; }
   .blog__wrap-main {
-    max-width: 800px;
-    margin: 0 auto; }
+    max-width: 800px; }
   .blog__wrap-list {
-    padding: 94px 10px 0 10px; }
+    background-color: rgba(1, 88, 175, 0.8);
+    padding: 30px 10px 30px 10px; }
     .blog__wrap-list li {
       padding: 10px;
       margin-top: 20px;
