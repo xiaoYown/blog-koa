@@ -30,16 +30,14 @@ function setAddImg (tree, dir, options) {
 // 获取文件夹树形结构
 exports.getFolderTree = function () {
   return new Promise(function (resolve, reject) {
-    fs.stat(imageConfig.folders_root, function (err) {
+    fs.stat(imageConfig.folders_path, function (err) {
       if (err) {
-        fs.mkdir(imageConfig.folders_root, function () {
-            const folderTree = {
-              name: 'root',
-              folders: []
-            };
-            resolve(folderTree);
-            fs.writeFileSync(imageConfig.folders_path, JSON.stringify(folderTree), 'utf-8')
-        })
+        const folderTree = {
+          name: 'root',
+          folders: []
+        };
+        resolve(folderTree);
+        fs.writeFileSync(imageConfig.folders_path, JSON.stringify(folderTree), 'utf-8')
       } else {
         fs.readFile(imageConfig.folders_path, function (err, data) {
           if (err) {

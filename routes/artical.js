@@ -22,7 +22,7 @@ router.get('/:id', async (ctx, next) => {
 	await ctx.render('artical', { layout: false, title: info[0].title, info: info[0] });
 })
 .get('/query/:id', async (ctx, next) => {
-	let info = await db_operate.query(
+	let info = await db_operate.query(	
 		`SELECT 
 		title,
 		type,
@@ -71,7 +71,7 @@ router.get('/:id', async (ctx, next) => {
 		type,
 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
 		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
-		FROM articals WHERE key_time='${key_time}' AND title='${ctx.params.title}' LIMIT 1`
+		FROM articals WHERE key_time='${key_time}' AND title='${decodeURI(ctx.params.title)}' LIMIT 1`
 	);
 	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
 	info[0].content = content;

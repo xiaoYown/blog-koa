@@ -39,6 +39,7 @@ router.get('/', isLogin, async (ctx, next) => {
 	let artical = await db_operate.query(`select * from articals where title="${body.title}" limit 1`);
 	let filePath = config.pathMd + body.title + '.md';
 	let isExists = await utils.fileExists(filePath);
+	console.log(key_time)
 
 	// 新增时文件如果存在则直接删除
 	if (isExists) {
@@ -57,8 +58,8 @@ router.get('/', isLogin, async (ctx, next) => {
 		// database 存储文章信息
 		await db_operate.query(`insert into articals (
 			type,
-			create_time,
 			key_time,
+			create_time,
 			update_time,
 			id,
 			title,
@@ -87,6 +88,7 @@ router.get('/', isLogin, async (ctx, next) => {
 	
 })
 .get('/mod/:id', isLogin, async (ctx, next) => {
+	console.log(ctx.params)
 	let artical = await db_operate.query(
 		`SELECT 
 		title,
@@ -96,7 +98,7 @@ router.get('/', isLogin, async (ctx, next) => {
 		content,
 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
 		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
-		FROM articals WHERE id = "${this.params.id}" LIMIT 1`
+		FROM articals WHERE id = "${ctx.params.id}" LIMIT 1`
 	);
 	await ctx.render('admin-edit', {
 		layout: false,
@@ -116,7 +118,7 @@ router.get('/', isLogin, async (ctx, next) => {
 
 	utils.fileWrite(filePath, body.content);
 	
-	await db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${this.params.id}"`);
+	await db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${ctx.params.id}"`);
 	ctx.body = {
 		code: '000000',
 		success: true,
@@ -124,7 +126,7 @@ router.get('/', isLogin, async (ctx, next) => {
 	};
 })
 .post('/del/:id', isLogin, async (ctx, next) => {
-	var articals = await db_operate.query(`select * from articals where id = "${this.params.id}" limit 1`);
+	var articals = await db_operate.query(`select * from articals where id = "${ctx.params.id}" limit 1`);
 	
 	if (articals.length > 0) {
 		let filePath = config.pathMd + articals[0].title + '.md';
@@ -134,7 +136,7 @@ router.get('/', isLogin, async (ctx, next) => {
 		}
 	}
 
-	await db_operate.query(`delete from articals where id = "${this.params.id}"`);
+	await db_operate.query(`delete from articals where id = "${ctx.params.id}"`);
 	ctx.body = {
 		code: '000000',
 		success: true,
@@ -143,7 +145,7 @@ router.get('/', isLogin, async (ctx, next) => {
 })
 .post('/top/:id', isLogin, async (ctx, next) => {
 	await db_operate.query(`update articals set top=0 where top=1`);
-	await db_operate.query(`update articals set top=1 where id="${this.params.id}"`);
+	await db_operate.query(`update articals set top=1 where id="${ctx.params.id}"`);
 	ctx.body = {
 		code: '000000',
 		success: true,
