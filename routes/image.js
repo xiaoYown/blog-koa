@@ -75,7 +75,7 @@ router.get('/', isLogin, async (ctx, next) => {
     message: '删除成功'
   };
 })
-// 删除文件夹
+// 上传图片
 .post('/uploadimg', isLogin, upload.single('infile'), async (ctx, next) => {
   let file = ctx.req.file;
   let folderTree = await image_util.getFolderTree();
