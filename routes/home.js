@@ -7,6 +7,8 @@ router.get('/', async (ctx, next) => {
   let articals = await db_operate.query(
 		`SELECT 
 		title,
+		readers,
+		thumb_up,
 		id,
 		type,
 		top,

@@ -67,6 +67,7 @@ router.get('/:id', async (ctx, next) => {
 	let info = await db_operate.query(
 		`SELECT
 		id,
+		readers,
 		title,
 		type,
 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
@@ -76,5 +77,8 @@ router.get('/:id', async (ctx, next) => {
 	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
 	info[0].content = content;
 	await ctx.render('artical', { layout: false, title: info[0].title, info: info[0] });
+	await db_operate.query(`
+		update articals set readers=${info[0].readers + 1} where id="${info[0].id}"
+	`)
 });
 module.exports = router;
