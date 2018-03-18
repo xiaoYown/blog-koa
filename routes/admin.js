@@ -39,7 +39,6 @@ router.get('/', isLogin, async (ctx, next) => {
 	let artical = await db_operate.query(`select * from articals where title="${body.title}" limit 1`);
 	let filePath = config.pathMd + body.title + '.md';
 	let isExists = await utils.fileExists(filePath);
-	console.log(key_time)
 
 	// 新增时文件如果存在则直接删除
 	if (isExists) {
@@ -88,7 +87,6 @@ router.get('/', isLogin, async (ctx, next) => {
 	
 })
 .get('/mod/:id', isLogin, async (ctx, next) => {
-	console.log(ctx.params)
 	let artical = await db_operate.query(
 		`SELECT 
 		title,

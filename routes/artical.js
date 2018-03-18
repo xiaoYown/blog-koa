@@ -8,20 +8,7 @@ const path = require('path');
 const utils = require('../utils/utils');
 const config = require('../config/config');
 
-router.get('/:id', async (ctx, next) => {
-	let info = await db_operate.query(
-		`SELECT 
-		title,
-		type,
-		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
-		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
-		FROM articals WHERE id = "${ctx.params.id}" LIMIT 1`
-	);
-	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
-	info[0].content = content;
-	await ctx.render('artical', { layout: false, title: info[0].title, info: info[0] });
-})
-.get('/query/:id', async (ctx, next) => {
+router.get('/query/:id', async (ctx, next) => {
 	let info = await db_operate.query(	
 		`SELECT 
 		title,
@@ -80,5 +67,18 @@ router.get('/:id', async (ctx, next) => {
 	await db_operate.query(`
 		update articals set readers=${info[0].readers + 1} where id="${info[0].id}"
 	`)
-});
+})
+// .get('/:id', async (ctx, next) => {
+// 	let info = await db_operate.query(
+// 		`SELECT 
+// 		title,
+// 		type,
+// 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i') AS create_time, 
+// 		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i') AS update_time
+// 		FROM articals WHERE id = "${ctx.params.id}" LIMIT 1`
+// 	);
+// 	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
+// 	info[0].content = content;
+// 	await ctx.render('artical', { layout: false, title: info[0].title, info: info[0] });
+// })
 module.exports = router;
