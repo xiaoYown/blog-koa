@@ -63,8 +63,7 @@ router.get('/', isLogin, async (ctx, next) => {
 			id,
 			title,
 			tips,
-			description,
-			content
+			description
 		) 
 		values 
 		(
@@ -75,8 +74,7 @@ router.get('/', isLogin, async (ctx, next) => {
 			"${id}",
 			"${body.title}",
 			"${body.tips}",
-			"${body.description}",
-			"${content}"
+			"${body.description}"
 		)`);
 		ctx.body = {
 			code: '000000',
@@ -93,7 +91,6 @@ router.get('/', isLogin, async (ctx, next) => {
 		tips,
 		type,
 		description,
-		content,
 		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
 		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
 		FROM articals WHERE id = "${ctx.params.id}" LIMIT 1`
@@ -109,8 +106,8 @@ router.get('/', isLogin, async (ctx, next) => {
 	let body = ctx.request.body;
 	let type = body.type
 	let update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
-			description  = tranSpace(body.description),
-			content = tranSpace(body.content);
+		description  = tranSpace(body.description),
+		content = tranSpace(body.content);
 
 	let filePath = config.pathMd + body.title + '.md';
 

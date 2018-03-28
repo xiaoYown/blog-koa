@@ -26,6 +26,7 @@ router.get('/', isLogin, async (ctx, next) => {
   await ctx.render('image', {
     layout: false,
     title: '图片管理',
+    url_origin: image_config.static_host,
     folders: folderTree.folders
 	})
 })
