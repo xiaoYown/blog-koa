@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS articals (
 
 # alter table articals add  column readers INT default 0 after type;
 # alter table articals add  column thumb_up INT default 0 after readers;
-# alter table articals add  column key_time INT after thumb_up;
+# alter table articals add  column key_time VARCHAR(30) after thumb_up;
