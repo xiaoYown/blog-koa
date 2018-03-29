@@ -108,11 +108,28 @@ router.get('/', isLogin, async (ctx, next) => {
 	let update_time = dateformat(new Date(), 'yyyy-mm-dd\nHH:M:ss'),
 		description  = tranSpace(body.description),
 		content = tranSpace(body.content);
-
+	// 查询 title 是否存在相同 -> true : modify false ? next
+	var sameTitle = await db_operate.query(`select * from articals where id != "${ctx.params.id}" and title = "${body.title}" limit 1`)
+	if (sameTitle.length > 0) {
+		return ctx.body = {
+			code: '000001',
+			success: false,
+			message: '文章已存在'
+		};
+	}
+	// 查询 title 是否修改 -> true : add then delete ? write
+	var articals = await db_operate.query(`select * from articals where id = "${ctx.params.id}" limit 1`);
+	if (articals[0].title !== body.title) {
+		let filePath = config.pathMd + articals[0].title + '.md';
+		let isExists = await utils.fileExists(filePath);
+		if (isExists) {
+			utils.fileRem(filePath);
+		}
+	}
+	// 文章生成 .md 文件
 	let filePath = config.pathMd + body.title + '.md';
-
 	utils.fileWrite(filePath, body.content);
-	
+	// sql 信息修改
 	await db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${ctx.params.id}"`);
 	ctx.body = {
 		code: '000000',
