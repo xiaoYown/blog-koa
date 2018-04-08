@@ -14,14 +14,16 @@ html {
     max-width: 800px;
   }
   &-list {
-    background-color: rgba($std_main_A, .8);
+    // background-color: rgba($std_main_A, .8);
     padding: 30px 10px 30px 10px;
     li {
       padding: 10px;
       margin-top: 20px;
       background-color: #fff;
+      box-shadow: 0 2px 3px 0 #c9c9c9;
     }
     &_title {
+      display: block;
       font-size: 20px;
       line-height: 30px;
       padding: 10px 0;
