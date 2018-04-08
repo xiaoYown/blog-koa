@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @-webkit-keyframes spread-icon {
   from {
     opacity: 0; }
@@ -43,19 +44,25 @@ html {
               box-shadow: 0 2px 3px 0 #c9c9c9; }
     .blog__wrap-list_title {
       display: block;
+      padding: 10px 0;
       font-size: 20px;
-      line-height: 30px;
-      padding: 10px 0; }
+      line-height: 30px; }
       .blog__wrap-list_title .icon-label {
         color: #0158af;
         font-size: 20px; }
     .blog__wrap-list_time {
       padding-bottom: 6px;
       font-size: 10px;
-      line-height: 18px; }
+      line-height: 18px;
+      text-align: right; }
       .blog__wrap-list_time span {
         display: inline-block;
         vertical-align: top;
         margin-right: 10px; }
     .blog__wrap-list_desc {
-      color: #d2d2d2; }
+      color: #d2d2d2;
+      margin-left: 40px; }
+      .blog__wrap-list_desc:before {
+        display: inline;
+        content: '拜拜';
+        visibility: hidden; }
