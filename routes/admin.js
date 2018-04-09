@@ -130,7 +130,7 @@ router.get('/', isLogin, async (ctx, next) => {
 	let filePath = config.pathMd + body.title + '.md';
 	utils.fileWrite(filePath, body.content);
 	// sql 信息修改
-	await db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", content="${content}", description="${description}", update_time="${update_time}" where id="${ctx.params.id}"`);
+	await db_operate.query(`update articals set title="${body.title}", tips="${body.tips}", type="${body.type}", description="${description}", update_time="${update_time}" where id="${ctx.params.id}"`);
 	ctx.body = {
 		code: '000000',
 		success: true,
