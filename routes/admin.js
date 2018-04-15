@@ -27,6 +27,24 @@ router.get('/', isLogin, async (ctx, next) => {
 		artical: {}
 	});
 })
+.get('/mod/:id', isLogin, async (ctx, next) => {
+	let artical = await db_operate.query(
+		`SELECT 
+		title,
+		tips,
+		type,
+		description,
+		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
+		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
+		FROM articals WHERE id = "${ctx.params.id}" LIMIT 1`
+	);
+	await ctx.render('admin-edit', {
+		layout: false,
+		title: '修改文章',
+		method: 'mod',
+		artical: artical[0]
+	});
+})
 .post('/add', isLogin, async (ctx, next) => {
 	let body = ctx.request.body;
 	let type = body.type;
@@ -83,24 +101,6 @@ router.get('/', isLogin, async (ctx, next) => {
 		}
 	}
 	
-})
-.get('/mod/:id', isLogin, async (ctx, next) => {
-	let artical = await db_operate.query(
-		`SELECT 
-		title,
-		tips,
-		type,
-		description,
-		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') AS create_time, 
-		DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s') AS update_time
-		FROM articals WHERE id = "${ctx.params.id}" LIMIT 1`
-	);
-	await ctx.render('admin-edit', {
-		layout: false,
-		title: '修改文章',
-		method: 'mod',
-		artical: artical[0]
-	});
 })
 .post('/mod/:id', isLogin, async (ctx, next) => {
 	let body = ctx.request.body;
@@ -163,12 +163,6 @@ router.get('/', isLogin, async (ctx, next) => {
 		success: true,
 		message: '修改成功'
 	}
-})
-.get('/blog', isLogin, async (ctx, next) => {
-	await ctx.render('admin-blog', {
-		layout: false,
-		title: '用户管理-blog'
-	});
 });
 
 module.exports = router;

@@ -29,12 +29,12 @@ editor.add({
   el: 'md-add'
 })
 // add
-function add(){
-  var type = document.getElementById('type').value,
-    title = document.getElementById('add-title').value,
-    description = document.getElementById('description').value,
-    tipsEls = document.querySelectorAll('[data-tip]'),
-    tips = ''
+function add () {
+  var type = document.getElementById('type').value
+  var title = document.getElementById('add-title').value
+  var description = document.getElementById('description').value
+  var tipsEls = document.querySelectorAll('[data-tip]')
+  var tips = ''
   
   if( !type || !title) {
     console.log('请将信息输入完整');
@@ -57,7 +57,7 @@ function add(){
     dataType: 'JSON',
     data: data,
     success: function(res){
-      if( res.code == '000000' ){
+      if (res.code == '000000') {
         editor.rem();
         window.location.href = '/admin';
       } else {
@@ -71,6 +71,7 @@ function add(){
 }
 
 document.getElementById('add').addEventListener('click', add)
+document.getElementById('add-save').addEventListener('click', add)
 
 // 标签
 function Tips (param) {

@@ -52,11 +52,12 @@ $.ajax({
 // add
 function update () {
 
-  var type = document.getElementById('type').value,
-    title = document.getElementById('add-title').value,
-    description = document.getElementById('description').value,
-    tipsEls = document.querySelectorAll('[data-tip]'),
-    tips = ''
+  var type = document.getElementById('type').value
+  var title = document.getElementById('add-title').value
+  var description = document.getElementById('description').value
+  var tipsEls = document.querySelectorAll('[data-tip]')
+  var tips = ''
+  var isSave = this.getAttribute('id') === 'mod-save'
 
   if( !type || !title) {
     console.log('请将信息输入完整');
@@ -79,8 +80,12 @@ function update () {
     dataType: 'JSON',
     data: data,
     success: function(res){
-      if( res.code == '000000' ){
-        window.location.href = '/admin';
+      if (res.code == '000000') {
+        if (isSave) {
+          alert('save success!');
+        } else {
+          window.location.href = '/admin';
+        }
       }
     },
     error: function(status){
@@ -90,6 +95,10 @@ function update () {
 }
 
 document.getElementById('mod').addEventListener('click', update)
+document.getElementById('mod-save').addEventListener('click', update)
+window.addEventListener('save', function (event) {
+  console.log(event)
+})
 
 // 标签
 function Tips (param) {

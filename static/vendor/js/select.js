@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2018-02-24 22:57:38
+ * Updated: 2018-04-15 21:33:03
 */
 /**
  * options Object

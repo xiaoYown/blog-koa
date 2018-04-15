@@ -1,5 +1,5 @@
 <% include header %>
-		<link rel="stylesheet" href="/static/css/admin.css">
+		<link rel="stylesheet" href="/static/vendor/css/admin.css">
 		<link rel="stylesheet" href="/static/css/editormd.css">
 		<link rel="stylesheet" href="/static/css/codemirror.css">
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_298842_24vw8ohp6ekx1or.css">
@@ -45,7 +45,12 @@
 				</div>
 				<div id="md-add"></div>
 				<div style="display: none" id="content"><%= artical.content %></div>
-				<button class="admin__btn-bottom" id="<%= method %>">提交</button>
+				<div class="admin__btn">
+					<% if (method === 'mod') { %>
+						<button class="admin__btn-bottom" id="<%= method %>-save">保存</button>
+					<% } %>
+					<button class="admin__btn-bottom" id="<%= method %>">提交</button>
+				</div>
 			</div>
 		</div>
 	</body>
