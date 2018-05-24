@@ -1,9 +1,9 @@
 .artical__wrap {
   max-width: 800px;
-  margin: 0 auto 60px auto;
-  color: #fff; }
+  margin: 0 auto 60px auto; }
   .artical__wrap-header {
     padding-left: 20px;
+    color: #fff;
     background-color: #0158af; }
   .artical__wrap-title {
     line-height: 50px;

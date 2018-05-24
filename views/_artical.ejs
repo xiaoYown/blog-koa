@@ -1,0 +1,45 @@
+<% include header %>
+    <link rel="stylesheet" href="/static/vendor/css/artical.css">
+    <link rel="stylesheet" href="/static/css/github-markdown.css">
+  </head>
+  <body>
+    <div class="blog__wrap">
+      <% include title %>
+      <% include aside %>
+      <div class="com__cmp-ct scroll--bar">
+        <div id="wrap" class="artical__wrap artical--animate-before">
+          <div class="artical__wrap-header">
+            <h3 class="artical__wrap-title">
+              <%= info.title %>
+            </h3>
+            <!-- <p class="artical__wrap-tips">
+              <a href="/">首页</a>
+            </p> -->
+            <ul class="artical__wrap-time">
+              <li class="artical__wrap-time_c"><%= info.create_time %></li>
+              <!--<li class="artical__wrap-time_u">update: <%= info.update_time %></li>-->
+            </ul>
+          </div>
+          <div class="artical__wrap-section markdown-body">
+            <div id="show"><%- info.content %></div>
+          </div>
+          <div style="display: none" id="content"><%= info.content %></div>
+        </div>
+      </div>
+      </div>
+    
+  </body>
+</html>
+<script src="/static/vendor/js/common.js"></script>
+<script>
+  var wrap = document.getElementById('wrap')
+
+  function move (method) {
+    if (method === 'in') {
+      wrap.className = wrap.className.replace(/\s+artical--animate-before/, ' artical--animate-in')
+    } else if (method === 'out') {
+      wrap.className = wrap.className.replace(/\s+artical--animate-in/, ' artical--animate-before')
+    }
+  }
+  move('in')
+</script>

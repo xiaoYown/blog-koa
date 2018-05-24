@@ -8,6 +8,8 @@ const path = require('path');
 const utils = require('../utils/utils');
 const config = require('../config/config');
 
+const marked = require('markdown').markdown;
+
 router.get('/query/:id', async (ctx, next) => {
 	let info = await db_operate.query(	
 		`SELECT 
@@ -61,9 +63,14 @@ router.get('/query/:id', async (ctx, next) => {
 		FROM articals WHERE key_time='${key_time}' AND title='${decodeURI(ctx.params.title)}' LIMIT 1`
 	);
 	var content = await utils.fileRead(config.pathMd + info[0].title + '.md');
+	// info[0].content = marked.toHTML(content);
 	info[0].content = content;
-	await ctx.render('artical', { layout: false, title: info[0].title, info: info[0] });
-	await db_operate.query(`
+	await ctx.render('artical', {
+		layout: false,
+		title: info[0].title,
+		info: info[0]
+	});
+	db_operate.query(`
 		update articals set readers=${info[0].readers + 1} where id="${info[0].id}"
 	`)
 })
