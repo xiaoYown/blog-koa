@@ -8,7 +8,7 @@ const path = require('path');
 const utils = require('../utils/utils');
 const config = require('../config/config');
 
-const marked = require('markdown').markdown;
+// const marked = require('markdown').markdown;
 
 router.get('/query/:id', async (ctx, next) => {
 	let info = await db_operate.query(	
