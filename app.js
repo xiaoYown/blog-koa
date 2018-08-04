@@ -74,7 +74,7 @@ render(app, {
 	// layout: 'layout',
 	viewExt: 'ejs',
 	cache: false,
-	debug: true
+	debug: false
 });
 // logger
 app.use(async (ctx, next) => {
