@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2018-05-05 23:45:28
+ * Updated: 2018-08-06 23:10:34
 */
 // editor 控制
 var editor = {
@@ -76,7 +76,6 @@ function add () {
 }
 
 document.getElementById('add').addEventListener('click', add)
-document.getElementById('add-save').addEventListener('click', add)
 
 // 标签
 function Tips (param) {
