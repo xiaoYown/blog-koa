@@ -71,7 +71,6 @@ function add () {
 }
 
 document.getElementById('add').addEventListener('click', add)
-document.getElementById('add-save').addEventListener('click', add)
 
 // 标签
 function Tips (param) {
