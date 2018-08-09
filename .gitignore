@@ -2,3 +2,4 @@ node_modules/
 *.scssc
 logs/
 files/md/
+files/
