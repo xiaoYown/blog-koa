@@ -4,7 +4,7 @@ var wrapper = require('co-mysql'),
 var options = {
 	host : 'localhost',
 	port : 3306 ,
-	database : 'blog_test',
+	database : 'blog_koa',
 	user: 'root',
 	password : '511687372'
 };
