@@ -2,7 +2,7 @@ var wrapper = require('co-mysql'),
 		mysql 	= require('mysql'); 
 
 var options = {
-	host : '127.0.0.1',
+	host : '192.168.3.9',
 	port : 3306 ,
 	database : 'blog',
 	user: 'root',
