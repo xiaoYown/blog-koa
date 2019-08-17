@@ -45,10 +45,16 @@ router.get('/', async (ctx, next) => {
 		articals
 	});
 })
-.get('react', async (ctx, next) => {
-	await ctx.render('react', {
+.get('react/:page/:subpage1?/:subpage2?/:subpage3?', async (ctx, next) => {
+	await ctx.render('react/' + ctx.params.page, {
 		layout: false,
 		title: '首页'
+	});
+})
+.get('vue/:page/:subpage1?/:subpage2?/:subpage3?', async (ctx, next) => {
+	await ctx.render('vue/' + ctx.params.page, {
+		layout: false,
+		title: 'vue template'
 	});
 })
 
