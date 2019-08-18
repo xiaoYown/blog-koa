@@ -92,7 +92,7 @@ router.get('/', isLogin, async (ctx, next) => {
 			"${id}",
 			"${body.title}",
 			"${body.tips}",
-			"${body.description}"
+			"${description}"
 		)`);
 		ctx.body = {
 			code: '000000',

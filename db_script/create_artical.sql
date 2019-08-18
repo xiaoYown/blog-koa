@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS articals (
 	key_time VARCHAR(30),
 	create_time DATETIME, 
 	update_time DATETIME, 
-	description VARCHAR(200),
+	description TEXT(200),
 	tips VARCHAR(200),
 	title VARCHAR(30),
 	content TEXT(65535),
