@@ -2,7 +2,7 @@ const router = require('koa-router')();
 const image_util = require('../utils/image_util');
 const image_config = require('../config/image_config');
 const isLogin = require('../utils/login').isLogin;
-const path = require('path');
+// const path = require('path');
 
 const multer = require('koa-multer');
 
@@ -28,15 +28,15 @@ router.get('/', isLogin, async (ctx, next) => {
     title: '图片管理',
     url_origin: image_config.static_host,
     folders: folderTree.folders
-	})
+  })
 })
 .get('/:url', isLogin, async (ctx, next) => {
   let folderTree = await image_util.getFolderTree();
   let folders = image_util.getDirs(folderTree, ctx.params.url.split('_'));
-	await ctx.render('image', {
+  await ctx.render('image', {
     layout: false,
     folders: folders
-	})
+  })
 })
 // 添加文件夹
 .post('/addfolder', isLogin, async (ctx, next) => {

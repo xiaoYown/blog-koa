@@ -98,28 +98,6 @@ app.use(async (ctx, next) => {
 	}
 });
 
-// var myRouter = new Router();
-/**
- * 创建数据库: create database dbname
- * 创建表: CREATE TABLE IF NOT EXISTS user_info ( user_id VARCHAR(30), user_pwd VARCHAR(30) )
- * 
- * 查询:   select * from table_name where __key__=__value__ (limit 1)
- * 
- * 插入列(首部): alter table table_name add  column col_name varchar(30) first
- * 插入列(末尾): alter table table_name add  column col_name varchar(30) (not null)
- * 插入列(之后): alter table table_name add  column col_name varchar(30) after __col__name (default value)
- * 删除列: alter table table_name drop column col_name
- * 
- * 插入行: insert into table_name (col1_name,col2_name) values (col1_val, col2_val)
- * 修改:   update table_name set _key_=_value_ where __key__=__value__ (limit 1) 
- * 删除:   delete from table_name where id = _id
- */
-
-/**
- * CREATE TABLE admin ( user_id CHAR, user_pwd CHAR, user_name CHAR );
- * INSERT INTO admin (user_id, user_pwd, user_name) VALUES ('admin', '511687372', 'xiaoYown');
- */
-
 app.keys = ['some secret hurr'];
 
 const CONFIG = {
@@ -139,33 +117,14 @@ let isLogin = function *( next ){
 		yield next;
 }
 
-// router
-// 	.get('/', function *( next ) {
-// 		let new_list = [];
-// 		try{
-// 			let new_list = yield db_operate.query(`SELECT title,id FROM artical`);
-// 			yield this.render('index', {
-// 				layout: false, 
-// 				title: '首页', 
-// 				new_list
-// 			});
-// 		} catch(err){
-
-// 		}
-// 	})
-
-
 app.use(router.routes(),  router.allowedMethods());
 
-// response
 app.on('error', function(err, ctx){
 	console.error(err);
-	// console.error('server error', err, ctx);
 });
 
 app.listen(config.port);
 
-// open("http://localhost:3002")
 console.log("http://localhost:3002")
 
 module.exports = app;
