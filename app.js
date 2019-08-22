@@ -1,20 +1,20 @@
 'use strict'
 
-const path 			= require('path');
-const Koa 			= require('koa');
-const app 			= new Koa();
-const render 		= require('koa-ejs');
-const co 			= require('co');
-const convert 		= require('koa-convert');
-const json 			= require('koa-json');
-const onerror 		= require('koa-onerror');
-const bodyparser 	= require('koa-bodyparser')();
-// const logger 		= require('koa-logger');
-// const redisStore 	= require('koa-redis');
-const session 		= require('koa-session');
-// const open 			= require("open");
-// const dateformat 	= require('dateformat');
-const staticCache   = require('koa-static-cache'); 
+const path = require('path');
+const Koa = require('koa');
+const app = new Koa();
+const render = require('koa-ejs');
+const co = require('co');
+const convert = require('koa-convert');
+const json = require('koa-json');
+const onerror = require('koa-onerror');
+const bodyparser = require('koa-bodyparser')();
+// const logger = require('koa-logger');
+// const redisStore = require('koa-redis');
+const session = require('koa-session');
+// const open = require("open");
+// const dateformat = require('dateformat');
+const staticCache = require('koa-static-cache'); 
 //log工具
 const logUtil = require('./utils/log_util');
 const config = require('./config/config');
@@ -42,7 +42,7 @@ const router = require('./routes');
 const imageRouter = require('./routes/image');
 
 // var wrapper = require('co-mysql'),
-// 	mysql 	= require('mysql'); 
+// mysql 	= require('mysql'); 
 
 // var options = {
 // 	host : 'localhost',

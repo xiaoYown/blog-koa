@@ -1,7 +1,7 @@
-var wrapper = require('co-mysql'),
-		mysql 	= require('mysql'); 
+const wrapper = require('co-mysql');
+const mysql = require('mysql'); 
 
-var options = {
+const options = {
 	host : '192.168.3.9',
 	port : 3306 ,
 	database : 'blog',
@@ -9,6 +9,6 @@ var options = {
 	password : 'Mysql_511687372'
 };
 
-var pool = mysql.createPool(options);
+const pool = mysql.createPool(options);
 
 module.exports.db_operate = wrapper(pool);

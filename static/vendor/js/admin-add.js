@@ -1,7 +1,7 @@
 /*
  * Version: 1.0.0
  * Author: xioYown 
- * Updated: 2018-08-06 23:10:34
+ * Updated: 2019-08-22 22:47:31
 */
 // editor 控制
 var editor = {

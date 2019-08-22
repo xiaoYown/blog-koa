@@ -1,57 +1,104 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
-    <head>
-        <meta charset="utf-8">
-        <title><%= title %></title>
-        <link rel="stylesheet" href="/static/vendor/css/base.css">
-        <link rel="stylesheet" href="/static/vendor/css/login.css">
-    </head>
-    <body>
-        <div class="admin-login-wrap">
-            <ul>
-                <li class="admin-login-item">
-                    <h4>id</h4>
-                    <input type="text" id="id">
-                </li>
-                <li class="admin-login-item">
-                    <h4>password</h4>
-                    <input type="password" id="pwd">
-                </li>
-                <li class="admin-login-item">
-                    <button id="submit"><span>login</span></button>
-                </li>
-            </ul>
-        </div>
-    </body>
+
+<head>
+  <meta charset="utf-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/static/vendor/css/base.css">
+  <link rel="stylesheet" href="/static/vendor/css/login.css">
+</head>
+
+<body>
+  <div class="admin-login-wrap">
+    <ul>
+      <li class="admin-login-item">
+        <h4>id</h4>
+        <input type="text" id="id">
+      </li>
+      <li class="admin-login-item">
+        <h4>password</h4>
+        <input type="password" id="pwd">
+      </li>
+      <li class="admin-login-item">
+        <button id="submit"><span>login</span></button>
+      </li>
+    </ul>
+  </div>
+</body>
+
 </html>
 <script src="/static/js/jquery.js"></script>
+<script src="/static/js/jsencrypt.min.js"></script>
 <script>
-    var submit = document.getElementById('submit'),
-        idEl   = document.getElementById('id'),
-        pwdEl  = document.getElementById('pwd');
+  var PUBLICKEY = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC93PjNxLGMcyrP3HRYuTN/aN8B92dVNcCxIX7KQmRj5DnlJe5eB3CS4LCfITuFiIEM0GwiD8wPjevWff2geJJ2Gi2s793Z+HxsJu7W7b2fxBGbL2XoVQTygDgPN/SRp7pvDpZhA2In3hC+h3HcqHTrsWJyJYaXvhu7+GiHlMTknwIDAQAB-----END PUBLIC KEY-----';
 
-    function register(){
-        var data = {
-            user_id: idEl.value,
-            user_pwd: pwdEl.value,
-        };
-        
-        $.ajax({
-            url: '/login',
-            type: 'POST',
-            dataType: 'JSON',
-            data: data,
-            success: function(res){
-                console.log(res)
-                if( res.code == '000000' ){
-                    window.location.href = '/admin';
-                }
-            },
-            error: function(status){
-                console.log(status)
-            }
-        });
-    }
+  // 加密方法
+  function Encrypt (str) {
+    let encrypt = new JSEncrypt();
 
-    submit.addEventListener('click', register, false);
+    encrypt.setPublicKey(PUBLICKEY);
+    return encrypt.encrypt(str);
+  }
+
+  var submit = document.getElementById('submit'),
+    idEl = document.getElementById('id'),
+    pwdEl = document.getElementById('pwd');
+
+  function register() {
+    // $.ajax({
+    //   url: '/login/key',
+    //   type: 'POST',
+    //   dataType: 'JSON',
+    //   success: function (res) {
+    //     if (res.code == '000000') {
+    //       var data = {
+    //         user_id: idEl.value,
+    //         user_pwd: Encrypt(pwdEl.value, res.data.replace(/\n+/g, ''))
+    //       };
+    //       $.ajax({
+    //         url: '/login',
+    //         type: 'POST',
+    //         dataType: 'JSON',
+    //         data: data,
+    //         success: function (res) {
+    //           if (res.code == '000000') {
+    //             window.location.href = '/admin';
+    //           }
+    //         },
+    //         error: function (status) {
+    //           console.log(status)
+    //         }
+    //       });
+    //     } else {
+    //       console.log(res);
+    //     }
+    //   },
+    //   error: function (status) {
+    //     console.log(status)
+    //   }
+    // });
+    var data = {
+      user_id: idEl.value,
+      user_pwd: Encrypt(pwdEl.value)
+    };
+    $.ajax({
+      url: '/login',
+      type: 'POST',
+      dataType: 'JSON',
+      data: data,
+      success: function (res) {
+        if (res.code == '000000') {
+          window.location.href = '/admin';
+        } else {
+          console.log(res);
+        }
+      },
+      error: function (status) {
+        console.log(status)
+      }
+    });
+    
+  }
+
+  submit.addEventListener('click', register, false);
 </script>

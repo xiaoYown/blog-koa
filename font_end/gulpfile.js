@@ -1,36 +1,36 @@
-var gulp = require('gulp'),
-	jade = require('gulp-jade'),
-	clean = require('gulp-clean'),      
-	uglify = require('gulp-uglify'), 
-	header = require('gulp-header'),   
-	rename = require('gulp-rename'),
-	autoprefixer = require('gulp-autoprefixer'),
-	util = require('gulp-util'),     
-	sass = require('gulp-ruby-sass'),        
-	minifycss = require('gulp-minify-css'),   
-	concat = require('gulp-concat'),
-	connect = require('gulp-connect');
-	// gulp-inject和wiredep     
+const gulp = require('gulp');
+const jade = require('gulp-jade');
+const clean = require('gulp-clean');
+const uglify = require('gulp-uglify');
+const header = require('gulp-header');
+const rename = require('gulp-rename');
+const autoprefixer = require('gulp-autoprefixer');
+const util = require('gulp-util');
+const sass = require('gulp-ruby-sass');
+const minifycss = require('gulp-minify-css');
+const concat = require('gulp-concat');
+const connect = require('gulp-connect');
+	// gulp-inject和wiredep   
 
-var Version =   '1.0.0';
-var buildDate =   util.date(  Date.now(), 'isoDate') + " " + util.date(Date.now() , 'isoTime');
-var banner =   ['/*\n * Version: ', Version, '\n * Author: xioYown \n * Updated: ', buildDate, '\n*/\n'].join('');
+const Version = '1.0.0';
+const buildDate = util.date(  Date.now(), 'isoDate') + " " + util.date(Date.now() , 'isoTime');
+const banner = ['/*\n * Version: ', Version, '\n * Author: xioYown \n * Updated: ', buildDate, '\n*/\n'].join('');
 
-var debug = true;
+const debug = true;
 
-var path = {
-	jade: 	'./src/views',
-	js:   	'./src/assets/js',
-	sass: 	'./src/assets/sass',
-	css: 	'./src/assets/css',
+const path = {
+	jade: './src/views',
+	js: './src/assets/js',
+	sass: './src/assets/sass',
+	css: './src/assets/css',
 	images: './src/assets/images'
 };
-var dist = {
+const dist = {
 	static: '../static/vendor',
 	views: 	'../views'
 };
 
-var config = {
+const config = {
 	min: debug ? '' : '.min',
 	description: 'blog',
 	keywords: 'xioYown blog node koa web'
@@ -91,8 +91,8 @@ gulp.task('images', function () {
 /* 热启配置 */
 gulp.task('connect', function () {
 	 connect.server({
-		host: '192.168.0.108',
-		port: 8010,
+		host: '127.0.0.1',
+		port: 2020,
 		livereload: true
 	 });
  });
@@ -101,7 +101,7 @@ gulp.task('default', function(){
 	gulp.watch([path.jade + '/*.jade'], ['jade']);
 	gulp.watch([path.js + '/base/*.js'], ['base']);
 	gulp.watch([path.js + '/*.js'], 	  ['js']);
-	gulp.watch([path.sass   + '/mixin/*.scss', path.sass   + '/*.scss'], ['sass']);
+	gulp.watch([path.sass + '/mixin/*.scss', path.sass + '/*.scss'], ['sass']);
 });
 // 热启动
 gulp.task('hot', ['connect','default']);
