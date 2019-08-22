@@ -5,8 +5,12 @@ const path = require('path');
 const NodeRSA = require('node-rsa');
 const PRIVATE_KEY_PATH = path.join(__dirname, '../rsa_1024_priv.pem');
 
-const pem = fs.readFileSync(PRIVATE_KEY_PATH, 'utf8');
-var privateKey = new NodeRSA(pem.toString());
+// openssl genrsa -out rsa_1024_priv.pem 1024
+// openssl genrsa -out rsa_1024_priv.pem 1024
+
+const PEM = fs.readFileSync(PRIVATE_KEY_PATH, 'utf8');
+const privateKey = new NodeRSA(PEM.toString());
+
 privateKey.setOptions({
     // 这里需要指定RSA padding模式为pkcs1，这是因为前端jsencrypt库采用了pkcs1，而后端node-rsa默认使用的pkcs1_oaep
     // https://stackoverflow.com/questions/33837617/node-rsa-errors-when-trying-to-decrypt-message-with-private-key
